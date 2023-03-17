@@ -47,7 +47,7 @@ export function createGrid<T>(
 
   function assertCoord(x: number, y: number) {
     if (!isValidCoord(x, y)) {
-      throw new Error(`Index Out Of Bounds (${x}, ${y})`);
+      throw new Error(`Selected index Out Of Bounds (${x}, ${y})`);
     }
   }
 
