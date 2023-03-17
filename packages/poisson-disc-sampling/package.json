@@ -1,0 +1,21 @@
+{
+  "name": "poisson-disc-sampling",
+  "version": "1.0.0",
+  "description": "Reusable poisson disc sampling",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "p5",
+    "typescript",
+    "lib",
+    "canvas"
+  ],
+  "dependencies": {
+    "data-structures": "workspace:*"
+  },
+  "author": "Patrick",
+  "license": "ISC"
+}

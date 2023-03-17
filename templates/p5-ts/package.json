@@ -1,0 +1,14 @@
+{
+  "name": "sketch",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "sketch-pack serve ./main.ts",
+    "build": "sketch-pack build ./main.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sketch-pack": "workspace:*"
+  }
+}

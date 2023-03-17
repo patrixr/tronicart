@@ -1,0 +1,13 @@
+{
+  "name": "sketch-pack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "sketch-pack": "./bin/cli.js"
+  },
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
