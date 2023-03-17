@@ -1,7 +1,7 @@
 {
-  "name": "creative-workspace",
+  "name": "tronicart",
   "version": "1.0.0",
-  "description": "",
+  "description": "Creative coding workspace",
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
