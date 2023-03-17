@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "sketch-pack": "workspace:*",
-    "poisson-disc-sampling": "workspace:*"
+    "@tronicart/poisson-disk-sampling": "workspace:*"
   }
 }

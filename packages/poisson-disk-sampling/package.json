@@ -1,7 +1,7 @@
 {
-  "name": "poisson-disc-sampling",
+  "name": "@tronicart/poisson-disk-sampling",
   "version": "1.0.0",
-  "description": "Reusable poisson disc sampling",
+  "description": "Reusable poisson disk sampling",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -14,7 +14,7 @@
     "canvas"
   ],
   "dependencies": {
-    "data-structures": "workspace:*"
+    "@tronicart/data-structures": "workspace:*"
   },
   "author": "Patrick",
   "license": "ISC"

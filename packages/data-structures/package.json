@@ -1,5 +1,5 @@
 {
-  "name": "data-structures",
+  "name": "@tronicart/data-structures",
   "version": "1.0.0",
   "description": "Reus",
   "main": "dist/index.js",

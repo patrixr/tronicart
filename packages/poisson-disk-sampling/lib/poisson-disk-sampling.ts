@@ -10,7 +10,7 @@ export type VectorFactory<T extends IVector> = (x: number, y: number) => T;
 
 export type RandomFunction = () => number;
 
-export type PoissonDiscSamplingConfig<V extends IVector> = {
+export type PoissondiskSamplingConfig<V extends IVector> = {
   surfaceWidth: number;
   surfaceHeight: number;
   radius: number;
@@ -50,7 +50,7 @@ function present(obj: any) {
  * }} config
  * @return {*}
  */
-export function poissonDiscSampling<V extends IVector>(config: PoissonDiscSamplingConfig<V>) {
+export function poissondiskSampling<V extends IVector>(config: PoissondiskSamplingConfig<V>) {
   const {
     surfaceHeight,
     surfaceWidth,
@@ -130,7 +130,7 @@ export function poissonDiscSampling<V extends IVector>(config: PoissonDiscSampli
     /* Small fallback to avoid any drama */
     if (--iteractionTracker <= 0) {
       console.warn(
-        `PoissonDiscSampling reached max ${MAX_ITERATIONS} iterations and stopped earlier than planned`
+        `PoissondiskSampling reached max ${MAX_ITERATIONS} iterations and stopped earlier than planned`
       );
       break;
     }
@@ -139,8 +139,8 @@ export function poissonDiscSampling<V extends IVector>(config: PoissonDiscSampli
   return points;
 }
 
-export function poissonDiscSamplingP5(p5: P5, radius: number, maxRetry = 30) {
-  return poissonDiscSampling<P5.Vector>({
+export function poissondiskSamplingP5(p5: P5, radius: number, maxRetry = 30) {
+  return poissondiskSampling<P5.Vector>({
     surfaceHeight: p5.height,
     surfaceWidth: p5.width,
     createVector: p5.createVector.bind(p5),

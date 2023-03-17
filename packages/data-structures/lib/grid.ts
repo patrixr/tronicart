@@ -42,7 +42,7 @@ export function createGrid<T>(
   const idx = (x: number, y: number) => y * width + x;
 
   function isValidCoord(x: number, y: number) {
-    return x >= 0 && y >= 0 && x < width && y <= height;
+    return x >= 0 && y >= 0 && x < width && y < height;
   }
 
   function assertCoord(x: number, y: number) {

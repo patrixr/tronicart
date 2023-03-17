@@ -1,5 +1,5 @@
 import P5, { Vector } from 'p5';
-import { poissonDiscSamplingP5 } from 'poisson-disc-sampling';
+import { poissondiskSamplingP5 } from '@tronicart/poisson-disk-sampling';
 
 const sketch = (p5: P5) => {
   let points: Vector[];
@@ -8,7 +8,7 @@ const sketch = (p5: P5) => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
     p5.background(200);
 
-    points = poissonDiscSamplingP5(p5, 10);
+    points = poissondiskSamplingP5(p5, 10);
   };
 
   p5.draw = (): void => {
