@@ -15,7 +15,7 @@ const sketch = (p5: P5) => {
     p5.fill(0);
     p5.stroke(0);
     points.forEach((p) => {
-      p5.circle(p.x, p.y, 3);
+      p5.circle(p.x, p.y, 2);
     });
 
     p5.noLoop();

@@ -3,6 +3,24 @@
 const yargs = require('yargs');
 const path = require('path');
 const childProcess = require('child_process');
+const webpack = require('webpack');
+
+webpack({});
+
+const progressPlugin = () =>
+  new webpack.ProgressPlugin({
+    activeModules: false,
+    entries: true,
+    handler(percentage, message, ...args) {
+      console.info(`[${message}] ${Number(percentage * 100).toFixed(1)}% ${args.join(' - ')}`);
+    },
+    modules: true,
+    modulesCount: 5000,
+    profile: false,
+    dependencies: true,
+    dependenciesCount: 10000,
+    percentBy: null
+  });
 
 yargs
   .scriptName('p5-cli')
@@ -17,19 +35,50 @@ yargs
       });
     },
     function ({ sketch }) {
-      const fullPath = path.resolve(process.cwd(), sketch);
+      process.env['SKETCH_ENTRYPOINT'] = sketch;
 
-      childProcess.execSync(
-        `npx webpack serve --config ${path.resolve(__dirname, '../config/webpack.config.dev.js')}`,
+      const webpackConfig = {
+        ...require(path.resolve(__dirname, '../config/webpack.config.dev.js'))
+      };
+
+      webpackConfig.plugins = webpackConfig.plugins || [];
+
+      const compiler = webpack(webpackConfig);
+
+      compiler.watch(
         {
-          cwd: path.dirname(fullPath),
-          env: {
-            ...process.env,
-            SKETCH_ENTRYPOINT: sketch
-          },
-          stdio: 'inherit'
+          // Example
+          aggregateTimeout: 300,
+          poll: undefined,
+          ignored: /node_modules/
+        },
+        (err, stats) => {
+          if (err) {
+            console.error(err);
+          }
+          console.log(
+            stats.toString({
+              colors: true,
+              modules: true,
+              children: true,
+              chunks: true,
+              chunkModules: true
+            }) + '\n'
+          );
         }
       );
+
+      // childProcess.execSync(
+      //   `npx webpack serve --config ${path.resolve(__dirname, '../config/webpack.config.dev.js')}`,
+      //   {
+      //     cwd: path.dirname(fullPath),
+      //     env: {
+      //       ...process.env,
+      //       SKETCH_ENTRYPOINT: sketch
+      //     },
+      //     stdio: 'inherit'
+      //   }
+      // );
     }
   )
   .command(
@@ -38,23 +87,28 @@ yargs
     (yargs) => {
       yargs.positional('sketch', {
         type: 'string',
-        describe: 'the sketch to run'
+        describe: 'the sketch to build'
       });
     },
     function ({ sketch }) {
-      const fullPath = path.resolve(process.cwd(), sketch);
+      process.env['SKETCH_ENTRYPOINT'] = sketch;
 
-      childProcess.execSync(
-        `npx webpack build --config ${path.resolve(__dirname, '../config/webpack.config.prod.js')}`,
-        {
-          cwd: path.dirname(fullPath),
-          env: {
-            ...process.env,
-            SKETCH_ENTRYPOINT: sketch
-          },
-          stdio: 'inherit'
+      const webpackConfig = {
+        ...require(path.resolve(__dirname, '../config/webpack.config.prod.js'))
+      };
+
+      webpackConfig.plugins = webpackConfig.plugins || [];
+
+      webpackConfig.plugins.push(progressPlugin());
+
+      const compiler = webpack(webpackConfig);
+
+      compiler.compile((err, stats) => {
+        if (err) {
+          console.error(err);
         }
-      );
+        console.info('webpack compilation done');
+      });
     }
   )
   .help().argv;
