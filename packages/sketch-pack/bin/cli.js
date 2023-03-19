@@ -22,6 +22,7 @@ const progressPlugin = () =>
     percentBy: null
   });
 
+/* Begin */
 yargs
   .scriptName('p5-cli')
   .usage('$0 <cmd> [args]')
