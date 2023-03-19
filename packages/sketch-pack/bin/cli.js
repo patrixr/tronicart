@@ -2,10 +2,8 @@
 
 const yargs = require('yargs');
 const path = require('path');
-const childProcess = require('child_process');
 const webpack = require('webpack');
-
-webpack({});
+const WebpackDevServer = require('webpack-dev-server');
 
 const progressPlugin = () =>
   new webpack.ProgressPlugin({
@@ -45,41 +43,16 @@ yargs
       webpackConfig.plugins = webpackConfig.plugins || [];
 
       const compiler = webpack(webpackConfig);
+      const devServerOptions = { ...webpackConfig.devServer, open: true };
+      const server = new WebpackDevServer(devServerOptions, compiler);
 
-      compiler.watch(
-        {
-          // Example
-          aggregateTimeout: 300,
-          poll: undefined,
-          ignored: /node_modules/
-        },
-        (err, stats) => {
-          if (err) {
-            console.error(err);
-          }
-          console.log(
-            stats.toString({
-              colors: true,
-              modules: true,
-              children: true,
-              chunks: true,
-              chunkModules: true
-            }) + '\n'
-          );
-        }
-      );
-
-      // childProcess.execSync(
-      //   `npx webpack serve --config ${path.resolve(__dirname, '../config/webpack.config.dev.js')}`,
-      //   {
-      //     cwd: path.dirname(fullPath),
-      //     env: {
-      //       ...process.env,
-      //       SKETCH_ENTRYPOINT: sketch
-      //     },
-      //     stdio: 'inherit'
-      //   }
-      // );
+      console.log('Starting server...');
+      server
+        .start()
+        .then(() => {
+          console.log('Server closing');
+        })
+        .catch((e) => console.error(e));
     }
   )
   .command(
@@ -99,7 +72,6 @@ yargs
       };
 
       webpackConfig.plugins = webpackConfig.plugins || [];
-
       webpackConfig.plugins.push(progressPlugin());
 
       const compiler = webpack(webpackConfig);

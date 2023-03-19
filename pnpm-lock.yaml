@@ -11,14 +11,11 @@ importers:
       '@types/yargs-interactive': ^2.1.3
       ava: ^5.2.0
       fs-extra: ^11.1.0
-      p5: ^1.6.0
       ts-loader: ^9.4.2
       ts-node: ^10.9.1
       turbo: ^1.8.3
       typescript: ^4.9.5
       yargs-interactive: ^3.0.1
-    dependencies:
-      p5: 1.6.0
     devDependencies:
       '@tronicart/batch-capture': link:packages/batch-catpure
       '@types/fs-extra': 11.0.1
@@ -50,6 +47,9 @@ importers:
   packages/data-structures:
     specifiers: {}
 
+  packages/p5-flow-field:
+    specifiers: {}
+
   packages/poisson-disk-sampling:
     specifiers:
       '@tronicart/data-structures': workspace:*
@@ -78,10 +78,14 @@ importers:
 
   sketches/playground:
     specifiers:
+      '@tronicart/p5-flow-field': workspace:*
       '@tronicart/poisson-disk-sampling': workspace:*
+      p5: ^1.6.0
       sketch-pack: workspace:*
     dependencies:
+      '@tronicart/p5-flow-field': link:../../packages/p5-flow-field
       '@tronicart/poisson-disk-sampling': link:../../packages/poisson-disk-sampling
+      p5: 1.6.0
       sketch-pack: link:../../packages/sketch-pack
 
 packages:

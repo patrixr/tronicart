@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "p5": "^1.6.0",
     "sketch-pack": "workspace:*"
   }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "@tronicart/p5-flow-field",
+  "version": "1.0.0",
+  "description": "P5 flow field",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "p5": "^1.6.0"
+  },
+  "keywords": [
+    "p5",
+    "typescript",
+    "lib",
+    "canvas"
+  ],
+  "author": "Patrick",
+  "license": "ISC"
+}
