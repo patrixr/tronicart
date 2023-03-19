@@ -6,6 +6,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "generate:p5-ts": "ts-node scripts/generate-p5-ts-sketch.ts",
+    "test": "turbo run test  --include-dependencies",
     "build:all": "turbo run build  --include-dependencies",
     "test:all": "turbo run test  --include-dependencies",
     "playground": "turbo run serve --filter=playground",

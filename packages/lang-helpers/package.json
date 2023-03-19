@@ -1,0 +1,25 @@
+{
+  "name": "@tronicart/lang-helpers",
+  "version": "1.0.0",
+  "description": "Reus",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "ava",
+    "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "lib"
+  ],
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "author": "Patrick",
+  "license": "ISC"
+}

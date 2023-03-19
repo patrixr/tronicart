@@ -47,14 +47,19 @@ importers:
   packages/data-structures:
     specifiers: {}
 
+  packages/lang-helpers:
+    specifiers: {}
+
   packages/p5-flow-field:
     specifiers: {}
 
   packages/poisson-disk-sampling:
     specifiers:
       '@tronicart/data-structures': workspace:*
+      '@tronicart/lang-helpers': workspace:*
     dependencies:
       '@tronicart/data-structures': link:../data-structures
+      '@tronicart/lang-helpers': link:../lang-helpers
 
   packages/sketch-pack:
     specifiers:

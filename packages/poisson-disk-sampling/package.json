@@ -14,7 +14,8 @@
     "canvas"
   ],
   "dependencies": {
-    "@tronicart/data-structures": "workspace:*"
+    "@tronicart/data-structures": "workspace:*",
+    "@tronicart/lang-helpers": "workspace:*"
   },
   "author": "Patrick",
   "license": "ISC"

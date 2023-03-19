@@ -1,5 +1,6 @@
 import { createGrid } from 'data-structures';
 import P5 from 'p5';
+import { present } from 'packages/lang-helpers';
 
 export type IVector = {
   x: number;
@@ -29,10 +30,6 @@ function dist(x1: number, y1: number, x2: number, y2: number) {
   let y = x2 - x1;
   let x = y2 - y1;
   return Math.sqrt(x * x + y * y);
-}
-
-function present(obj: any) {
-  return obj !== null && obj !== undefined;
 }
 
 /**
