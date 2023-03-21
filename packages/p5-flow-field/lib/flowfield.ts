@@ -1,24 +1,20 @@
 import type P5 from 'p5';
 import type { Vector } from 'p5';
-import { BaseParticle } from './particle';
+import { FlowFieldParticle, UpdateCallback } from './particle';
 
 const globalP5 = (): P5 => window as any as P5;
 
 export class FlowField {
-  p5: P5;
-  width: number;
-  height: number;
-  tileSize: number;
-  cols: number;
-  rows: number;
-  vectors: P5.Vector[];
-  center: P5.Vector | null;
-  inc: number;
-  particles: BaseParticle[];
+  public p5: P5;
+  public tileSize: number;
+  public particles: FlowFieldParticle[];
+  private cols: number;
+  private rows: number;
+  private vectors: P5.Vector[];
+  private center: P5.Vector | null;
+  private inc: number;
 
   constructor(width, height, tileSize, p5: P5 | P5.Graphics = globalP5()) {
-    this.width = width;
-    this.height = height;
     this.tileSize = tileSize;
     this.cols = p5.ceil(width / tileSize);
     this.rows = p5.ceil(height / tileSize);
@@ -27,18 +23,23 @@ export class FlowField {
     this.inc = 0.1;
     this.p5 = p5;
     this.particles = [];
+    this.reset();
   }
 
-  add(particle: BaseParticle) {
-    this.particles.push(particle);
-    particle.initialize(this);
+  public spawnParticles(count: number, particleUpdateMathod?: UpdateCallback) {
+    const batch: FlowFieldParticle[] = [];
+    for (let i = 0; i < count; ++i) {
+      batch.push(new FlowFieldParticle(this, particleUpdateMathod));
+    }
+    this.particles.push(...batch);
+    return batch;
   }
 
-  withCenter(center: P5.Vector) {
+  public setVortex(center: P5.Vector) {
     this.center = center.copy();
   }
 
-  init() {
+  public reset() {
     const { p5 } = this;
 
     this.vectors = [];
@@ -65,15 +66,15 @@ export class FlowField {
     }
   }
 
-  index(x, y) {
+  private index(x, y) {
     return x + y * this.cols;
   }
 
-  get(x, y) {
+  public get(x, y) {
     return this.vectors[this.index(x, y)];
   }
 
-  each(cb: (direction: Vector, vecPos: Vector) => any) {
+  private each(cb: (direction: Vector, vecPos: Vector) => any) {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
         cb(
@@ -84,7 +85,7 @@ export class FlowField {
     }
   }
 
-  draw(debug = false) {
+  public update(debug = false) {
     const { p5 } = this;
 
     if (debug) {
@@ -98,9 +99,24 @@ export class FlowField {
       });
     }
 
-    this.particles.forEach((p) => {
-      p.update();
-      p.draw();
+    this.particles = this.particles.filter((p) => {
+      // cheat to avoid making update public
+      // @TODO refactor
+      (p as any).update();
+      return !p.dead;
     });
   }
+
+  public particleCount() {
+    return this.particles.length;
+  }
+}
+
+export function createFlowField(
+  width,
+  height,
+  tileSize,
+  p5: P5 | P5.Graphics = globalP5()
+): FlowField {
+  return new FlowField(width, height, tileSize, p5);
 }

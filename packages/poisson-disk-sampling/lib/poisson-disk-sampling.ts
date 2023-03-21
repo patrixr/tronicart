@@ -1,6 +1,6 @@
 import { createGrid } from 'data-structures';
 import P5 from 'p5';
-import { present } from 'packages/lang-helpers';
+import { present } from '@tronicart/lang-helpers';
 
 export type IVector = {
   x: number;
@@ -20,7 +20,7 @@ export type PoissondiskSamplingConfig<V extends IVector> = {
   random?: RandomFunction;
 };
 
-const MAX_ITERATIONS = 50000;
+const MAX_ITERATIONS = 200000;
 
 function degreesToRadians(degrees: number) {
   return degrees * (Math.PI / 180);
@@ -73,7 +73,10 @@ export function poissondiskSampling<V extends IVector>(config: PoissondiskSampli
   const cellCountW = Math.ceil(surfaceWidth / cellSize) + 1;
   const cellCountH = Math.ceil(surfaceHeight / cellSize) + 1;
   const grid = createGrid<V>(cellCountW, cellCountH).fill(null);
-  const firstPoint = createVector(randomInt(surfaceWidth), randomInt(surfaceHeight));
+  const firstPoint = createVector(
+    surfaceWidth / 4 + randomInt(surfaceWidth / 2),
+    surfaceHeight / 4 + randomInt(surfaceHeight / 2)
+  );
 
   const isValidPoint = (p: V) => {
     if (p.x < 0 || p.x >= surfaceWidth || p.y < 0 || p.y >= surfaceHeight) {

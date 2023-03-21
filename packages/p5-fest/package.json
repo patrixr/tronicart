@@ -1,0 +1,21 @@
+{
+  "name": "@tronicart/p5-fest",
+  "version": "1.0.0",
+  "description": "P5 reusable goodies",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "p5",
+    "typescript",
+    "lib",
+    "canvas"
+  ],
+  "author": "Patrick",
+  "license": "ISC",
+  "dependencies": {
+    "color-scheme": "^1.0.1"
+  }
+}

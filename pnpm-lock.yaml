@@ -50,6 +50,12 @@ importers:
   packages/lang-helpers:
     specifiers: {}
 
+  packages/p5-fest:
+    specifiers:
+      color-scheme: ^1.0.1
+    dependencies:
+      color-scheme: 1.0.1
+
   packages/p5-flow-field:
     specifiers: {}
 
@@ -60,6 +66,9 @@ importers:
     dependencies:
       '@tronicart/data-structures': link:../data-structures
       '@tronicart/lang-helpers': link:../lang-helpers
+
+  packages/shapes:
+    specifiers: {}
 
   packages/sketch-pack:
     specifiers:
@@ -83,13 +92,19 @@ importers:
 
   sketches/playground:
     specifiers:
+      '@tronicart/lang-helpers': workspace:*
+      '@tronicart/p5-fest': workspace:*
       '@tronicart/p5-flow-field': workspace:*
       '@tronicart/poisson-disk-sampling': workspace:*
+      '@tronicart/shapes': workspace:*
       p5: ^1.6.0
       sketch-pack: workspace:*
     dependencies:
+      '@tronicart/lang-helpers': link:../../packages/lang-helpers
+      '@tronicart/p5-fest': link:../../packages/p5-fest
       '@tronicart/p5-flow-field': link:../../packages/p5-flow-field
       '@tronicart/poisson-disk-sampling': link:../../packages/poisson-disk-sampling
+      '@tronicart/shapes': link:../../packages/shapes
       p5: 1.6.0
       sketch-pack: link:../../packages/sketch-pack
 
@@ -1155,6 +1170,10 @@ packages:
 
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+
+  /color-scheme/1.0.1:
+    resolution: {integrity: sha512-4x+ya6+z6g9DaTFSfVzTZc8TSjxHuDT40NB43N3XPUkQlF6uujhwH8aeMeq8HBgoQQog/vrYgJ16mt/eVTRXwQ==}
+    dev: false
 
   /colorette/2.0.19:
     resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
