@@ -2,6 +2,10 @@
 
 This monorepo is designed for creative coding, mainly with P5.js, but not limited to it. It uses pnpm as a package manager and Turbo Repo as a monorepo tool. Sketches are located in the `/sketches` folder, while reusable packages are located in the `/packages` folder.
 
+Here are a few sketch outputs I've generated thanks to these tools:
+
+![](./assets/creative-coding-collage.png)
+
 ## Getting Started
 
 To get started with this monorepo, you'll need to install pnpm globally:
@@ -61,6 +65,7 @@ This monorepo contains several reusable packages for creative coding, located in
 -   [@tronicart/p5-fest](./packages/p5-fest/): A collection of utilities and helpers for P5.js.
 -   [@tronicart/p5-flow-field](./packages/p5-flow-field/): A function for creating and manipulating 2D flow fields.
 -   [@tronicart/data-structures](./packages/data-structures/): A collection data structures for creative coding.
+-   [@tronicart/batch-capture](./packages/batch-capture/): Captures screenshots of your sketch in batches.
 -   [@tronicart/shapes](./packages/shapes/): A collection of 2D shapes for creative coding.
 -   [@tronicart/poisson-disk-sampling](./packages/poisson-disk-sampling/): function for generating 2D points that are uniformly spaced apart.
 
