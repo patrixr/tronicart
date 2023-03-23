@@ -20,7 +20,7 @@ export type PoissondiskSamplingConfig<V extends IVector> = {
   random?: RandomFunction;
 };
 
-const MAX_ITERATIONS = 200000;
+const MAX_ITERATIONS = 100000;
 
 function degreesToRadians(degrees: number) {
   return degrees * (Math.PI / 180);

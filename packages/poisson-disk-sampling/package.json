@@ -18,5 +18,5 @@
     "@tronicart/lang-helpers": "workspace:*"
   },
   "author": "Patrick",
-  "license": "ISC"
+  "license": "MIT"
 }

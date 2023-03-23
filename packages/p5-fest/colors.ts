@@ -48,8 +48,6 @@ export function lerpingColor(config: LerpingColorConfig): LerpingColor {
   return { color, update };
 }
 
-export type DynamicColor = ReturnType<typeof lerpingColor>;
-
 export function copyColor(c: P5.Color): P5.Color {
   const p5 = getP5();
   return p5.color(p5.red(c), p5.green(c), p5.blue(c), p5.alpha(c));
