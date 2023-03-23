@@ -73,6 +73,8 @@ This monorepo contains several reusable packages for creative coding, located in
 -   [@tronicart/shapes](./packages/shapes/): A collection of 2D shapes for creative coding.
 -   [@tronicart/poisson-disk-sampling](./packages/poisson-disk-sampling/): function for generating 2D points that are uniformly spaced apart.
 
+Check the [/packages](/packages/) folder for more.
+
 ## Contributing
 
 If you'd like to contribute to this monorepo, please open an issue or submit a pull request on GitHub. Contributions are always welcome!
