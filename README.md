@@ -1,5 +1,9 @@
 # Tronicart - Creative Workspace
 
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
+
+
 This monorepo is designed for creative coding, mainly with P5.js, but not limited to it. It uses pnpm as a package manager and Turbo Repo as a monorepo tool. Sketches are located in the `/sketches` folder, while reusable packages are located in the `/packages` folder.
 
 Here are a few sketch outputs I've generated thanks to these tools:
