@@ -2,8 +2,8 @@
   "name": "@tronicart/poisson-disk-sampling",
   "version": "1.0.0",
   "description": "Reusable poisson disk sampling",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/packages/poisson-disk-sampling/index.js",
+  "types": "dist/packages/poisson-disk-sampling/index.d.ts",
   "scripts": {
     "build": "tsc"
   },

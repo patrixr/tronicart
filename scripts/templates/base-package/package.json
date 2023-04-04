@@ -1,18 +1,24 @@
 {
-  "name": "@tronicart/shapes",
+  "name": "package",
   "version": "1.0.0",
-  "description": "Shapes",
+  "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc"
   },
   "keywords": [
-    "p5",
     "typescript",
-    "lib",
-    "canvas"
+    "lib"
   ],
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
   "author": "Patrick",
   "license": "ISC"
 }

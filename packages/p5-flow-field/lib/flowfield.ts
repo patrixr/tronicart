@@ -35,12 +35,14 @@ export class FlowField {
     return batch;
   }
 
-  public setVortex(center: P5.Vector) {
+  public setAttractor(center: P5.Vector) {
     this.center = center.copy();
+    this.reset();
   }
 
   public reset() {
     const { p5 } = this;
+    const baseVector = p5.createVector(0, 1); // p5.createVector(p5.random(-1, 1), p5.random(-1, 1));
 
     this.vectors = [];
     let yoff = 0;
@@ -55,7 +57,7 @@ export class FlowField {
             .sub(p5.createVector(x, y))
             .rotate(p5.noise(xoff, yoff, 0) * p5.TWO_PI);
         } else {
-          v = p5.createVector(0, 1).rotate(p5.noise(xoff, yoff, 0) * p5.TWO_PI);
+          v = baseVector.copy().rotate(p5.noise(xoff, yoff, 0) * p5.TWO_PI);
         }
 
         v.setMag(-1);
@@ -89,8 +91,6 @@ export class FlowField {
     const { p5 } = this;
 
     if (debug) {
-      p5.fill(255);
-      p5.stroke(255, 150);
       this.each((v, { x, y }) => {
         p5.push();
         p5.translate(x, y);

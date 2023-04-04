@@ -1,4 +1,4 @@
-import { createGrid } from 'data-structures';
+import { createGrid } from '@tronicart/data-structures';
 import P5 from 'p5';
 import { present } from '@tronicart/lang-helpers';
 
@@ -47,7 +47,7 @@ function dist(x1: number, y1: number, x2: number, y2: number) {
  * }} config
  * @return {*}
  */
-export function poissondiskSampling<V extends IVector>(config: PoissondiskSamplingConfig<V>) {
+export function poissonDiskSampling<V extends IVector>(config: PoissondiskSamplingConfig<V>) {
   const {
     surfaceHeight,
     surfaceWidth,
@@ -140,7 +140,7 @@ export function poissondiskSampling<V extends IVector>(config: PoissondiskSampli
 }
 
 export function poissondiskSamplingP5(p5: P5, radius: number, maxRetry = 30) {
-  return poissondiskSampling<P5.Vector>({
+  return poissonDiskSampling<P5.Vector>({
     surfaceHeight: p5.height,
     surfaceWidth: p5.width,
     createVector: p5.createVector.bind(p5),

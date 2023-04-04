@@ -1,6 +1,6 @@
 import type P5 from 'p5';
-import { Color } from 'p5';
-import { getP5 } from './configure';
+import { isColor } from './colors';
+import { getGlobalP5 } from './configure';
 
 export type ColorTuple = [number, number, number, number];
 
@@ -8,7 +8,7 @@ export type PixelCallback = (x: number, y: number, c: ColorTuple) => void;
 
 export type PixelMapper = (x: number, y: number, c: ColorTuple) => P5.Color | ColorTuple;
 
-export function createPixelEditor(p5: P5 | P5.Graphics = getP5()) {
+export function createPixelEditor(p5: P5 | P5.Graphics = getGlobalP5()) {
   const d = p5.pixelDensity();
 
   const begin = () => p5.loadPixels();
@@ -26,11 +26,11 @@ export function createPixelEditor(p5: P5 | P5.Graphics = getP5()) {
   const setPixel = (x: number, y: number, c: P5.Color | ColorTuple) => {
     const i = index(x, y);
 
-    if (c instanceof Color) {
-      p5.pixels[i] = (c as any)._getRed();
-      p5.pixels[i + 1] = (c as any)._getGreen();
-      p5.pixels[i + 2] = (c as any)._getBlue();
-      p5.pixels[i + 3] = (c as any)._getAlpha();
+    if (isColor(c)) {
+      p5.pixels[i] = p5.red(c);
+      p5.pixels[i + 1] = p5.green(c);
+      p5.pixels[i + 2] = p5.blue(c);
+      p5.pixels[i + 3] = p5.alpha(c);
     } else {
       p5.pixels[i] = c[0];
       p5.pixels[i + 1] = c[1];

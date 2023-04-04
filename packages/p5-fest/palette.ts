@@ -1,6 +1,6 @@
 import type P5 from 'p5';
 import ColorScheme from 'color-scheme';
-import { getP5 } from './configure';
+import { getGlobalP5 } from './configure';
 
 export module Palette {
   const ALL_SCHEMES = ['mono', 'contrast', 'triade', 'tetrade', 'analogic'] as const;
@@ -23,7 +23,7 @@ export module Palette {
   let savedConfig: PaletteConfiguration = null;
 
   export function configure(config: PaletteConfiguration = {}) {
-    p5 = config.p5 ?? getP5();
+    p5 = config.p5 ?? getGlobalP5();
 
     const {
       hue = p5.floor(p5.random(0, 360)),
@@ -45,9 +45,14 @@ export module Palette {
 
     colors = p5.shuffle(colors);
     configured = true;
+
+    savedConfig = {
+      ...config
+    };
   }
 
   export function reload() {
+    prepare();
     configure(savedConfig);
   }
 
@@ -60,6 +65,11 @@ export module Palette {
   export function nextColor() {
     prepare();
     return p5.color(colors[index++ % colors.length]);
+  }
+
+  export function intToColor(i: number) {
+    prepare();
+    return p5.color(colors[Math.floor(i) % colors.length]);
   }
 
   export function peekNextColor() {

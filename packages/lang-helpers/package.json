@@ -2,8 +2,8 @@
   "name": "@tronicart/lang-helpers",
   "version": "1.0.0",
   "description": "Reus",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/packages/lang-helpers/index.js",
+  "types": "dist/packages/lang-helpers/index.d.ts",
   "scripts": {
     "test": "ava",
     "build": "tsc"

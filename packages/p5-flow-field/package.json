@@ -2,8 +2,8 @@
   "name": "@tronicart/p5-flow-field",
   "version": "1.0.0",
   "description": "P5 flow field",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/packages/p5-flow-field/index.js",
+  "types": "dist/packages/p5-flow-field/index.d.ts",
   "scripts": {
     "build": "tsc"
   },

@@ -11,9 +11,12 @@
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
     "baseUrl": "./",
-    "rootDir": ".",
-    "paths": {
-      "p5-fest": ["packages/p5-fest/index.ts"]
+    "rootDir": "."
+  },
+  "ts-node": {
+    // these options are overrides used only by ts-node
+    "compilerOptions": {
+      "module": "commonjs"
     }
   }
 }

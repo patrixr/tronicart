@@ -3,6 +3,10 @@
   "include": ["**/*.ts"],
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "esModuleInterop": true
+  },
+  "devDependencies": {
+    "vite": "^4.2.1"
   }
 }

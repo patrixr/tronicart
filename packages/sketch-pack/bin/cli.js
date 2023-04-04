@@ -22,7 +22,7 @@ const progressPlugin = () =>
 
 /* Begin */
 yargs
-  .scriptName('p5-cli')
+  .scriptName('sketch-pack')
   .usage('$0 <cmd> [args]')
   .command(
     'serve [sketch]',

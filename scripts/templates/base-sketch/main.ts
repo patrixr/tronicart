@@ -1,4 +1,4 @@
-import * as P5 from 'p5';
+import P5 from 'p5';
 
 const sketch = (p5: P5) => {
   p5.setup = (): void => {

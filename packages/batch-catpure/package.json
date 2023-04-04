@@ -2,7 +2,7 @@
   "name": "@tronicart/batch-capture",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./cli/index.js",
   "bin": {
     "batch-capture": "./cli/index.js"
   },

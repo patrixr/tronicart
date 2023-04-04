@@ -30,7 +30,7 @@ pnpm install
 To create a new TypeScript sketch, use the following command:
 
 ```bash
-pnpm generate:p5-ts
+pnpm generate:sketch
 ```
 
 This will create a new sketch in the `/sketches` folder, with the following structure:

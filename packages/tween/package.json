@@ -1,19 +1,20 @@
 {
-  "name": "@tronicart/data-structures",
+  "name": "@tronicart/tween",
   "version": "1.0.0",
-  "description": "Reus",
-  "main": "dist/packages/data-structures/index.js",
-  "types": "dist/packages/data-structures/index.d.ts",
+  "description": "",
+  "main": "dist/packages/tween/index.js",
+  "types": "dist/packages/tween/index.d.ts",
   "scripts": {
     "test": "ava",
     "build": "tsc"
   },
   "keywords": [
-    "p5",
     "typescript",
-    "lib",
-    "canvas"
+    "lib"
   ],
+  "dependencies": {
+    "@tronicart/lang-helpers": "workspace:*"
+  },
   "ava": {
     "extensions": [
       "ts"

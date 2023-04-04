@@ -2,8 +2,8 @@
   "name": "@tronicart/p5-fest",
   "version": "1.0.0",
   "description": "P5 reusable goodies",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/packages/p5-fest/index.js",
+  "types": "dist/packages/p5-fest/index.d.ts",
   "scripts": {
     "build": "tsc"
   },
@@ -17,5 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "color-scheme": "^1.0.1"
+  },
+  "peerDependencies": {
+    "p5": "^1.6.0"
   }
 }

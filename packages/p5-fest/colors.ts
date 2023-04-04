@@ -1,23 +1,33 @@
-import type P5 from 'p5';
-import { getP5 } from './configure';
+import P5 from 'p5';
+import { getGlobalP5 } from './configure';
 
 export function colorsEqual(c1: P5.Color, c2: P5.Color) {
   return c1.toString() === c2.toString();
 }
 
+export function isColor(obj: any): obj is P5.Color {
+  return (
+    !!obj &&
+    typeof obj.setAlpha === 'function' &&
+    typeof obj.setRed === 'function' &&
+    typeof obj.setGreen === 'function' &&
+    typeof obj.setBlue === 'function'
+  );
+}
+
 export type LerpingColorConfig = {
+  p5?: P5;
   colors: P5.Color[];
   rotate?: boolean;
 };
 
-type LerpingColor = {
+export type LerpingColor = {
   update(delta?: number): void;
   color(): P5.Color;
 };
 
 export function lerpingColor(config: LerpingColorConfig): LerpingColor {
-  const p5 = getP5();
-  const { colors } = config;
+  const { colors, p5 = getGlobalP5() } = config;
   const rotate = config.rotate ?? true;
 
   let index = 0;
@@ -48,7 +58,6 @@ export function lerpingColor(config: LerpingColorConfig): LerpingColor {
   return { color, update };
 }
 
-export function copyColor(c: P5.Color): P5.Color {
-  const p5 = getP5();
+export function copyColor(c: P5.Color, p5: P5 | P5.Graphics = getGlobalP5()): P5.Color {
   return p5.color(p5.red(c), p5.green(c), p5.blue(c), p5.alpha(c));
 }

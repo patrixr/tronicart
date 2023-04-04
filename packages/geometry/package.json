@@ -1,12 +1,15 @@
 {
-  "name": "@tronicart/data-structures",
+  "name": "@tronicart/geometry",
   "version": "1.0.0",
-  "description": "Reus",
-  "main": "dist/packages/data-structures/index.js",
-  "types": "dist/packages/data-structures/index.d.ts",
+  "description": "Geometry",
+  "main": "dist/packages/geometry/index.js",
+  "types": "dist/packages/geometry/index.d.ts",
   "scripts": {
     "test": "ava",
     "build": "tsc"
+  },
+  "dependencies": {
+    "@tronicart/lang-helpers": "workspace:*"
   },
   "keywords": [
     "p5",

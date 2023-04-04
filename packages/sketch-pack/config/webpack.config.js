@@ -1,6 +1,7 @@
 const path = require('path');
 const { DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const tsLoader = require('ts-loader');
 
 const SKETCH_ENTRYPOINT = process.env['SKETCH_ENTRYPOINT'];
 
@@ -8,8 +9,11 @@ if (!SKETCH_ENTRYPOINT) {
   throw new Error(`Environment variable SKETCH_ENTRYPOINT was not defined`);
 }
 
+console.log(path.resolve(path.dirname(SKETCH_ENTRYPOINT), 'dist'));
+
 module.exports = {
-  entry: SKETCH_ENTRYPOINT,
+  context: __dirname,
+  entry: path.resolve(SKETCH_ENTRYPOINT),
   output: {
     path: path.resolve(path.dirname(SKETCH_ENTRYPOINT), 'dist'),
     filename: 'bundle.js',
@@ -38,7 +42,7 @@ module.exports = {
       __CREATION_DATE__: Date.now().toString()
     }),
     new HtmlWebpackPlugin({
-      template: path.join(path.dirname(SKETCH_ENTRYPOINT), 'public/index.html'),
+      template: path.resolve(path.dirname(SKETCH_ENTRYPOINT), 'public/index.html'),
       inject: 'body',
       publicPath: './'
     })

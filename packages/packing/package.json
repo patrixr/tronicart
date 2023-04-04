@@ -1,0 +1,28 @@
+{
+  "name": "@tronicart/packing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/packages/packing/index.js",
+  "types": "dist/packages/packing/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "lib"
+  ],
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "author": "Patrick",
+  "license": "ISC",
+  "dependencies": {
+    "@tronicart/geometry": "workspace:*",
+    "@tronicart/lang-helpers": "workspace:*"
+  }
+}
