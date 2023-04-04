@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Unlock secrets
         uses: sliteteam/github-action-git-crypt-unlock@1.2.0
@@ -39,5 +41,5 @@ jobs:
       - name: Test
         run: npx turbo run test --filter="[HEAD^1]"
 
-      - name: Test
+      - name: Build
         run: npx turbo run build --filter="[HEAD^1]"
