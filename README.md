@@ -25,6 +25,14 @@ Then, install the dependencies:
 pnpm install
 ```
 
+## Encrypted Folders
+
+After cloning a repository with encrypted files, unlock with GPG:
+
+```
+git-crypt unlock
+```
+
 ## Creating a New Sketch
 
 To create a new TypeScript sketch, use the following command:
