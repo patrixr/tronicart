@@ -9,6 +9,8 @@
     "test": "turbo run test  --include-dependencies",
     "build:all": "turbo run build  --include-dependencies",
     "test:all": "turbo run test  --include-dependencies",
+    "test:ci": "turbo run test --filter=\"...[HEAD^1]\"",
+    "build:ci": "turbo run build --filter=\"...[HEAD^1]\"",
     "screen:capture": "batch-capture",
     "playground": "turbo run serve --filter=\"playground\"",
     "orbits": "turbo run serve --filter=\"orbits\"",
