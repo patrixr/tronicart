@@ -15,7 +15,9 @@
     "playground": "turbo run serve --filter=\"playground\"",
     "orbits": "turbo run serve --filter=\"orbits\"",
     "chinese-ink": "turbo run serve --filter=\"chinese-ink\"",
-    "wall-art": "turbo run serve --filter=\"wall-art\""
+    "wall-art": "turbo run serve --filter=\"wall-art\"",
+    "dunes": "turbo run serve --filter=\"dunes\"",
+    "isometric": "turbo run serve --filter=\"isometric\""
   },
   "keywords": [],
   "author": "",

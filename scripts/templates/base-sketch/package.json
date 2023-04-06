@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "serve": "sketch-pack serve ./main.ts",
-    "build": "sketch-pack build ./main.ts"
+    "serve": "vite serve",
+    "build": "vite build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "p5": "^1.6.0",
-    "@tronicart/sketch-pack": "workspace:*"
+    "p5": "^1.6.0"
+  },
+  "devDependencies": {
+    "vite": "^4.2.1"
   }
 }
