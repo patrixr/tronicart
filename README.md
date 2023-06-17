@@ -25,25 +25,6 @@ Then, install the dependencies:
 pnpm install
 ```
 
-## Encrypted Folders
-
-This repo contains a mix of public and private content. Private is secured with [git-crypt](https://github.com/AGWA/git-crypt)
-
-To add secured repos, modify the `.gitattributes` file as such
-
-```conf
-# Encrypted Folders:
-sketches/wall-art/** filter=git-crypt diff=git-crypt
-sketches/orbits/** filter=git-crypt diff=git-crypt
-sketches/chinese-ink/** filter=git-crypt diff=git-crypt
-```
-
-After cloning a repository with encrypted files, unlock with GPG:
-
-```
-git-crypt unlock
-```
-
 ## Creating a New Sketch
 
 To create a new TypeScript sketch, use the following command:
