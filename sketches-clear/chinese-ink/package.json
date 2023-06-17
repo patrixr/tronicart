@@ -1,0 +1,24 @@
+{
+  "name": "chinese-ink",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "sketch-pack serve ./main.ts",
+    "build": "vite build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "p5": "^1.6.0",
+    "@tronicart/sketch-pack": "workspace:*",
+    "@tronicart/poisson-disk-sampling": "workspace:*",
+    "@tronicart/p5-fest": "workspace:*",
+    "@tronicart/p5-flow-field": "workspace:*",
+    "@tronicart/geometry": "workspace:*",
+    "@tronicart/lang-helpers": "workspace:*",
+    "@tronicart/packing": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^4.2.1"
+  }
+}

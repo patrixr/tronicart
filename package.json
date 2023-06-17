@@ -7,6 +7,7 @@
     "preinstall": "npx only-allow pnpm",
     "generate": "ts-node scripts/generate.ts",
     "test": "turbo run test  --include-dependencies",
+    "clean": "rm -rf packages/*/dist sketches/*/dist sketches/*/dist-zip",
     "build:all": "turbo run build  --include-dependencies",
     "test:all": "turbo run test  --include-dependencies",
     "test:ci": "turbo run test --filter=\"...[HEAD^1]\"",
@@ -16,8 +17,7 @@
     "orbits": "turbo run serve --filter=\"orbits\"",
     "chinese-ink": "turbo run serve --filter=\"chinese-ink\"",
     "wall-art": "turbo run serve --filter=\"wall-art\"",
-    "dunes": "turbo run serve --filter=\"dunes\"",
-    "isometric": "turbo run serve --filter=\"isometric\""
+    "isometric": "turbo run serve --filter=\"isometric\"",
   },
   "keywords": [],
   "author": "",

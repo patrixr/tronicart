@@ -1,5 +1,0 @@
-# Encrypted Folders:
-sketches/wall-art/** filter=git-crypt diff=git-crypt
-sketches/orbits/** filter=git-crypt diff=git-crypt
-sketches/chinese-ink/** filter=git-crypt diff=git-crypt
-sketches/isometric/** filter=git-crypt diff=git-crypt

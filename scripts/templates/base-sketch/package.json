@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "serve": "vite serve",
-    "build": "vite build"
+    "build": "vite build",
+    "release": "RELEASE=1 vite build"
   },
   "author": "",
   "license": "ISC",

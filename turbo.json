@@ -5,6 +5,10 @@
       "dependsOn": ["^build", "test"],
       "outputs": ["./dist/**"]
     },
+    "release": {
+      "dependsOn": ["^build", "test"],
+      "outputs": ["./dist/**", "./dist-zip/**"]
+    },
     "serve": {
       "dependsOn": ["^build"],
       "persistent": true
