@@ -9,3 +9,6 @@ package-lock.json
 .turbo
 *.mp4
 ffmpeg.txt
+*.so
+*.dylib
+*.dll
