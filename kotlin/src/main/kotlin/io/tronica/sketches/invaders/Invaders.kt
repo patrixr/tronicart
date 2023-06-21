@@ -13,7 +13,7 @@ import java.lang.reflect.Type
 
 data class InvaderShape(val name: String, val data: Array<Array<Int>>);
 
-class InvadersComposition : PApplet() {
+class Invaders : PApplet() {
 
     private var invaderCellSize = 10F
     private val spacing = 5
@@ -68,7 +68,7 @@ class InvadersComposition : PApplet() {
                 var x = 0f;
                 while (x < width) {
                     val c =
-                        getAverageColorFromSourceImage(x.toInt(), y.toInt(), shapeWidth.toInt(), shapeHeight.toInt())
+                            getAverageColorFromSourceImage(x.toInt(), y.toInt(), shapeWidth.toInt(), shapeHeight.toInt())
                     fill(c)
                     if (invaderCellSize > 2) {
                         stroke(0)
@@ -123,10 +123,10 @@ class InvadersComposition : PApplet() {
                 for (colIndex in shape[rowIndex].indices) {
                     if (shape[rowIndex][colIndex] == 1) {
                         rect(
-                            (colIndex * invaderCellSize + colIndex).toFloat(),
-                            (rowIndex * invaderCellSize + rowIndex).toFloat(),
-                            invaderCellSize.toFloat(),
-                            invaderCellSize.toFloat()
+                                (colIndex * invaderCellSize + colIndex).toFloat(),
+                                (rowIndex * invaderCellSize + rowIndex).toFloat(),
+                                invaderCellSize.toFloat(),
+                                invaderCellSize.toFloat()
                         )
                     }
                 }
@@ -158,15 +158,15 @@ class InvadersComposition : PApplet() {
         }
 
         return color(
-            totalHue / count,
-            totalSaturation / count,
-            totalBrightness / count
+                totalHue / count,
+                totalSaturation / count,
+                totalBrightness / count
         )
     }
 
     fun readShapesFromFile(): List<InvaderShape> {
         val gson = Gson()
-        val inputStream = InvadersComposition::class.java.getResourceAsStream("/invader_composition/invaders.json")
+        val inputStream = Invaders::class.java.getResourceAsStream("/invader_composition/invaders.json")
         val reader = InputStreamReader(inputStream!!)
         val type: Type = object : TypeToken<List<InvaderShape>>() {}.type
 

@@ -13,9 +13,6 @@ dependencies {
     implementation(fileTree("libs") { include("*.jar") })
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.google.code.gson:gson:2.8.9")
-    implementation(files("libs/video-export.jar"))
-    implementation(files("libs/jna.jar"))
-    implementation(files("libs/jna-platform.jar"))
 }
 
 application {

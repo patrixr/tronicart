@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -54,7 +58,7 @@ importers:
         version: 1.0.4
       puppeteer:
         specifier: ^19.7.5
-        version: 19.7.5
+        version: 19.7.5(typescript@4.9.5)
 
   packages/data-structures: {}
 
@@ -71,8 +75,15 @@ importers:
       color-scheme:
         specifier: ^1.0.1
         version: 1.0.1
+      p5:
+        specifier: ^1.6.0
+        version: 1.6.0
 
-  packages/p5-flow-field: {}
+  packages/p5-flow-field:
+    dependencies:
+      p5:
+        specifier: ^1.6.0
+        version: 1.6.0
 
   packages/packing:
     dependencies:
@@ -160,20 +171,7 @@ importers:
     devDependencies:
       vite:
         specifier: ^4.2.1
-        version: 4.2.1
-
-  sketches/hello:
-    dependencies:
-      '@tronicart/p5-fest':
-        specifier: workspace:*
-        version: link:../../packages/p5-fest
-      p5:
-        specifier: ^1.6.0
-        version: 1.6.0
-    devDependencies:
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1
+        version: 4.2.1(@types/node@18.14.6)
 
   sketches/invaders:
     dependencies:
@@ -183,7 +181,7 @@ importers:
     devDependencies:
       vite:
         specifier: ^4.2.1
-        version: 4.2.1
+        version: 4.2.1(@types/node@18.14.6)
 
   sketches/isometric:
     dependencies:
@@ -202,7 +200,7 @@ importers:
     devDependencies:
       vite:
         specifier: ^4.2.1
-        version: 4.2.1
+        version: 4.2.1(@types/node@18.14.6)
       vite-plugin-obfuscator:
         specifier: ^1.0.5
         version: 1.0.5
@@ -221,7 +219,7 @@ importers:
     devDependencies:
       vite:
         specifier: ^4.2.1
-        version: 4.2.1
+        version: 4.2.1(@types/node@18.14.6)
 
   sketches/playground:
     dependencies:
@@ -249,7 +247,7 @@ importers:
     devDependencies:
       vite:
         specifier: ^4.2.1
-        version: 4.2.1
+        version: 4.2.1(@types/node@18.14.6)
 
   sketches/wall-art:
     dependencies:
@@ -268,7 +266,7 @@ importers:
     devDependencies:
       vite:
         specifier: ^4.2.1
-        version: 4.2.1
+        version: 4.2.1(@types/node@18.14.6)
 
 packages:
 
@@ -964,8 +962,10 @@ packages:
       indent-string: 5.0.0
     dev: true
 
-  /ajv-formats@2.1.1:
+  /ajv-formats@2.1.1(ajv@8.12.0):
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -3529,7 +3529,7 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /puppeteer-core@19.7.5:
+  /puppeteer-core@19.7.5(typescript@4.9.5):
     resolution: {integrity: sha512-EJuNha+SxPfaYFbkoWU80H3Wb1SiQH5fFyb2xdbWda0ziax5mhV63UMlqNfPeTDIWarwtR4OIcq/9VqY8HPOsg==}
     engines: {node: '>=14.14.0'}
     peerDependencies:
@@ -3547,6 +3547,7 @@ packages:
       proxy-from-env: 1.1.0
       rimraf: 4.4.0
       tar-fs: 2.1.1
+      typescript: 4.9.5
       unbzip2-stream: 1.4.3
       ws: 8.12.1
     transitivePeerDependencies:
@@ -3556,7 +3557,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /puppeteer@19.7.5:
+  /puppeteer@19.7.5(typescript@4.9.5):
     resolution: {integrity: sha512-UqD8K+yaZa6/hwzP54AATCiHrEYGGxzQcse9cZzrtsVGd8wT0llCdYhsBp8n+zvnb1ofY0YFgI3TYZ/MiX5uXQ==}
     requiresBuild: true
     dependencies:
@@ -3564,7 +3565,7 @@ packages:
       https-proxy-agent: 5.0.1
       progress: 2.0.3
       proxy-from-env: 1.1.0
-      puppeteer-core: 19.7.5
+      puppeteer-core: 19.7.5(typescript@4.9.5)
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -3777,7 +3778,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.11
       ajv: 8.12.0
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1(ajv@8.12.0)
       ajv-keywords: 5.1.0(ajv@8.12.0)
     dev: false
 
@@ -4436,10 +4437,10 @@ packages:
       vite: '>=2.x'
     dependencies:
       jszip: 3.10.1
-      vite: 4.2.1
+      vite: 4.2.1(@types/node@18.14.6)
     dev: true
 
-  /vite@4.2.1:
+  /vite@4.2.1(@types/node@18.14.6):
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4464,6 +4465,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.14.6
       esbuild: 0.17.15
       postcss: 8.4.21
       resolve: 1.22.1

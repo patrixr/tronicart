@@ -17,7 +17,7 @@
     "orbits": "turbo run serve --filter=\"orbits\"",
     "chinese-ink": "turbo run serve --filter=\"chinese-ink\"",
     "wall-art": "turbo run serve --filter=\"wall-art\"",
-    "isometric": "turbo run serve --filter=\"isometric\"",
+    "isometric": "turbo run serve --filter=\"isometric\""
   },
   "keywords": [],
   "author": "",
