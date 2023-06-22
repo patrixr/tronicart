@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -241,6 +237,25 @@ importers:
       '@tronicart/poisson-disk-sampling':
         specifier: workspace:*
         version: link:../../packages/poisson-disk-sampling
+      p5:
+        specifier: ^1.6.0
+        version: 1.6.0
+    devDependencies:
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.14.6)
+
+  sketches/tiling:
+    dependencies:
+      '@tronicart/data-structures':
+        specifier: workspace:*
+        version: link:../../packages/data-structures
+      '@tronicart/lang-helpers':
+        specifier: workspace:*
+        version: link:../../packages/lang-helpers
+      '@tronicart/p5-fest':
+        specifier: workspace:*
+        version: link:../../packages/p5-fest
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -4841,3 +4856,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
