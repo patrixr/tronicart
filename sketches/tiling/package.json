@@ -13,7 +13,7 @@
     "p5": "^1.6.0",
     "@tronicart/lang-helpers": "workspace:*",
     "@tronicart/p5-fest": "workspace:*",
-    "@tronicart/data-structures": "workspace:*"
+    "@tronicart/truchet": "workspace:*"
   },
   "devDependencies": {
     "vite": "^4.2.1"

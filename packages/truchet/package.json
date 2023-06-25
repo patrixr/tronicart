@@ -1,0 +1,28 @@
+{
+  "name": "@tronicart/truchet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/packages/truchet/index.js",
+  "types": "dist/packages/truchet/index.d.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "ava"
+  },
+  "keywords": [
+    "typescript",
+    "lib"
+  ],
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "author": "Patrick",
+  "license": "ISC",
+  "dependencies": {
+    "@tronicart/lang-helpers": "workspace:*"
+  }
+}

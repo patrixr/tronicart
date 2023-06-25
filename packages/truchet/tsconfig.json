@@ -1,0 +1,11 @@
+{
+  "exclude": ["*.test.ts", "lib/**/*.spec.ts", "lib/**/*.test.ts", "dist/**/*"],
+  "include": ["**/*.ts"],
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationMap": true,
+    "module": "ESNEXT"
+  }
+}

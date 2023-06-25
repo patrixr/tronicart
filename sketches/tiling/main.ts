@@ -1,62 +1,75 @@
 import P5 from 'p5';
-import { Grid, createGrid } from '@tronicart/data-structures';
+import { Tile, tilingBuilder } from '@tronicart/truchet';
 
-type Corner = {
-  coord: [number, number],
-  sides: [string, string]
-}
-
-const corners : Corner[] = [
-  {
-    coord: [0, 0],
-    sides: ['left', 'top']
-  },
-  {
-    coord: [0, 1],
-    sides: ['left', 'bottom']
-  },
-  {
-    coord: [1, 0],
-    sides: ['right', 'top']
-  },
-  {
-    coord: [1, 1],
-    sides: ['right', 'bottom']
-  }
-];
-
-const createTileTexture = (p5: P5, tileSize: number, corner: Corner) => {
-  const centerPoint = p5.createVector(corner.coord[0], corner.coord[1]);
-
-  const pt1 = p5.createVector(centerPoint.x, centerPoint.y == 1 ? 0 : 1);
-  const pt2 = centerPoint;
-  const pt3 = p5.createVector(centerPoint.x == 1 ? 0 : 1, centerPoint.y);
-  const pt4 = p5.createVector(p5.random(0.2, 0.8), p5.random(0.2, 0.8));
-  const pt5 = p5.createVector(p5.random(0.2, 0.8), p5.random(0.2, 0.8));
-
-  const gfx = p5.createGraphics(tileSize, tileSize);
-
-  gfx.beginShape();
-  gfx.background(255);
-  gfx.fill(0);
-  gfx.stroke(0);
-  gfx.curveVertex(pt1.x * tileSize, pt1.y * tileSize);
-  gfx.curveVertex(pt2.x * tileSize, pt2.y * tileSize);
-  gfx.curveVertex(pt3.x * tileSize, pt3.y * tileSize);
-  gfx.curveVertex(pt4.x * tileSize, pt4.y * tileSize);
-  gfx.curveVertex(pt5.x * tileSize, pt5.y * tileSize);
-  gfx.endShape(gfx.CLOSE);
-
-  return {
-    tex: gfx,
-    right: pt1.x + pt2.x + pt3.x >= 2,
-    left: pt1.x + pt2.x + pt3.x < 2,
-    bottom: pt1.y + pt2.y + pt3.y >= 2,
-    top: pt1.y + pt2.y + pt3.y < 2
-  };
+type CustomTile = Tile & {
+  draw: (x: number, y: number, size: number) => any;
 };
 
-type Tile = ReturnType<typeof createTileTexture>;
+// ---------------------------------------------------
+// TEXTURES
+// ---------------------------------------------------
+
+const createTexture = (p5: P5, tileSize: number): P5.Graphics => {
+  const gfx = p5.createGraphics(tileSize, tileSize);
+
+  gfx.stroke(255);
+  gfx.push();
+
+  //const middle = p5.createVector(tileSize / 2, tileSize / 2);
+
+  const mandatoryPoints : P5.Vector[] = p5.shuffle([
+    p5.createVector(0, tileSize * .25),
+    p5.createVector(0, tileSize * .75),
+    p5.createVector(tileSize, tileSize * .25),
+    p5.createVector(tileSize, tileSize * .75),
+    p5.createVector(tileSize * .25, 0),
+    p5.createVector(tileSize * .75, 0),
+    p5.createVector(tileSize * .25, tileSize),
+    p5.createVector(tileSize * .75, tileSize),
+  ])
+
+  gfx.beginShape();
+  gfx.noFill();
+  mandatoryPoints.forEach(p => gfx.curveVertex(p.x, p.y))
+  gfx.endShape();
+
+  // gfx.noFill();
+  // gfx.strokeWeight(2);
+  // gfx.arc(tileSize * .75, tileSize * .5, tileSize / 2, tileSize / 2, p5.HALF_PI, p5.PI + p5.HALF_PI);
+  // gfx.line(tileSize * .75, tileSize * .25, tileSize, tileSize * .25);
+  // gfx.line(tileSize * .75, tileSize * .75, tileSize, tileSize * .75);
+
+  // const points : P5.Vector[] = [
+  //   p5.createVector(0, 0),
+  //   p5.createVector(tileSize * .25, tileSize * .25)
+  // ]
+
+  // gfx.stroke(255);
+  // gfx.beginShape();
+  // points.forEach(p => gfx.curveVertex(p.x, p.y))
+  //gfx.endShape();
+  gfx.pop();
+
+  return gfx;
+};
+
+const createTile = (p5: P5, tileSize: number) : Tile => {
+  const tex = createTexture(p5, tileSize);
+
+  return {
+    id: '',
+    connections: {
+      top: '1',
+      left: '1',
+      bottom: '1',
+      right: '1'
+    },
+    draw: (x, y) => {
+      p5.image(tex, x, y);
+    }
+  }
+
+}
 
 // ---------------------------------------------------
 // SKETCH
@@ -66,7 +79,45 @@ const sketch = (p5: P5) => {
   let tileSize: number;
   let rows: number;
   let cols: number;
-  let grid: Grid<Tile>;
+
+  const TILES_BASIC: CustomTile[] = [
+    {
+      id: '1',
+      connections: {
+        top: '1',
+        left: '1',
+        bottom: '1',
+        right: '1'
+      },
+      draw(x, y, size) {
+        p5.push();
+        p5.noFill();
+        p5.strokeWeight(p5.map(y, 0, p5.height, 3, 0));
+        p5.translate(x, y);
+        p5.arc(0, 0, tileSize, tileSize, 0, p5.HALF_PI);
+        p5.arc(tileSize, tileSize, tileSize, tileSize, p5.PI, p5.PI + p5.HALF_PI);
+        p5.pop();
+      }
+    },
+    {
+      id: '2',
+      connections: {
+        top: '1',
+        left: '1',
+        bottom: '1',
+        right: '1'
+      },
+      draw(x, y, size) {
+        p5.push();
+        p5.noFill();
+        p5.strokeWeight(p5.map(y, 0, p5.height, 3, 0));
+        p5.translate(x, y);
+        p5.arc(tileSize, 0, tileSize, tileSize, p5.HALF_PI, p5.PI);
+        p5.arc(0, tileSize, tileSize, tileSize, p5.PI + p5.HALF_PI, p5.TWO_PI);
+        p5.pop();
+      }
+    }
+  ];
 
   p5.preload = () => {
     const seed = window.fxrand() * 1000000000000000;
@@ -75,63 +126,41 @@ const sketch = (p5: P5) => {
     p5.noiseSeed(seed);
   };
 
-  const populate = (x: number, y: number, tile: Tile) => {
-    if (
-      x < 0 || x >= cols ||
-      y < 0 || y >= rows ||
-      grid.get(x, y) !== null
-    ) return;
-
-    grid.set(x, y, tile);
-
-    console.log(tile);
-    if (tile.bottom) {
-      const corner = p5.shuffle(corners).find(c => c.sides.includes("top"))
-      const newTile = createTileTexture(p5, tileSize, corner);
-      populate(x, y + 1, newTile);
-    }
-
-    if (tile.right) {
-      const corner = p5.shuffle(corners).find(c => c.sides.includes("left"))
-      const newTile = createTileTexture(p5, tileSize, corner);
-      populate(x + 1, y, newTile);
-    }
-
-    if (tile.top) {
-      const corner = p5.shuffle(corners).find(c => c.sides.includes("bottom"))
-      const newTile = createTileTexture(p5, tileSize, corner);
-      populate(x, y - 1, newTile);
-    }
-
-    if (tile.left) {
-      const corner = p5.shuffle(corners).find(c => c.sides.includes("right"))
-      const newTile = createTileTexture(p5, tileSize, corner);
-      populate(x - 1, y, newTile);
-    }
-  };
-
   p5.setup = (): void => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
-    p5.background(125);
+    p5.background(0);
+    p5.stroke(255);
 
-    tileSize = p5.min(p5.width, p5.height) / 10;
+    tileSize = p5.min(p5.width, p5.height) / 15;
     rows = p5.floor(p5.height / tileSize);
     cols = p5.floor(p5.width / tileSize);
-    grid = createGrid<Tile>(cols, rows, () => null);
+
+    const texture = createTexture(p5, tileSize, false);
+
+    const grid = tilingBuilder(cols, rows, TILES_BASIC);
+    // const grid = tilingBuilder(cols, rows, [
+    //   createTile(p5, tileSize),
+    //   createTile(p5, tileSize),
+    //   createTile(p5, tileSize),
+    //   createTile(p5, tileSize)
+    // ]);
 
     console.info(`Rows: ${rows}`);
     console.info(`Cols: ${cols}`);
 
-    const startCoord = p5.createVector(p5.floor(p5.random(cols)), p5.floor(p5.random(rows)));
-    const firstTile = createTileTexture(p5, tileSize, p5.random(corners as any[]));
-
-    populate(startCoord.x, startCoord.y, firstTile);
-
-    grid.each((tile, x, y) => {
-      if (tile) {
-        p5.image(tile.tex, x * tileSize, y * tileSize)
+    for (let x = 0; x < cols; ++x) {
+      for (let y = 0; y < rows; ++y) {
+        if (!grid || !grid[x]) break;
+        if (grid[x][y] !== null) {
+          grid[x][y].draw(x * tileSize, y * tileSize, tileSize);
+        }
       }
-    });
+    }
+
+    p5.fill(0);
+    p5.rect(0, 0, tileSize, tileSize);
+    p5.image(texture, 0, 0);
+    p5.noLoop();
   };
 
   p5.draw = (): void => {};

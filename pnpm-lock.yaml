@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 importers:
 
   .:
@@ -132,6 +136,12 @@ importers:
         specifier: ^3.5.1
         version: 3.5.1(javascript-obfuscator@4.0.2)(webpack@5.75.0)
 
+  packages/truchet:
+    dependencies:
+      '@tronicart/lang-helpers':
+        specifier: workspace:*
+        version: link:../lang-helpers
+
   packages/tween:
     dependencies:
       '@tronicart/lang-helpers':
@@ -247,15 +257,15 @@ importers:
 
   sketches/tiling:
     dependencies:
-      '@tronicart/data-structures':
-        specifier: workspace:*
-        version: link:../../packages/data-structures
       '@tronicart/lang-helpers':
         specifier: workspace:*
         version: link:../../packages/lang-helpers
       '@tronicart/p5-fest':
         specifier: workspace:*
         version: link:../../packages/p5-fest
+      '@tronicart/truchet':
+        specifier: workspace:*
+        version: link:../../packages/truchet
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -4856,7 +4866,3 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
