@@ -1,0 +1,21 @@
+{
+  "name": "hong-kong-curves",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "vite serve",
+    "build": "vite build",
+    "release": "RELEASE=1 vite build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tronicart/lang-helpers": "workspace:*",
+    "@tronicart/p5-fest": "workspace:*",
+    "canvas-capture": "^2.1.1",
+    "p5": "^1.6.0"
+  },
+  "devDependencies": {
+    "vite": "^4.2.1"
+  }
+}
