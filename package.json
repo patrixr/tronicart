@@ -22,7 +22,8 @@
     "iris": "turbo run serve --filter=\"iris\"",
     "charcoal-lines": "turbo run serve --filter=\"charcoal-lines\"",
     "hong-kong-curves": "turbo run serve --filter=\"hong-kong-curves\"",
-    "static-flowfields": "turbo run serve --filter=\"static-flowfields\""
+    "static-flowfields": "turbo run serve --filter=\"static-flowfields\"",
+    "diff-growth-experiments": "turbo run serve --filter=\"diff-growth-experiments\""
   },
   "keywords": [],
   "author": "",
@@ -39,6 +40,9 @@
     "turbo": "^1.8.8",
     "typescript": "^4.9.5",
     "yargs-interactive": "^3.0.1"
+  },
+  "dependencies": {
+    "canvas-capture": "^2.1.1"
   },
   "packageManager": "pnpm@7.29.3",
   "engines": {

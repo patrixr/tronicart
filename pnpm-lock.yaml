@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      canvas-capture:
+        specifier: ^2.1.1
+        version: 2.1.1
     devDependencies:
       '@tronicart/batch-capture':
         specifier: workspace:*
@@ -154,22 +158,6 @@ importers:
         specifier: workspace:*
         version: link:../lang-helpers
 
-  sketches/charcoal-lines:
-    dependencies:
-      '@tronicart/lang-helpers':
-        specifier: workspace:*
-        version: link:../../packages/lang-helpers
-      '@tronicart/p5-fest':
-        specifier: workspace:*
-        version: link:../../packages/p5-fest
-      p5:
-        specifier: ^1.6.0
-        version: 1.6.0
-    devDependencies:
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.14.6)
-
   sketches/chinese-ink:
     dependencies:
       '@tronicart/geometry':
@@ -201,6 +189,25 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.14.6)
 
+  sketches/diff-growth-experiments:
+    dependencies:
+      '@tronicart/differential-growth':
+        specifier: workspace:*
+        version: link:../../packages/differential-growth
+      '@tronicart/lang-helpers':
+        specifier: workspace:*
+        version: link:../../packages/lang-helpers
+      '@tronicart/p5-fest':
+        specifier: workspace:*
+        version: link:../../packages/p5-fest
+      p5:
+        specifier: ^1.6.0
+        version: 1.6.0
+    devDependencies:
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.14.6)
+
   sketches/hong-kong-curves:
     dependencies:
       '@tronicart/lang-helpers':
@@ -209,9 +216,6 @@ importers:
       '@tronicart/p5-fest':
         specifier: workspace:*
         version: link:../../packages/p5-fest
-      canvas-capture:
-        specifier: ^2.1.1
-        version: 2.1.1
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -286,6 +290,9 @@ importers:
 
   sketches/playground:
     dependencies:
+      '@tronicart/differential-growth':
+        specifier: workspace:*
+        version: link:../../packages/differential-growth
       '@tronicart/geometry':
         specifier: workspace:*
         version: link:../../packages/geometry

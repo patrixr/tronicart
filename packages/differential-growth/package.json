@@ -1,0 +1,27 @@
+{
+  "name": "@tronicart/differential-growth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/packages/differential-growth/index.js",
+  "types": "dist/packages/differential-growth/index.d.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "lib"
+  ],
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "author": "Patrick",
+  "license": "ISC",
+  "dependencies": {
+    "@tronicart/lang-helpers": "workspace:*"
+  }
+}
