@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tronicart/p5-fest": "workspace:*",
+    "@tronicart/zest": "workspace:*",
     "p5": "^1.6.0"
   },
   "devDependencies": {

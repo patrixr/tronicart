@@ -1,11 +1,26 @@
 import P5 from 'p5';
 import type { Graphics, Image } from 'p5';
-import { Palette } from '@tronicart/p5-fest/palette';
-import { lerpingColor } from '@tronicart/p5-fest/colors';
-import { createCircle, Circle } from '@tronicart/geometry';
+import { Palette } from '@tronicart/zest/drawing/palette';
+import { dist } from '@tronicart/zest/algo/coordinates';
+import { lerpingColor } from '@tronicart/zest/drawing/colors';
 import { Drawable } from '@tronicart/lang-helpers';
 
 const SPEED_MULTIPLIER = 10;
+
+export interface Circle {
+  readonly x: number;
+  readonly y: number;
+  readonly diameter: number;
+  readonly radius: number;
+  intersects: (shape: Circle) => boolean
+}
+
+export function createCircle(x: number, y: number, diameter: number): Circle {
+  const radius = diameter / 2;
+  const intersects = (shape: Circle) => dist(x, y, shape.x, shape.y) <= radius + shape.radius;
+  return { radius, diameter, intersects, x,  y };
+}
+
 
 const sketch = (p5: P5) => {
   let debug = false;

@@ -1,9 +1,9 @@
 import p5, { Color, Image } from 'p5';
 import P5, { Vector } from 'p5';
-import { copyColor } from '@tronicart/p5-fest/colors';
-import { Palette } from '@tronicart/p5-fest/palette';
-import { createFlowField, FlowField } from '@tronicart/p5-flow-field';
-import { poissondiskSamplingP5 } from '@tronicart/poisson-disk-sampling';
+import { copyColor } from '@tronicart/zest/drawing/colors';
+import { Palette } from '@tronicart/zest/drawing/palette';
+import { createFlowField, FlowField } from '@tronicart/zest/algo/flowfield';
+import { poissondiskSamplingP5 } from '@tronicart/zest/algo/poisson-disk-sampling';
 
 const sketch = (p5: P5) => {
   let distanceConstant: number;

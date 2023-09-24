@@ -23,7 +23,9 @@
     "charcoal-lines": "turbo run serve --filter=\"charcoal-lines\"",
     "hong-kong-curves": "turbo run serve --filter=\"hong-kong-curves\"",
     "static-flowfields": "turbo run serve --filter=\"static-flowfields\"",
-    "diff-growth-experiments": "turbo run serve --filter=\"diff-growth-experiments\""
+    "diff-growth-flower": "turbo run serve --filter=\"diff-growth-flower\"",
+    "shader-test": "turbo run serve --filter=\"shader-test\"",
+    "planet": "turbo run serve --filter=\"planet\""
   },
   "keywords": [],
   "author": "",

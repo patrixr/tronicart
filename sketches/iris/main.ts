@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import { Palette } from '@tronicart/p5-fest/palette';
+import { Palette } from '@tronicart/zest/drawing/palette';
 
 const range = (n) => [...Array(n).keys()];
 

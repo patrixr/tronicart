@@ -1,6 +1,7 @@
 import { IsometricWorld } from '../world';
 import type P5 from 'p5';
-import { cache, repeat } from '@tronicart/lang-helpers';
+import { cache } from '@tronicart/zest/utils/cache';
+import { repeat } from '@tronicart/zest/utils/repeat';
 
 export const getLeafColors = cache((p5: P5) => {
   return p5

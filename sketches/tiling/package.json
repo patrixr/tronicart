@@ -11,9 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "p5": "^1.6.0",
-    "@tronicart/lang-helpers": "workspace:*",
-    "@tronicart/p5-fest": "workspace:*",
-    "@tronicart/truchet": "workspace:*"
+    "@tronicart/zest": "workspace:*"
   },
   "devDependencies": {
     "vite": "^4.2.1"

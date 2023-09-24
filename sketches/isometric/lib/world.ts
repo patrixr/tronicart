@@ -1,4 +1,4 @@
-import { IVector } from '@tronicart/lang-helpers';
+import type { IVector } from '@tronicart/zest/types';
 import type P5 from 'p5';
 import type { Color } from 'p5';
 import { createCube, CubeProps } from './cube';

@@ -1,7 +1,7 @@
 import P5 from 'p5';
-import { copyColor, lerpingColor, LerpingColor } from '@tronicart/p5-fest/colors';
-import { circlePoints } from '@tronicart/p5-fest/angles';
-import { Palette } from '@tronicart/p5-fest/palette';
+import { lerpingColor, LerpingColor } from '@tronicart/zest/drawing/colors';
+import { circlePoints } from '@tronicart/zest/algo/coordinates';
+import { Palette } from '@tronicart/zest/drawing/palette';
 
 type TrailRecord = {
   pos: P5.Vector;
