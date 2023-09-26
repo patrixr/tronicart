@@ -1,6 +1,6 @@
 import P5 from 'p5';
 import { CelestialBody } from './celestial';
-import { Palette } from '@tronicart/zest/drawing/palette';
+import { Palette } from '@tronicart/cc/drawing/palette';
 import { nightSky } from './textures';
 
 const sketch = (p5: P5) => {

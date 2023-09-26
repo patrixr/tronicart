@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import { Palette } from '@tronicart/zest/drawing/palette';
+import { Palette } from '@tronicart/cc/drawing/palette';
 import { createIsometricWorld, IsometricWorld } from './lib/world';
 import { plugins } from './lib/plugins';
 

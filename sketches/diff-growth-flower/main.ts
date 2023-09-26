@@ -1,9 +1,9 @@
 import P5 from 'p5';
-import { repeat } from '@tronicart/zest/utils/repeat';
-import { Palette } from '@tronicart/zest/drawing/palette';
-import { createDifferentialGrowth } from '@tronicart/zest/algo/differential-growth';
-import { circlePoints } from '@tronicart/zest/algo/coordinates';
-import { enableUserControls, DebugUserControls } from '@tronicart/zest/p5/debug';
+import { repeat } from '@tronicart/cc/utils/repeat';
+import { Palette } from '@tronicart/cc/drawing/palette';
+import { createDifferentialGrowth } from '@tronicart/cc/algo/differential-growth';
+import { circlePoints } from '@tronicart/cc/algo/coordinates';
+import { enableUserControls, DebugUserControls } from '@tronicart/cc/p5/debug';
 
 type DG = ReturnType<typeof createDifferentialGrowth>;
 

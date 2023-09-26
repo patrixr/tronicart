@@ -1,4 +1,4 @@
-import { Palette } from '@tronicart/zest/drawing/palette';
+import { Palette } from '@tronicart/cc/drawing/palette';
 import { IsometricWorld } from '../world';
 import { tree } from './tree';
 import P5 from 'p5';

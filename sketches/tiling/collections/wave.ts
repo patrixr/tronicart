@@ -1,6 +1,6 @@
 import type { DrawableTile } from '../main';
-import { Palette } from '@tronicart/zest/colors/alette';
-import { ConnectionMatcher } from '@tronicart/zest/algo/truchet';
+import { Palette } from '@tronicart/cc/colors/alette';
+import { ConnectionMatcher } from '@tronicart/cc/algo/truchet';
 import type P5 from 'p5';
 
 type Connections = DrawableTile['connections'];

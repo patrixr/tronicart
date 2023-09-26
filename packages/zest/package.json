@@ -1,10 +1,9 @@
 {
-  "name": "@tronicart/zest",
+  "name": "@tronicart/cc",
   "version": "1.0.0",
   "description": "P5 reusable goodies",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "test": "ava"

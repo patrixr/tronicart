@@ -1,5 +1,5 @@
 import test from 'ava';
-import { present } from './functions';
+import { present } from './present';
 
 test('present(x)', (t) => {
   t.assert(present(1) == true);

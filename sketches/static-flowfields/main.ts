@@ -1,6 +1,6 @@
 import P5 from 'p5';
-import { repeat } from '@tronicart/zest/utils/repeat';
-import { Palette } from '@tronicart/zest/colors/palette';
+import { repeat } from '@tronicart/cc/utils/repeat';
+import { Palette } from '@tronicart/cc/colors/palette';
 
 const sketch = (p5: P5) => {
   p5.setup = (): void => {

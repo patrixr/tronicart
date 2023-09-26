@@ -1,4 +1,4 @@
-import { IVector } from '@tronicart/zest/types';
+import { IVector } from '@tronicart/cc/types';
 import { IsometricObject, IsoObjectTypes } from './world';
 
 export type PlaneProps = {};

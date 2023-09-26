@@ -7,7 +7,7 @@ interface DebugOpts {
     commands?: string[]
 }
 
-export function enableUserControls(p5 = getGlobalP5(), opts: DebugOpts = {}) {
+export function bootstrapDebug(p5 = getGlobalP5(), opts: DebugOpts = {}) {
     const { sketchName = "sketch", commands = [] } = opts;
     
     CanvasCapture.init((window as any).document.getElementById('defaultCanvas0'));
@@ -35,4 +35,4 @@ export function enableUserControls(p5 = getGlobalP5(), opts: DebugOpts = {}) {
     return { keybinds, update };
 }
 
-export type DebugUserControls = ReturnType<typeof enableUserControls>
+export type DebugControls = ReturnType<typeof bootstrapDebug>

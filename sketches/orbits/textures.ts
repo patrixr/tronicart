@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import { editPixels } from '@tronicart/zest/drawing/pixels';
+import { editPixels } from '@tronicart/cc/drawing/pixels';
 
 export function smokeyBackground(
   p5: P5 | P5.Graphics,

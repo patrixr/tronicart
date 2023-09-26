@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "p5": "^1.6.0",
-    "@tronicart/zest": "workspace:*"
+    "@tronicart/cc": "workspace:*"
   },
   "devDependencies": {
     "vite": "^4.2.1"

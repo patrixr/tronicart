@@ -1,5 +1,5 @@
 
 
-throw new Error('Zest should not be loaded from its main endpoint');
+throw new Error('cc should not be loaded from its main endpoint');
 
 export {};

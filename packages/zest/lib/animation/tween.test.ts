@@ -1,5 +1,5 @@
 import test from 'ava';
-import { createNumericTween, createTween } from '.';
+import { createNumericTween, createTween } from './tween';
 
 test('raw tween increments', (t) => {
   const tween = createTween((pct) => ({ value: pct * 100 }));

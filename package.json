@@ -25,7 +25,7 @@
     "static-flowfields": "turbo run serve --filter=\"static-flowfields\"",
     "diff-growth-flower": "turbo run serve --filter=\"diff-growth-flower\"",
     "shader-test": "turbo run serve --filter=\"shader-test\"",
-    "planet": "turbo run serve --filter=\"planet\""
+    "audiosphere": "turbo run serve --filter=\"audiosphere\""
   },
   "keywords": [],
   "author": "",

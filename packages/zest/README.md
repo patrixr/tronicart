@@ -1,13 +1,13 @@
-# @tronicart/zest
+# @tronicart/cc
 
-`@tronicart/zest` is a TypeScript package that exports a series of useful functions meant to be used within a P5 script.
+`@tronicart/cc` is a TypeScript package that exports a series of useful functions meant to be used within a P5 script.
 
 ## Installation
 
 To install the package, use the following command:
 
 ```bash
-npm install @tronicart/zest
+npm install @tronicart/cc
 ```
 
 ## Usage
@@ -15,19 +15,19 @@ npm install @tronicart/zest
 To use the package in a TypeScript P5 script, import the relevant submodules as follows:
 
 ```typescript
-import { lerpingColor } from '@tronicart/zest/colors';
+import { lerpingColor } from '@tronicart/cc/colors';
 ```
 
 ## Modules
 
 ### Colors
 
-The `@tronicart/zest` package provides a `colors` module that exports several functions and types related to colors.
+The `@tronicart/cc` package provides a `colors` module that exports several functions and types related to colors.
 
 To import the `colors` module, use the following syntax:
 
 ```typescript
-import * as colors from '@tronicart/zest/colors';
+import * as colors from '@tronicart/cc/colors';
 ```
 
 #### Available Functions
@@ -57,7 +57,7 @@ Returns a copy of the provided `P5.Color` object.
 The `Palette` module is used to generate color schemes for use in P5 sketches. It exports a number of functions that can be used to obtain colors from the generated palette.
 
 ```typescript
-import { Palette } from '@tronicart/zest/palette';
+import { Palette } from '@tronicart/cc/palette';
 ```
 
 Once the module is imported, you can use any of its exported functions and types.
@@ -90,7 +90,7 @@ The `reload()` function can be used to reload the last configuration applied by 
 To use the `Pixels` module, first import it into your project:
 
 ```typescript
-import { editPixels } from '@tronicart/zest/pixels';
+import { editPixels } from '@tronicart/cc/pixels';
 ```
 
 The `Pixels` module provides a `createPixelEditor()` function which returns an object with several methods for modifying the pixels of a P5 instance:
@@ -107,7 +107,7 @@ The `Pixels` module provides a `createPixelEditor()` function which returns an o
 Here is an example of its usage it in **global mode**:
 
 ```typescript
-import { editPixels } from '@tronicart/zest/pixels';
+import { editPixels } from '@tronicart/cc/pixels';
 
 function setup() {
   createCanvas(400, 400);

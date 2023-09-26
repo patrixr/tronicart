@@ -1,5 +1,5 @@
 import test from 'ava';
-import { tilingBuilder, Tile, ConnectionMatcher } from './index';
+import { tilingBuilder, Tile, ConnectionMatcher } from './truchet';
 
 test('tilingBuilder generates an empty grid with no tiles', (t) => {
     const colCount = 4;

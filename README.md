@@ -67,7 +67,7 @@ This will start a development server at `http://localhost:3033` that allows you 
 
 This monorepo contains several reusable packages for creative coding, located in the `/packages` folder. Some of the most important packages are:
 
--   [@tronicart/zest](./packages/zest/): A collection of utilities and helpers for P5.js.
+-   [@tronicart/cc](./packages/cc/): A collection of utilities and helpers for P5.js.
 -   [@tronicart/p5-flow-field](./packages/p5-flow-field/): A function for creating and manipulating 2D flow fields.
 -   [@tronicart/data-structures](./packages/data-structures/): A collection data structures for creative coding.
 -   [@tronicart/batch-capture](./packages/batch-capture/): Captures screenshots of your sketch in batches.

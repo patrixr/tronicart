@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import { Tile, tilingBuilder } from '@tronicart/zest/algo/truchet';
+import { Tile, tilingBuilder } from '@tronicart/cc/algo/truchet';
 
 type CustomTile = Tile & {
   draw: (x: number, y: number, size: number) => any;

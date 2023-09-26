@@ -1,7 +1,7 @@
 {
   "exclude": ["lib/**/*.spec.ts", "lib/**/*.test.ts", "dist/**/*"],
   "include": ["**/*.ts"],
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true,

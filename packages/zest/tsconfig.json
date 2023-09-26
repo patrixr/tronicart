@@ -1,15 +1,15 @@
 {
-  "exclude": ["**/*.spec.ts", "**/*.test.ts", "./dist/**/*"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "dist/**/*"],
   "include": ["**/*.ts"],
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./lib",
+    "rootDir": "lib",
     "outDir": "./dist",
     "declaration": true,
     "declarationMap": true,
     "module": "ESNEXT",
     "paths": {
-      "@tronicart/zest/*": ["dist/*"]
+      "@tronicart/cc/*": ["dist/*"]
     }
   }
 }

@@ -1,4 +1,4 @@
-import { copyColor } from '@tronicart/zest/drawing/colors';
+import { copyColor } from '@tronicart/cc/drawing/colors';
 import { ColorProps, IsometricObject, IsoObjectTypes, Quad } from './world';
 import { Color } from 'p5';
 
