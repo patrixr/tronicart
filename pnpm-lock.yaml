@@ -64,7 +64,7 @@ importers:
         specifier: ^19.7.5
         version: 19.7.5(typescript@4.9.5)
 
-  packages/zest:
+  packages/cc:
     dependencies:
       canvas-capture:
         specifier: ^2.1.1
@@ -80,7 +80,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -93,7 +93,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -106,7 +106,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -119,7 +119,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -138,7 +138,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -151,7 +151,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -164,7 +164,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -177,7 +177,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -190,7 +190,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
@@ -203,7 +203,7 @@ importers:
     dependencies:
       '@tronicart/cc':
         specifier: workspace:*
-        version: link:../../packages/zest
+        version: link:../../packages/cc
       p5:
         specifier: ^1.6.0
         version: 1.6.0
