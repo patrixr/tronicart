@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tronicart/cc": "workspace:*",
     "p5": "^1.6.0"
   },
   "devDependencies": {

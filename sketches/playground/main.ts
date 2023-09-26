@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import { Palette } from '@tronicart/cc/co';
+import { Palette } from '@tronicart/cc/drawing/palette';
 
 const sketch = (p5: P5) => {
   p5.setup = (): void => {

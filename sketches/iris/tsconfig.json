@@ -4,7 +4,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@tronicart/cc/*": ["./packages/cc/lib/*"]
+    }
   },
   "devDependencies": {
     "vite": "^4.2.1",

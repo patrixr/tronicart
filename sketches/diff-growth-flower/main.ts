@@ -3,7 +3,6 @@ import { repeat } from '@tronicart/cc/utils/repeat';
 import { Palette } from '@tronicart/cc/drawing/palette';
 import { createDifferentialGrowth } from '@tronicart/cc/algo/differential-growth';
 import { circlePoints } from '@tronicart/cc/algo/coordinates';
-import { enableUserControls, DebugUserControls } from '@tronicart/cc/p5/debug';
 
 type DG = ReturnType<typeof createDifferentialGrowth>;
 
@@ -11,7 +10,6 @@ const sketch = (p5: P5) => {
   let bgOpacity: number;
   let dg: DG;
   let rotation = 0;
-  let userControls : DebugUserControls;
 
   p5.preload = () => {
     const seed = window.fxrand() * 1000000000000000;
@@ -36,8 +34,6 @@ const sketch = (p5: P5) => {
     dg.addNodes(circlePoints(100, 30).map((pt) => p5.createVector(pt.x, pt.y)));
     dg.addNodes(circlePoints(150, 30).map((pt) => p5.createVector(pt.x, pt.y)));
     dg.addNodes(circlePoints(200, 30).map((pt) => p5.createVector(pt.x, pt.y)));
-
-    userControls = enableUserControls(p5);
   };
 
   p5.draw = (): void => {
@@ -62,8 +58,6 @@ const sketch = (p5: P5) => {
     }
 
     rotation += 0.0005;
-
-    userControls.update();
   };
 };
 
