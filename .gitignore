@@ -3,6 +3,8 @@ node_modules
 dist
 dist-zipped
 dist-zip
+umd
+amd
 generated
 .fleet
 package-lock.json
