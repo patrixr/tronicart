@@ -1,6 +1,6 @@
 const TWO_PI = Math.PI * 2;
 
-export function circlePoints(radius: number, resolution: number, centerX = 0, centerY = 0) {
+function circlePoints(radius: number, resolution: number, centerX = 0, centerY = 0) {
   const step = TWO_PI / resolution;
   const points: { x: number; y: number }[] = [];
 
@@ -14,8 +14,13 @@ export function circlePoints(radius: number, resolution: number, centerX = 0, ce
   return points;
 }
 
-export function dist(x1: number, y1: number, x2: number, y2: number) {
+function dist(x1: number, y1: number, x2: number, y2: number) {
   let y = x2 - x1;
   let x = y2 - y1;
   return Math.sqrt(x * x + y * y);
+}
+
+export const Coordinates = {
+  circlePoints,
+  dist
 }

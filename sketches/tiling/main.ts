@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import { Tile, tilingBuilder } from '@tronicart/cc/algo/truchet';
+import { Tile, Truchet } from '@tronicart/cc/algo/truchet';
 
 type CustomTile = Tile & {
   draw: (x: number, y: number, size: number) => any;
@@ -52,24 +52,6 @@ const createTexture = (p5: P5, tileSize: number): P5.Graphics => {
 
   return gfx;
 };
-
-const createTile = (p5: P5, tileSize: number) : Tile => {
-  const tex = createTexture(p5, tileSize);
-
-  return {
-    id: '',
-    connections: {
-      top: '1',
-      left: '1',
-      bottom: '1',
-      right: '1'
-    },
-    draw: (x, y) => {
-      p5.image(tex, x, y);
-    }
-  }
-
-}
 
 // ---------------------------------------------------
 // SKETCH
@@ -135,9 +117,9 @@ const sketch = (p5: P5) => {
     rows = p5.floor(p5.height / tileSize);
     cols = p5.floor(p5.width / tileSize);
 
-    const texture = createTexture(p5, tileSize, false);
+    const texture = createTexture(p5, tileSize);
 
-    const grid = tilingBuilder(cols, rows, TILES_BASIC);
+    const grid = Truchet.createTiling(cols, rows, TILES_BASIC);
     // const grid = tilingBuilder(cols, rows, [
     //   createTile(p5, tileSize),
     //   createTile(p5, tileSize),

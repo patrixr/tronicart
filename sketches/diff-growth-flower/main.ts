@@ -1,14 +1,13 @@
 import P5 from 'p5';
-import { repeat } from '@tronicart/cc/utils/repeat';
 import { Palette } from '@tronicart/cc/drawing/palette';
-import { createDifferentialGrowth } from '@tronicart/cc/algo/differential-growth';
-import { circlePoints } from '@tronicart/cc/algo/coordinates';
+import { DifferentialGrowth } from '@tronicart/cc/algo/differential-growth';
+import { Coordinates } from '@tronicart/cc/algo/coordinates';
 
-type DG = ReturnType<typeof createDifferentialGrowth>;
+const { circlePoints } = Coordinates;
 
 const sketch = (p5: P5) => {
   let bgOpacity: number;
-  let dg: DG;
+  let dg: DifferentialGrowth;
   let rotation = 0;
 
   p5.preload = () => {
@@ -26,7 +25,7 @@ const sketch = (p5: P5) => {
     p5.rectMode(p5.CENTER);
 
     bgOpacity = p5.random(5, 15);
-    dg = createDifferentialGrowth(p5, {
+    dg = new DifferentialGrowth(p5, {
       minSeparation: p5.random(35, 50)
     });
 

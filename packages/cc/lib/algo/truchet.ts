@@ -103,71 +103,74 @@ function getRandomItem<T>(arr: T[]): T {
 // IMPLEMENTATION
 // ---------------------------------------------
 
-export function tilingBuilder<T extends Tile>(
-  /* The width of the grid */
-  colCount: number,
-  /* The height of the grid */
-  rowCount: number,
-  /* The usable tiles for the algorithm */
-  tiles: T[],
-  /* Some options */
-  opts: TruchetOptions = {}
-): Maybe<T>[][] {
-  const width = colCount;
-  const height = rowCount;
-  const grid: Maybe<T>[][] = Array.from({ length: width }, () => Array(height).fill(null));
+export const Truchet = {
 
-  const { strategy = 'bestfit', connectionMatcher = defaultConnectionMatcher } = opts;
+  createTiling<T extends Tile>(
+    /* The width of the grid */
+    colCount: number,
+    /* The height of the grid */
+    rowCount: number,
+    /* The usable tiles for the algorithm */
+    tiles: T[],
+    /* Some options */
+    opts: TruchetOptions = {}
+  ): Maybe<T>[][] {
+    const width = colCount;
+    const height = rowCount;
+    const grid: Maybe<T>[][] = Array.from({ length: width }, () => Array(height).fill(null));
 
-  /*
-   * Given a location and a tile we wish to place there,
-   * this function will return a score between 0 and 1 of how well it fits there
-   */
-  const getPlacementScore = (x: number, y: number, tile: T): number => {
-    let score = 0;
+    const { strategy = 'bestfit', connectionMatcher = defaultConnectionMatcher } = opts;
 
-    for (const { dx, dy, dir } of NEIGHBOURS) {
-      const nx = x + dx;
-      const ny = y + dy;
-      const outOfBounds = ny < 0 || ny >= height || nx < 0 || nx >= width;
-      const neighbourTile = outOfBounds ? null : grid[x + dx][y + dy];
-      const oppositeDir = OPPOSITES[dir];
-      if (!neighbourTile) {
-        score += tile.connections[dir] ? 0.5 : 1;
-      } else {
-        const localScore = connectionMatcher(
-          neighbourTile.connections[oppositeDir],
-          tile.connections[dir]
-        );
-        if (strategy === 'firstmatch' && localScore === 1) return 1;
-        score += localScore;
+    /*
+     * Given a location and a tile we wish to place there,
+     * this function will return a score between 0 and 1 of how well it fits there
+     */
+    const getPlacementScore = (x: number, y: number, tile: T): number => {
+      let score = 0;
+
+      for (const { dx, dy, dir } of NEIGHBOURS) {
+        const nx = x + dx;
+        const ny = y + dy;
+        const outOfBounds = ny < 0 || ny >= height || nx < 0 || nx >= width;
+        const neighbourTile = outOfBounds ? null : grid[x + dx][y + dy];
+        const oppositeDir = OPPOSITES[dir];
+        if (!neighbourTile) {
+          score += tile.connections[dir] ? 0.5 : 1;
+        } else {
+          const localScore = connectionMatcher(
+            neighbourTile.connections[oppositeDir],
+            tile.connections[dir]
+          );
+          if (strategy === 'firstmatch' && localScore === 1) return 1;
+          score += localScore;
+        }
       }
-    }
 
-    return score;
-  };
+      return score;
+    };
 
-  const groupItemsByScore = (x: number, y: number, tiles: T[]) => {
-    const groups = new Map();
+    const groupItemsByScore = (x: number, y: number, tiles: T[]) => {
+      const groups = new Map();
 
-    tiles.forEach((tile) => {
-      const score = getPlacementScore(x, y, tile);
-      if (groups.has(score)) {
-        groups.get(score).push(tile);
-      } else {
-        groups.set(score, [tile]);
-      }
+      tiles.forEach((tile) => {
+        const score = getPlacementScore(x, y, tile);
+        if (groups.has(score)) {
+          groups.get(score).push(tile);
+        } else {
+          groups.set(score, [tile]);
+        }
+      });
+
+      return Array.from(groups.entries())
+        .sort(([scoreA], [scoreB]) => scoreB - scoreA)
+        .map(([, group]) => group);
+    };
+
+    spiralTraversal(width, height, (x, y) => {
+      const scoreGroups = groupItemsByScore(x, y, tiles);
+      grid[x][y] = getRandomItem<T>(scoreGroups[0]);
     });
 
-    return Array.from(groups.entries())
-      .sort(([scoreA], [scoreB]) => scoreB - scoreA)
-      .map(([, group]) => group);
-  };
-
-  spiralTraversal(width, height, (x, y) => {
-    const scoreGroups = groupItemsByScore(x, y, tiles);
-    grid[x][y] = getRandomItem<T>(scoreGroups[0]);
-  });
-
-  return grid;
+    return grid;
+  }
 }

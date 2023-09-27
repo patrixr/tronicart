@@ -3,7 +3,7 @@ import P5, { Vector } from 'p5';
 import { copyColor } from '@tronicart/cc/drawing/colors';
 import { Palette } from '@tronicart/cc/drawing/palette';
 import { createFlowField, FlowField } from '@tronicart/cc/algo/flowfield';
-import { poissondiskSamplingP5 } from '@tronicart/cc/algo/poisson-disk-sampling';
+import { PoissonDiskSampling } from '@tronicart/cc/algo/poisson-disk-sampling';
 
 const sketch = (p5: P5) => {
   let distanceConstant: number;
@@ -63,7 +63,7 @@ const sketch = (p5: P5) => {
     p5.image(bgImage, 0, 0, p5.width, p5.height);
 
     distanceConstant = p5.random(20, 30);
-    points = poissondiskSamplingP5(p5, distanceConstant / p5.random(1, 3));
+    points = PoissonDiskSampling.computePoints({ p5, radius: distanceConstant / p5.random(1, 3) });
     flowfield = createFlowField(p5.width, p5.height, distanceConstant, p5);
 
     // if (true || p5.random([true, false])) {
@@ -87,7 +87,6 @@ const sketch = (p5: P5) => {
     p5.stroke(200, 40);
     p5.strokeWeight(1);
     flowfield.update();
-    // points.forEach((p) => p5.circle(p.x, p.y, 1));
     strokes.forEach((s) => s.draw());
   };
 

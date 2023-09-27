@@ -1,6 +1,6 @@
 import P5 from 'p5';
 import { lerpingColor, LerpingColor } from '@tronicart/cc/drawing/colors';
-import { circlePoints } from '@tronicart/cc/algo/coordinates';
+import { Coordinates } from '@tronicart/cc/algo/coordinates';
 import { Palette } from '@tronicart/cc/drawing/palette';
 
 type TrailRecord = {
@@ -86,7 +86,7 @@ export class CelestialBody {
    */
   spawnSatellites(count, mass = 2) {
     const p5 = this.canvas;
-    return circlePoints(200, count, this.pos.x, this.pos.y).map((pt) => {
+    return Coordinates.circlePoints(200, count, this.pos.x, this.pos.y).map((pt) => {
       const range = p5.max([p5.width, p5.height]) / p5.random(4, 8);
       const randX = p5.random(-range, range);
       const randY = p5.random(-range, range);

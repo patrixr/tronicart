@@ -12,9 +12,9 @@ const constrain = (val: number, min: number, max: number) => {
   if (val > max) return max;
   if (val < min) return min;
   return val;
-};
+}
 
-export function createTween<T>(fn: (pct: number) => T) {
+function createTween<T>(fn: (pct: number) => T) {
   let pct = 0;
   let sign = 1;
   let started = false;
@@ -66,7 +66,7 @@ type NumericObject = Record<string, number>;
 type NumericInput = number | NumericObject;
 type Consistent<T extends NumericInput> = T extends number ? number : Full<T>;
 
-export function createNumericTween<T extends NumericInput>(
+function createNumericTween<T extends NumericInput>(
   from: Consistent<T>,
   to: Consistent<T>,
   delta = 0.005
@@ -87,5 +87,7 @@ export function createNumericTween<T extends NumericInput>(
   return tween;
 }
 
-createNumericTween({ a: 1, b: 2 }, { a: 1, b: 1 });
-createNumericTween(2, 1);
+export const Tween = {
+  createNumericTween,
+  createTween
+}

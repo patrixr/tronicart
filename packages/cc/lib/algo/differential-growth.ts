@@ -12,7 +12,7 @@ export interface DGOptions {
     maxNodes?: number;
 }
 
-class DifferentialGrowth {
+export class DifferentialGrowth {
     public paths: Path[] = [];
     private nodeCount: number;
 
@@ -83,8 +83,4 @@ class DifferentialGrowth {
             }
         }
     }
-}
-
-export function createDifferentialGrowth(p5: P5, opts: DGOptions = {}) {
-    return new DifferentialGrowth(p5, opts);
 }

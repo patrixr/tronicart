@@ -1,11 +1,12 @@
 import P5 from 'p5';
 import type { Graphics, Image } from 'p5';
 import { Palette } from '@tronicart/cc/drawing/palette';
-import { dist } from '@tronicart/cc/algo/coordinates';
+import { Coordinates } from '@tronicart/cc/algo/coordinates';
 import { lerpingColor } from '@tronicart/cc/drawing/colors';
-import { Drawable } from '@tronicart/lang-helpers';
+import { Drawable } from '@tronicart/cc/types'
 
 const SPEED_MULTIPLIER = 10;
+const { dist } = Coordinates;
 
 export interface Circle {
   readonly x: number;

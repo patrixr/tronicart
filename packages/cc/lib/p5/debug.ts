@@ -1,5 +1,5 @@
 import { getGlobalP5 } from './configure';
-import { createKeybinds } from '../input/keybinds';
+import { KeybindManager } from '../input/keybinds';
 import { CanvasCapture } from 'canvas-capture';
 
 interface DebugOpts {
@@ -20,7 +20,7 @@ export function bootstrapDebug(p5 = getGlobalP5(), opts: DebugOpts = {}) {
     const defaultCommands = ['pause', 'record'];
     const allCommands = new Set([...defaultCommands, ...commands])
     
-    const keybinds = createKeybinds([...allCommands]);
+    const keybinds = new KeybindManager([...allCommands]);
     
     keybinds.on('pause', () => p5.isLooping() ? p5.noLoop() : p5.loop())
     keybinds.on('record', () => { /* record managed by CanvasCapture */ })

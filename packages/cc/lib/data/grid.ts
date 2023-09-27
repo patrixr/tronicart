@@ -1,83 +1,68 @@
 export type CellInitializer<T> = (x: number, y: number) => T;
-
 export type CellCallback<T> = (it: T, x: number, y: number) => any;
+export type CellRef<T> = { x: number; y: number; value: T; };
 
-export type CellRef<T> = {
-  x: number;
-  y: number;
-  value: T;
-};
+export class Grid<T> {
+  private items: T[];
+  private width: number;
+  private height: number;
 
-export type Grid<T> = {
-  get(x: number, y: number): T;
-  set(x: number, y: number, item: T): void;
-  rowIterator(): Generator<T[]>;
-  rows(): Array<T[]>;
-  each(cb: CellCallback<T>): void;
-  neighbors(x: number, y: number, includeSelf?: boolean): CellRef<T>[];
-  fill(value: T): Grid<T>;
-  findCellRelativeToSurface(
-    realX: number,
-    realY: number,
-    cellSize: number
-  ): { x: number; y: number };
-};
+  constructor(width: number, height: number, initializer?: CellInitializer<T>) {
+    this.width = width;
+    this.height = height;
+    const itemLen = width * height;
+    this.items = new Array<T>(itemLen);
 
-/**
- * Create a 2D grid with access functions
- *
- * @export
- * @template T
- * @param {number} width
- * @param {number} height
- * @return {*}  {Grid<T>}
- */
-export function createGrid<T>(
-  width: number,
-  height: number,
-  initializer?: CellInitializer<T>
-): Grid<T> {
-  const itemLen = width * height;
-  const items: T[] = new Array<T>(itemLen);
-  const idx = (x: number, y: number) => y * width + x;
-
-  function isValidCoord(x: number, y: number) {
-    return x >= 0 && y >= 0 && x < width && y < height;
+    if (initializer) {
+      this.each((_, x, y) => this.set(x, y, initializer(x, y)));
+    }
   }
 
-  function assertCoord(x: number, y: number) {
-    if (!isValidCoord(x, y)) {
+  private idx(x: number, y: number) {
+    return y * this.width + x;
+  }
+
+  private isValidCoord(x: number, y: number) {
+    return x >= 0 && y >= 0 && x < this.width && y < this.height;
+  }
+
+  private assertCoord(x: number, y: number) {
+    if (!this.isValidCoord(x, y)) {
       throw new Error(`Index Out Of Bounds (${x}, ${y})`);
     }
   }
 
-  function get(x, y) {
-    assertCoord(x, y);
-    return items[idx(x, y)];
+  get(x: number, y: number): T {
+    this.assertCoord(x, y);
+    return this.items[this.idx(x, y)];
   }
 
-  function set(x, y, it) {
-    assertCoord(x, y);
-    items[idx(x, y)] = it;
+  set(x: number, y: number, item: T): void {
+    this.assertCoord(x, y);
+    this.items[this.idx(x, y)] = item;
   }
 
-  function* rowIterator(): Generator<T[]> {
-    for (let y = 0; y < height; ++y) {
-      const leftIdx = idx(0, y);
-      const rightIdx = idx(width, y);
-      yield items.slice(leftIdx, rightIdx);
+  *rowIterator(): Generator<T[]> {
+    for (let y = 0; y < this.height; ++y) {
+      const leftIdx = this.idx(0, y);
+      const rightIdx = this.idx(this.width, y);
+      yield this.items.slice(leftIdx, rightIdx);
     }
   }
 
-  function each(cb: CellCallback<T>) {
-    for (let x = 0; x < width; ++x) {
-      for (let y = 0; y < height; ++y) {
-        cb(get(x, y), x, y);
+  rows(): Array<T[]> {
+    return [...this.rowIterator()];
+  }
+
+  each(cb: CellCallback<T>): void {
+    for (let x = 0; x < this.width; ++x) {
+      for (let y = 0; y < this.height; ++y) {
+        cb(this.get(x, y), x, y);
       }
     }
   }
 
-  function neighbors(x: number, y: number, includeSelf = false): CellRef<T>[] {
+  neighbors(x: number, y: number, includeSelf = false): CellRef<T>[] {
     const adjacent = [
       { x: x - 1, y: y - 1 },
       { x: x, y: y - 1 },
@@ -92,40 +77,25 @@ export function createGrid<T>(
     const cells = includeSelf ? [...adjacent, { x, y }] : adjacent;
 
     return cells
-      .filter(({ x, y }) => isValidCoord(x, y))
+      .filter(({ x, y }) => this.isValidCoord(x, y))
       .map(({ x, y }) => {
         return {
           x,
           y,
-          value: get(x, y)
+          value: this.get(x, y)
         };
       });
   }
 
-  function fill(value: T): Grid<T> {
-    items.fill(value);
+  fill(value: T): Grid<T> {
+    this.items.fill(value);
     return this;
   }
 
-  function findCellRelativeToSurface(realX: number, realY: number, cellSize: number) {
+  findCellRelativeToSurface(realX: number, realY: number, cellSize: number) {
     return {
       x: Math.floor(realX / cellSize),
       y: Math.floor(realY / cellSize)
     };
   }
-
-  if (initializer) {
-    each((_, x, y) => set(x, y, initializer(x, y)));
-  }
-
-  return {
-    get,
-    set,
-    rowIterator,
-    each,
-    neighbors,
-    fill,
-    findCellRelativeToSurface,
-    rows: () => [...rowIterator()]
-  };
 }

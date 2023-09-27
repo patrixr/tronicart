@@ -82,7 +82,3 @@ export class KeybindManager {
         }
     }
 }
-
-export function createKeybinds(commands: Command[]): KeybindManager {
-    return new KeybindManager(commands);
-}
