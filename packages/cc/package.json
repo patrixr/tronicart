@@ -2,8 +2,8 @@
   "name": "@tronicart/cc",
   "version": "1.0.2",
   "description": "P5 reusable goodies",
-  "main": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "umd"
@@ -16,7 +16,7 @@
     "clean": "rm -rf dist umd"
   },
   "exports": {
-    "./*": "./dist/esm/*"
+    "./*": "./dist/*"
   },
   "keywords": [
     "p5",
