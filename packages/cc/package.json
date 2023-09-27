@@ -1,12 +1,11 @@
 {
   "name": "@tronicart/cc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "P5 reusable goodies",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "umd"
+    "dist"
   ],
   "scripts": {
     "build": "pnpm run build:esm && pnpm run build:umd",

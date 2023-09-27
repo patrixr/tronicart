@@ -7,7 +7,7 @@ module.exports = {
   output: {
     library: 'cc',
     libraryTarget: 'umd',
-    filename: 'cc.min.js',
-    path: path.resolve(__dirname, 'umd')
+    filename: 'cc.umd.js',
+    path: path.resolve(__dirname, 'dist')
   }
 };
