@@ -1,15 +1,17 @@
 {
   "name": "@tronicart/cc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "P5 reusable goodies",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm run build:esm && pnpm run build:amd",
+    "build:esm": "tsc --module esnext --outDir dist/esm",
+    "build:amd": "tsc --module amd --outFile dist/cc.amd.js",
     "test": "ava"
   },
   "exports": {
-    "./*": "./dist/*"
+    "./*": "./dist/esm/*"
   },
   "keywords": [
     "p5",

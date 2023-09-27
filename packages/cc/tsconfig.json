@@ -4,12 +4,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "lib",
-    "outDir": "./dist",
+    "outDir": "./dist/esm",
     "declaration": true,
     "declarationMap": true,
-    "module": "ESNEXT",
-    "paths": {
-      "@tronicart/cc/*": ["dist/*"]
-    }
+    "module": "ESNEXT"
   }
 }

@@ -1,15 +1,15 @@
 import { createGrid } from '../data/grid';
-import { present } from '../utils/present'
+import { present } from '../utils/present';
 import P5 from 'p5';
 
-export type IVector = {
+type IVector = {
   x: number;
   y: number;
 };
 
 export type VectorFactory<T extends IVector> = (x: number, y: number) => T;
 
-export type RandomFunction = () => number;
+type RandomFunction = () => number;
 
 export type PoissondiskSamplingConfig<V extends IVector> = {
   surfaceWidth: number;
