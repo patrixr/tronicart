@@ -43,4 +43,4 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
 
       - name: Publish @tronicart/cc
-        run: pnpm publish --access public --filter '@tronicart/cc'
+        run: pnpm publish --access public --no-git-checks --filter '@tronicart/cc'
