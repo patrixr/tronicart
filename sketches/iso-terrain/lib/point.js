@@ -1,0 +1,1 @@
+var s=Object.defineProperty;var o=(e,r)=>s(e,"name",{value:r,configurable:!0});var u=o(e=>({quads:0,type:3,draw(r){let{color:n=r.color(255,100,80),opacity:i=255,weight:c=1}=e;r.noFill(),r.stroke(n),r.strokeWeight(c),r.circle(0,0,1)}}),"createPoint");export{u as createPoint};

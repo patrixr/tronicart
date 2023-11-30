@@ -1,0 +1,1 @@
+var i=Object.defineProperty;var o=(e,t)=>i(e,"name",{value:t,configurable:!0});var a=o((e,t,c)=>({quads:0,type:2,draw(r){let{color:s=r.color(255,100,80),opacity:l=255,weight:u=1}=c;r.noFill(),r.stroke(s),r.strokeWeight(u),r.line(0,0,e,t)}}),"createLine");export{a as createLine};
