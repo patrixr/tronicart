@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "ghost": "ghost",
+    "prepare": "ln -F -s versions/5.75.2 current && (cd current && yarn)",
     "start": "ghost start",
     "stop": "ghost stop",
     "build": "gssg  --productionDomain 'https://tronica.io'"

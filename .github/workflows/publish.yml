@@ -28,17 +28,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Set ghost version
-        run: (cd ghost && ln -s versions/5.75.2 current)
+      - name: Init ghost
+        run: pnpm run ghost:prepare
         
       - name: Start ghost
-        run: (cd ghost && npx --yes -p ghost-cli ghost start)
+        run: pnpm run ghost:start
 
       - name: Build ghost
         run: pnpm run ghost:build
 
       - name: Stop ghost
-        run: (cd ghost && npx --yes -p ghost-cli ghost stop)
+        run: pnpm run ghost:stop
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
