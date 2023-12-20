@@ -14,5 +14,8 @@
   "devDependencies": {
     "ghost-cli": "^1.25.3",
     "ghost-static-site-generator": "workspace:*"
+  },
+  "dependencies": {
+    "@tryghost/pretty-cli": "^1.2.39"
   }
 }

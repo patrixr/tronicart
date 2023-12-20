@@ -53,6 +53,10 @@ importers:
         version: 3.0.1
 
   ghost:
+    dependencies:
+      '@tryghost/pretty-cli':
+        specifier: ^1.2.39
+        version: 1.2.39
     devDependencies:
       ghost-cli:
         specifier: ^1.25.3
@@ -3383,6 +3387,13 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@tryghost/pretty-cli@1.2.39:
+    resolution: {integrity: sha512-M3vpjFjcjR1FsglMTMWUqoz1BkE3xqRiD0+83pgxmZDI6wVqDHdkj31wS/Te0vTo3ywbc+exHsXsu6dPNGkdQA==}
+    dependencies:
+      chalk: 4.1.2
+      sywac: 1.3.0
+    dev: false
 
   /@tryghost/zip@1.1.40:
     resolution: {integrity: sha512-1G3b/JNgjS4AGLVR//uc1IWKnvr+bep7YscFa6PuhEc7N5u2Pbx5sBNp+m6Q7BClJQjqas7KZ0cRHm/KCFYknw==}
@@ -11173,6 +11184,11 @@ packages:
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
     dev: true
+
+  /sywac@1.3.0:
+    resolution: {integrity: sha512-LDt2stNTp4bVPMgd70Jj9PWrSa4batl+bv+Ea5NLNGT7ufc4oQPtRfQ73wbddNV6RilaPqnEt6y1Wkm5FVTNEg==}
+    engines: {node: '>=4'}
+    dev: false
 
   /table@6.8.1:
     resolution: {integrity: sha512-Y4X9zqrCftUhMeH2EptSSERdVKt/nEdijTOacGD/97EKjhQ/Qs8RTlEGABSJNNN8lac9kheH+af7yAkEWlgneA==}
