@@ -1,1 +1,0 @@
-var s=Object.defineProperty;var e=(t,c)=>s(t,"name",{value:c,configurable:!0});var u=e((t,c)=>{let o=[{x:0,y:0}];for(let r=Math.PI/6;r<Math.PI;r+=Math.PI/3)o.push({x:Math.cos(r)*t,y:Math.sin(r)*t});return{quads:1,type:1,draw(r){r.stroke(0,0,0),r.fill(255,255,80,50),r.quad(o[0].x,o[0].y,o[1].x,o[1].y,o[2].x,o[2].y,o[3].x,o[3].y)}}},"createPlane");export{u as createPlane};
