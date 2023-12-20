@@ -13,8 +13,7 @@ function replaceContent(filePath) {
 
     const updatedData = data
           .replace(/http:\/\/localhost:2368/g, 'https://tronica.io')
-          .replace(/localhost:2368/g, 'tronica.io')
-          .replace(/localhost/g, 'tronica.io');
+          .replace(/localhost:2368/g, 'tronica.io');
 
     if (updatedData !== data) {
       try {
