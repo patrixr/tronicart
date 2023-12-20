@@ -4,7 +4,6 @@
   "description": "A simple static site generator for ghost",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
     "start": "http-server ./static -o",
     "lint": "eslint src",
     "prepublishOnly": "npm run lint; npm run test;",
