@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const debug = require('debug')('url-replacer');
+const debug = require('debug')('post-build');
 
 const targetDir = path.join(__dirname, "../static");
 
@@ -13,7 +13,8 @@ function replaceContent(filePath) {
 
     const updatedData = data
           .replace(/http:\/\/localhost:2368/g, 'https://tronica.io')
-          .replace(/localhost:2368/g, 'tronica.io');
+          .replace(/localhost:2368/g, 'tronica.io')
+          .replace(/localhost/g, 'tronica.io');
 
     if (updatedData !== data) {
       try {
@@ -43,5 +44,5 @@ function walkDir(dir) {
   });
 }
 
-debug(`Starting to walk through the directory: ${targetDir}`);
+debug(`Walking through the directory: ${targetDir}`);
 walkDir(targetDir);
