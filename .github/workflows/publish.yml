@@ -31,9 +31,6 @@ jobs:
       - name: Init ghost
         run: pnpm run ghost:init
 
-      - name: Setup permissions
-        run: sudo chown -R $(user -u):$(group -g) ghost
-        
       - name: Start ghost
         run: pnpm run ghost:start
 
