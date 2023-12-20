@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "ghost": "pnpm --filter=ghost run ghost",
-    "ghost:prepare": "pnpm --filter=ghost run prepare",
+    "ghost:init": "pnpm --filter=ghost run init",
     "ghost:start": "pnpm --filter=ghost run start",
     "ghost:stop": "pnpm --filter=ghost run stop",
     "ghost:build": "pnpm --filter=ghost run build",
