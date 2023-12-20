@@ -29,7 +29,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Set ghost version
-        run: ln -s versions/5.75.2 current
+        run: (cd ghost && ln -s versions/5.75.2 current)
         
       - name: Start ghost
         run: pnpm run ghost:start
