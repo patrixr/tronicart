@@ -1,0 +1,17 @@
+{
+  "name": "ghost",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ghost start",
+    "stop": "ghost stop",
+    "build": "gssg"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ghost-cli": "^1.25.3",
+    "ghost-static-site-generator": "^1.1.4"
+  }
+}

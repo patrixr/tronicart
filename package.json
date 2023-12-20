@@ -4,6 +4,9 @@
   "description": "Creative coding workspace",
   "main": "index.js",
   "scripts": {
+    "ghost:start": "pnpm --filter=ghost run start",
+    "ghost:stop": "pnpm --filter=ghost run stop",
+    "ghost:build": "pnpm --filter=ghost run build",
     "preinstall": "npx only-allow pnpm",
     "generate": "ts-node scripts/generate.ts",
     "test": "turbo run test  --include-dependencies",
@@ -20,12 +23,8 @@
     "isometric": "turbo run serve --filter=\"isometric\"",
     "tiling": "turbo run serve --filter=\"tiling\"",
     "iris": "turbo run serve --filter=\"iris\"",
-    "charcoal-lines": "turbo run serve --filter=\"charcoal-lines\"",
-    "hong-kong-curves": "turbo run serve --filter=\"hong-kong-curves\"",
     "static-flowfields": "turbo run serve --filter=\"static-flowfields\"",
-    "diff-growth-flower": "turbo run serve --filter=\"diff-growth-flower\"",
-    "shader-test": "turbo run serve --filter=\"shader-test\"",
-    "audiosphere": "turbo run serve --filter=\"audiosphere\""
+    "diff-growth-flower": "turbo run serve --filter=\"diff-growth-flower\""
   },
   "keywords": [],
   "author": "",

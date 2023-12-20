@@ -18,8 +18,8 @@ export function smokeyBackground(
 }
 
 export function nightSky(p5: P5 | P5.Graphics) {
-  const pixelCount = p5.width + p5.height;
-  const starCount = p5.random(pixelCount, pixelCount * 2);
+  const pixelCount = p5.width * p5.height;
+  const starCount = p5.random(pixelCount * 0.001, pixelCount * 0.003);
 
   const colors = [
     p5.color('#9bb0ff'),

@@ -21,16 +21,12 @@ const sketch = (p5: P5) => {
     nightSky(nightSkyTexture);
 
     suns = [
-      //       new CelestialBody(p5, p5.width / 4, p5.height / 2, 30),
-      //       new CelestialBody(p5, 3* p5.width / 4, p5.height / 2, 30)
       new CelestialBody(p5, p5.width / 2, p5.height / 2, 100)
     ];
 
     const bodyCount = 20;
 
     bodies = suns.map((sun) => sun.spawnSatellites(bodyCount, 2)).flat();
-
-    //     bodies = bodies.concat(bodies.map(b => b.spawnSatellites(2, 2)).flat());
   };
 
   p5.draw = (): void => {
