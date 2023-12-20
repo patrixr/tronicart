@@ -8,7 +8,7 @@
     "init": "ln -f -s versions/5.75.2 current && (cd current && yarn)",
     "start": "ghost start",
     "stop": "ghost stop",
-    "build": "gssg  --productionDomain 'https://tronica.io'"
+    "build": "gssg  --productionDomain 'https://tronica.io' --source https://localhost:2368"
   },
   "author": "",
   "license": "ISC",
