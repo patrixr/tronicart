@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "ghost": "ghost",
     "start": "ghost start",
     "stop": "ghost stop",
-    "build": "gssg"
+    "build": "gssg  --productionDomain 'https://tronica.io'"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "ghost-cli": "^1.25.3",
-    "ghost-static-site-generator": "^1.1.4"
+    "ghost-static-site-generator": "workspace:*"
   }
 }

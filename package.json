@@ -4,6 +4,7 @@
   "description": "Creative coding workspace",
   "main": "index.js",
   "scripts": {
+    "ghost": "pnpm --filter=ghost run ghost",
     "ghost:start": "pnpm --filter=ghost run start",
     "ghost:stop": "pnpm --filter=ghost run stop",
     "ghost:build": "pnpm --filter=ghost run build",
@@ -44,7 +45,8 @@
     "yargs-interactive": "^3.0.1"
   },
   "dependencies": {
-    "canvas-capture": "^2.1.1"
+    "canvas-capture": "^2.1.1",
+    "debug": "^4.3.4"
   },
   "packageManager": "pnpm@7.29.3",
   "engines": {

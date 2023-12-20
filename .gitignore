@@ -15,3 +15,6 @@ ffmpeg.txt
 *.dylib
 *.dll
 ghost/static
+ghost/content/logs
+ghost/.ghostpid
+ghost/.ghost-cli
