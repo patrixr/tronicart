@@ -32,10 +32,13 @@ jobs:
         run: (cd ghost && ln -s versions/5.75.2 current)
         
       - name: Start ghost
-        run: pnpm run ghost:start
+        run: (cd ghost && npx --yes -p ghost-cli ghost start)
 
       - name: Build ghost
         run: pnpm run ghost:build
+
+      - name: Stop ghost
+        run: (cd ghost && npx --yes -p ghost-cli ghost stop)
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -43,9 +46,6 @@ jobs:
           github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
           publish_dir: ./ghost/static
           cname: tronica.io
-
-      - name: Stop ghost
-        run: pnpm run ghost:stop
 
   build:
     name: Package build/test/deploy
