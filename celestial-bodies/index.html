@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Celestial bodies</title>
-    <link rel="stylesheet" href="/assets/built/screen.css?v=2cfc361e42">
+    <link rel="stylesheet" href="/assets/built/screen.css?v=3c0c00f857">
 
     <meta name="description" content="Small creative coding piece simulating objects in space orbiting around a single sun">
     <link rel="canonical" href="https://tronica.io/celestial-bodies/">
@@ -76,16 +76,16 @@
     <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="d1975f6993f10601e7f9bac8db" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="https://tronica.io/" crossorigin="anonymous"></script>
     
     <link href="https://tronica.io/webmentions/receive/" rel="webmention">
-    <script defer src="/public/cards.min.js?v=2cfc361e42"></script><style>:root {--ghost-accent-color: #0f9f89;}</style>
-    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=2cfc361e42">
+    <script defer src="/public/cards.min.js?v=3c0c00f857"></script><style>:root {--ghost-accent-color: #0f9f89;}</style>
+    <link rel="stylesheet" type="text/css" href="/public/cards.min.css?v=3c0c00f857">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" integrity="sha512-vswe+cgvic/XBoF1OcM/TeJ2FW0OofqAVdCZiEYkd6dwGXthvkSFWOoGGJgS2CW70VK5dQM5Oh+7ne47s74VTg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="post-template tag-creative-coding tag-typescript is-head-left-logo has-serif-title">
-<div class="site">
+<body class="post-template tag-creative-coding tag-typescript is-head-left-logo">
+<div class="gh-site">
 
     <header id="gh-head" class="gh-head gh-outer">
-        <div class="gh-head-inner">
+        <div class="gh-head-inner gh-inner">
             <div class="gh-head-brand">
                 <div class="gh-head-brand-wrapper">
                     <a class="gh-head-logo" href="https://tronica.io">
@@ -93,7 +93,7 @@
                     </a>
                 </div>
                 <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-                <button class="gh-burger" aria-label="Toggle menu"></button>
+                <button class="gh-burger"></button>
             </div>
 
             <nav class="gh-head-menu">
@@ -112,27 +112,36 @@
 
     <div class="site-content">
         
-<div class="content-area">
 <main class="site-main">
 
 
-    <article class="post tag-creative-coding tag-typescript gh-article">
-        <header class="gh-article-header gh-canvas">
-                <figure class="gh-article-image">
-        <img
-            srcset="/content/images/size/w300/2023/12/localhost_5173_--1-.png 300w,
-                    /content/images/size/w750/2023/12/localhost_5173_--1-.png 750w,
-                    /content/images/size/w1140/2023/12/localhost_5173_--1-.png 1140w,
-                    /content/images/size/w1920/2023/12/localhost_5173_--1-.png 1920w"
-            sizes="(min-width: 1170px) 1140px, calc(100vw - 30px)"
-            src="/content/images/size/w1140/2023/12/localhost_5173_--1-.png"
-            alt="Celestial bodies">
+    <article class="gh-article post tag-creative-coding tag-typescript">
 
-    </figure>
+        <header class="gh-article-header gh-canvas">
+            <span class="gh-article-meta">
+                By <a href="/author/patrick/">Patrick</a>
+                    in
+                    <a class="gh-article-tag" href="https://tronica.io/tag/creative-coding/">creative-coding</a>
+                —
+                <time datetime="2022-07-13">Jul 13, 2022</time>
+            </span>
 
             <h1 class="gh-article-title">Celestial bodies</h1>
 
-                <div class="gh-article-excerpt">Small creative coding piece simulating objects in space orbiting around a single sun</div>
+                <p class="gh-article-excerpt">Small creative coding piece simulating objects in space orbiting around a single sun</p>
+
+                <figure class="gh-article-image kg-width-wide">
+        <img
+            srcset="/content/images/size/w400/2023/12/localhost_5173_--1-.png 400w,
+                    /content/images/size/w720/2023/12/localhost_5173_--1-.png 720w,
+                    /content/images/size/w960/2023/12/localhost_5173_--1-.png 960w,
+                    /content/images/size/w1200/2023/12/localhost_5173_--1-.png 1200w,
+                    /content/images/size/w2000/2023/12/localhost_5173_--1-.png 2000w"
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            src="/content/images/size/w1200/2023/12/localhost_5173_--1-.png"
+            alt="Celestial bodies"
+        >
+    </figure>
         </header>
 
         <div class="gh-content gh-canvas">
@@ -160,54 +169,169 @@ starColors = [
 ];
 </code></pre><p>We were left with the following:</p><figure class="kg-card kg-image-card"><img src="https://tronica.io/content/images/2023/12/image-2.png" class="kg-image" alt loading="lazy" width="1710" height="958" srcset="https://tronica.io/content/images/size/w600/2023/12/image-2.png 600w, https://tronica.io/content/images/size/w1000/2023/12/image-2.png 1000w, https://tronica.io/content/images/size/w1600/2023/12/image-2.png 1600w, https://tronica.io/content/images/2023/12/image-2.png 1710w" sizes="(min-width: 720px) 720px"></figure><h1 id="the-gravity">The gravity</h1><figure class="kg-card kg-image-card"><img src="https://tronica.io/content/images/2023/12/localhost_5173_--2-.png" class="kg-image" alt loading="lazy" width="2000" height="1125" srcset="https://tronica.io/content/images/size/w600/2023/12/localhost_5173_--2-.png 600w, https://tronica.io/content/images/size/w1000/2023/12/localhost_5173_--2-.png 1000w, https://tronica.io/content/images/size/w1600/2023/12/localhost_5173_--2-.png 1600w, https://tronica.io/content/images/2023/12/localhost_5173_--2-.png 2400w" sizes="(min-width: 720px) 720px"></figure>
         </div>
+
     </article>
 
-
-
-            <section class="related-posts">
-        <div class="post-feed">
-            <h3 class="related-title">You might also like...</h3>
-                <div class="grid-item grid-sizer"></div>
-                <div class="grid-item">
-<figure class="post">
-
-    <a class="post-link" aria-label="Navigate to Sherical coordinates page" href="/sherical-coordinates/">
-        <img
-            class="post-image"
-            srcset="/content/images/size/w300/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 300w,
-                    /content/images/size/w750/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 750w,
-                    /content/images/size/w1140/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 1140w,
-                    /content/images/size/w1920/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 1920w"
-            sizes="(min-width: 1020px) 300px, (min-width: 641px) calc((100vw - 50px) / 3), calc((100vw - 40px) / 2)"
-            src="/content/images/size/w300/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png"
-            alt="Sherical coordinates"
-        >
-    </a>
-
-    <a class="post-lightbox" aria-label="Expand image" href="/content/images/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line>
-</svg>    </a>
-
-    <figcaption class="post-caption">
-        <h2 class="post-caption-title">Sherical coordinates</h2>
-        <div class="post-caption-meta">
-            <span class="post-caption-meta-item post-caption-meta-date">
-                <time datetime="2023-09-13">Sep 13, 2023</time>
-            </span>
-            <span class="post-caption-meta-item post-caption-meta-link">
-                <a href="/sherical-coordinates/">View project</a>
-            </span>
-        </div>
-    </figcaption>
-
-</figure>
+    <div class="gh-canvas">
+    <div class="navigation">
+            <a class="navigation-item navigation-next" href="/playing-with-gravity/">
+                <span class="navigation-label">Next</span>
+                <h4 class="navigation-title">Playing with gravity</h4>
+            </a>
+    </div>
 </div>
-        </div>
-    </section>
 
+
+        <div class="related-wrapper gh-outer">
+        <section class="related-posts gh-inner">
+            <h3 class="related-title">
+                <span class="text">You might also like...</span>
+            </h3>
+            <div class="post-feed">
+                    <article class="post tag-creative-coding tag-typescript tag-math u-shadow">
+<a class="post-link" href="/sherical-coordinates/">
+        <figure class="post-media">
+            <div class="u-placeholder same-height rectangle">
+                <img
+                    class="post-image u-object-fit"
+                    srcset="/content/images/size/w400/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 400w,
+                            /content/images/size/w720/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 750w,
+                            /content/images/size/w960/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 960w,
+                            /content/images/size/w1200/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 1140w,
+                            /content/images/size/w2000/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png 1920w"
+                    sizes="600px"
+                    src="/content/images/size/w960/2023/12/Screenshot-2023-12-20-at-4.39.59-PM.png"
+                    alt="Sherical coordinates"
+                    loading="lazy"
+                >
+            </div>
+        </figure>
+
+    <div class="post-wrapper">
+        <header class="post-header">
+                <span class="post-tag">creative-coding</span>
+
+            <h2 class="post-title">
+                Sherical coordinates
+            </h2>
+        </header>
+
+            <div class="post-excerpt">
+                The basics of spherical coordinates for creative coding
+            </div>
+    </div>
+
+    <footer class="post-footer">
+        <span class="post-more">Read More</span>
+
+        <div class="post-author">
+        </div>
+    </footer>
+</a>
+</article>                    <article class="post tag-creative-coding tag-nft featured u-shadow">
+<a class="post-link" href="/fxhash-sky-march/">
+            <img
+                class="post-image u-object-fit"
+                src="/content/images/2023/12/perlin_5.png"
+                alt="FxHash: The sky march"
+                loading="lazy"
+            >
+
+    <div class="post-wrapper">
+        <header class="post-header">
+                <span class="post-tag">creative-coding</span>
+
+            <h2 class="post-title">
+                FxHash: The sky march
+            </h2>
+        </header>
+
+            <div class="post-excerpt">
+                Am NFT project based on a custom flow fields implementation
+            </div>
+    </div>
+
+    <footer class="post-footer">
+        <span class="post-more">Read More</span>
+
+        <div class="post-author">
+        </div>
+    </footer>
+</a>
+</article>                    <article class="post tag-creative-coding tag-events u-shadow">
+<a class="post-link" href="/kinect-fields/">
+        <figure class="post-media">
+            <div class="u-placeholder same-height rectangle">
+                <img
+                    class="post-image u-object-fit"
+                    srcset="/content/images/size/w400/2023/12/Screenshot-2023-12-21-at-12.46.39-PM.png 400w,
+                            /content/images/size/w720/2023/12/Screenshot-2023-12-21-at-12.46.39-PM.png 750w,
+                            /content/images/size/w960/2023/12/Screenshot-2023-12-21-at-12.46.39-PM.png 960w,
+                            /content/images/size/w1200/2023/12/Screenshot-2023-12-21-at-12.46.39-PM.png 1140w,
+                            /content/images/size/w2000/2023/12/Screenshot-2023-12-21-at-12.46.39-PM.png 1920w"
+                    sizes="600px"
+                    src="/content/images/size/w960/2023/12/Screenshot-2023-12-21-at-12.46.39-PM.png"
+                    alt="Electronic museum"
+                    loading="lazy"
+                >
+            </div>
+        </figure>
+
+    <div class="post-wrapper">
+        <header class="post-header">
+                <span class="post-tag">creative-coding</span>
+
+            <h2 class="post-title">
+                Electronic museum
+            </h2>
+        </header>
+
+            <div class="post-excerpt">
+                Emitting flow fields from a Kinect 3d mesh
+            </div>
+    </div>
+
+    <footer class="post-footer">
+        <span class="post-more">Read More</span>
+
+        <div class="post-author">
+        </div>
+    </footer>
+</a>
+</article>                    <article class="post tag-creative-coding tag-events featured u-shadow">
+<a class="post-link" href="/wall-art/">
+            <img
+                class="post-image u-object-fit"
+                src="/content/images/2023/12/Wall-Art-asset-20230402-5.png"
+                alt="Wall art"
+                loading="lazy"
+            >
+
+    <div class="post-wrapper">
+        <header class="post-header">
+                <span class="post-tag">creative-coding</span>
+
+            <h2 class="post-title">
+                Wall art
+            </h2>
+        </header>
+
+            <div class="post-excerpt">
+                Coding some graffiti-looking sketch
+            </div>
+    </div>
+
+    <footer class="post-footer">
+        <span class="post-more">Read More</span>
+
+        <div class="post-author">
+        </div>
+    </footer>
+</a>
+</article>            </div>
+        </section>
+</div>
 </main>
-</div>
     </div>
 
     <footer class="gh-foot gh-outer">
@@ -229,7 +353,7 @@ starColors = [
 
 </div>
 
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="pswp__bg"></div>
 
     <div class="pswp__scroll-wrap">
@@ -270,12 +394,7 @@ starColors = [
         </div>
     </div>
 </div>
-<script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous">
-</script>
-<script src="/assets/built/main.min.js?v=2cfc361e42"></script>
+<script src="/assets/built/main.min.js?v=3c0c00f857"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-fTl/qcO1VgvKtOMApX2PdZzkziyr2stM65GYPLGuYMnuMm1z2JLJG6XVU7C/mR+E7xBUqCivykuhlzfqxXBXbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
