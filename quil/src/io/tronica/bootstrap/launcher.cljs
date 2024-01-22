@@ -1,9 +1,11 @@
 (ns io.tronica.bootstrap.launcher
   (:require
+   [io.tronica.sketches.zareen :as zareen]
    [io.tronica.sketches.watercolors :as watercolors]))
 
 (def sketch-list
-  {:watercolors watercolors/run-sketch})
+  {:zareen zareen/run-sketch
+   :watercolors watercolors/run-sketch})
 
 (defn- invoke [fn] (fn))
 
