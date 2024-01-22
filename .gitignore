@@ -17,4 +17,6 @@ ffmpeg.txt
 ghost/content/logs
 ghost/.ghostpid
 ghost/static
-*.log
+*.log.lsp
+.clj-kondo
+.lsp/
