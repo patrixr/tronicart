@@ -1,0 +1,49 @@
+aspect_ratio:
+  w: 16
+  h: 9
+  
+size: 800
+
+camera:
+  origin:
+    x: 0
+    y: 0
+    z: 0
+
+antialiasing:
+  samples: 50
+
+focal_length: 1
+
+viewport:
+  size: 2.0
+
+
+objects:
+  # # Ground
+  - type: "sphere"
+    radius: 100
+    center: { "x": 0, "y": -100.5, "z": -1 }
+    material: "matte"
+    color: { "r": 150, "g": 150, "b": 150, "a": 255 }
+
+  # Center sphere
+  - type: "sphere"
+    radius: 0.5
+    center: { "x": -1, "y": 0, "z": -1 }
+    material: "matte"
+    color: { "r": 178, "g": 76, "b": 76, "a": 255 }
+
+  # # Left sphere
+  # - type: "sphere"
+  #   radius: 0.5
+  #   center: { "x": -1, "y": 0, "z": -1 }
+  #   material: "metal"
+  #   color: { "r": 204, "g": 204, "b": 204, "a": 255 }
+
+  # Right sphere
+  - type: "sphere"
+    radius: 1
+    center: { "x": 1, "y": 0.5, "z": -2 }
+    material: "metal"
+    color: { "r": 204, "g": 153, "b": 51, "a": 255 }
