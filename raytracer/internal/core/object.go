@@ -76,6 +76,12 @@ func DecodeMaterial(data map[string]interface{}) Material {
 			mapstructure.Decode(data, &mat),
 		)
 		return &mat
+	} else if materialType == "transparent" {
+		transparent := Transparent{}
+		utils.PanicOnError(
+			mapstructure.Decode(data, &transparent),
+		)
+		return &transparent
 	} else if materialType == "metal" {
 		metal := Metal{}
 		utils.PanicOnError(

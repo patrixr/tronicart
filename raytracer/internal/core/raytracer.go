@@ -40,7 +40,9 @@ func (rt *Raytracer) ScreenHeight() int {
 // -----------------------------------------
 
 func (rt *Raytracer) ViewPortHeight() float64 {
-	return float64(rt.Viewport.Size)
+	theta := rt.Camera.VFOV * (math.Pi / 180)
+	h := math.Tan(theta / 2)
+	return 2 * h * rt.FocalLength
 }
 
 // -----------------------------------------

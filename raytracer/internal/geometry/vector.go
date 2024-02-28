@@ -102,3 +102,10 @@ func (v Vec3) NearZero() bool {
 func (v Vec3) Reflect(normal Vec3) Vec3 {
 	return v.Sub(normal.Mul(2 * v.Dot(normal)))
 }
+
+func (v Vec3) Refract(normal Vec3, etaiOverEtat float64) Vec3 {
+	cosTheta := math.Min(v.Mul(-1).Dot(normal), 1.0)
+	rOutPerpendicular := v.Add(normal.Mul(cosTheta)).Mul(etaiOverEtat)
+	rOutParallel := normal.Mul(-math.Sqrt(math.Abs(1.0 - rOutPerpendicular.LengthSquared())))
+	return rOutPerpendicular.Add(rOutParallel)
+}

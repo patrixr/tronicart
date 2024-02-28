@@ -5,6 +5,7 @@ aspect_ratio:
 size: 800
 
 camera:
+  vfov: 90
   origin:
     x: 0
     y: 0
@@ -18,7 +19,6 @@ focal_length: 1
 viewport:
   size: 2.0
 
-
 objects:
   # # Ground
   - type: "sphere"
@@ -30,20 +30,29 @@ objects:
   # Center sphere
   - type: "sphere"
     radius: 0.5
-    center: { "x": -1, "y": 0, "z": -1 }
+    center: { "x": 0, "y": 0, "z": -1 }
     material: "matte"
     color: { "r": 178, "g": 76, "b": 76, "a": 255 }
 
-  # # Left sphere
-  # - type: "sphere"
-  #   radius: 0.5
-  #   center: { "x": -1, "y": 0, "z": -1 }
-  #   material: "metal"
-  #   color: { "r": 204, "g": 204, "b": 204, "a": 255 }
+  # Left sphere
+  - type: "sphere"
+    radius: 0.5
+    center: { "x": -1, "y": 0, "z": -1 }
+    material: "metal"
+    color: { "r": 204, "g": 204, "b": 204, "a": 255 }
 
   # Right sphere
   - type: "sphere"
-    radius: 1
-    center: { "x": 1, "y": 0.5, "z": -2 }
-    material: "metal"
-    color: { "r": 204, "g": 153, "b": 51, "a": 255 }
+    radius: 0.5
+    center: { "x": 1, "y": 0, "z": -1 }
+    material: "transparent"
+    refraction: 1.5
+    color: { "r": 255, "g": 255, "b": 255, "a": 255 }
+  - type: "sphere"
+    radius: -0.4
+    center: { "x": 1, "y": 0, "z": -1 }
+    material: "transparent"
+    refraction: 1.5
+    color: { "r": 255, "g": 255, "b": 255, "a": 255 }
+
+    #color: { "r": 204, "g": 153, "b": 51, "a": 255} 

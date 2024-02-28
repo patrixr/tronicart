@@ -5,7 +5,8 @@ import (
 )
 
 type Camera struct {
-	Origin Vec3 `yaml:"origin"`
+	Origin Vec3    `yaml:"origin"`
+	VFOV   float64 `yaml:"vfov"`
 }
 
 type Viewport struct {
