@@ -12,6 +12,13 @@
   [color opacity]
   (q/color (q/red color) (q/green color) (q/blue color) opacity))
 
+(defn equalize-brightness
+  "Equalizes the brightness of a color towards 50% brightness."
+  [color factor]
+  (let [middle-gray (q/color 127.5 127.5 127.5)
+        equalized-color (q/lerp-color color middle-gray factor)]
+    equalized-color))
+
 (defn random-color
   "Returns a random Quil color"
   []

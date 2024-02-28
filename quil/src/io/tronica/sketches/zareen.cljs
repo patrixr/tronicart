@@ -1,10 +1,20 @@
 (ns io.tronica.sketches.zareen
   (:require [quil.core :as q :include-macros true]
             [io.tronica.core.vector :as v]
+            [io.tronica.core.colors :as colors]
+            [io.tronica.core.transitions
+             :refer [create-oscillator oscillator-value inc-oscillator]]
+            [io.tronica.core.recording :as rec]
             [quil.middleware :as m]))
 
 (def w 720)
 (def h 1080)
+(def particle-count 1000)
+(def cell-size 1)
+(def enable-recording false)
+(def final-frame 500)
+                                        ;(def noise-seed 41232)
+(def noise-seed 1313431251324)
 
 ;; ----------------------------------------
 ;; Geometry
@@ -27,12 +37,19 @@
   (v/create-vector 0 0))
 
 (defn- spawn-particle []
-  (let [pos (v/create-vector (q/random 0 w) (q/random 0 h))]
-    (->Particle
-     pos
-     pos
-     (zero-vector)
-     (q/random 2 8))))
+  (let [side (q/random 1 100)
+        pos (if (< side 50)
+              ; If side < 50, spawn on the left or right 20% of the screen
+              (v/create-vector
+                (if (< side 25) (q/random 0 (* w 0.2)) ; left side 20%
+                              (q/random (* w 0.8) w)) ; right side 20%
+                (q/random 0 h))
+              ; If side >= 50, spawn on the top or bottom 20% of the screen
+              (v/create-vector
+                (q/random 0 w)
+                (if (< side 75) (q/random 0 (* h 0.2)) ; top side 20%
+                              (q/random (* h 0.8) h))))] ; bottom side 20%
+    (->Particle pos pos (zero-vector) (q/random 2 8))))
 
 (defn- oob? [pos]
   (or
@@ -41,71 +58,86 @@
    (> (:y pos) h)
    (< (:y pos) 0)))
 
-(defn- loop-edges [pos]
-  (v/create-vector
-   (cond
-     (< (:x pos) 0) w
-     (> (:x pos) w) 0
-     :else (:x pos))
-   (cond
-     (< (:y pos) 0) h
-     (> (:y pos) h) 0
-     :else (:y pos))))
+
+(def coord-to-flow-vector
+  (memoize
+   (fn [x y]
+      (let [factor 0.5
+            angle (* (q/noise (* x factor) (* y factor) (* 0.0005 (q/frame-count))) q/TWO-PI)]
+        (polar-to-cartesian 1 angle)))))
+
+(defn locate-cell [x y]
+  (let [column-width (/ w cell-size)
+        row-height (/ h cell-size)
+        col (Math/ceil (/ x column-width))
+        row (Math/ceil (/ y row-height))]
+    {:x row :y col}))
 
 (defn- compute-flow-vector [pos]
-  (let [x (:x pos)
-        y (:y pos)
-        div 1500
-        angle (* (* (q/noise (/ x div) (/ y div)) q/TWO-PI) 2)]
-    (polar-to-cartesian 1 angle)))
+  (let [cell (locate-cell (:x pos) (:y pos))]
+    (coord-to-flow-vector (:x cell) (:y cell))))
 
 (defn- apply-forces [p]
-  (let [cur-pos (:pos p)
-        velocity (:vel p)
-        force (compute-flow-vector cur-pos)
-        next-pos (v/add cur-pos velocity)
-        final-pos (loop-edges next-pos)]
-    (->Particle
-     final-pos
-     (if (oob? next-pos) final-pos cur-pos)
-     (v/add force (v/limit (:vel p) (:max-velocity p)))
-     (:max-velocity p))))
+  (if (oob? (:pos p))
+    (spawn-particle)
+    (let [cur-pos (:pos p)
+          velocity (:vel p)
+          force (compute-flow-vector cur-pos)
+          next-pos (v/add cur-pos velocity)]
+      (->Particle
+       next-pos
+       cur-pos
+       (v/limit (v/add force (:vel p)) (:max-velocity p))
+       (:max-velocity p)))))
 
 (defn- init-particles [n]
   (->> (range)
        (take n)
        (map spawn-particle)))
 
-(def img-url "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+(def img-url "assets/z.jpg")
 
 (defn- setup []
+  (q/pixel-density 1)
   (q/frame-rate 30)
-  (q/blend-mode :blend)
+  (q/noise-seed noise-seed)
+  (when enable-recording
+    (rec/init-canvas-capture)
+    (rec/begin-video-record))
+  (q/background 0)
   (let [img (q/load-image img-url)]
     {
+     :bg-opacity (create-oscillator 15 10 30 0.1)
      :img img
-     :particles (init-particles 2000) }))
+     :particles (init-particles particle-count) }))
 
 (defn- update-state [state]
-  ; Update sketch state by changing circle color and position.
   {
+   :bg-opacity (inc-oscillator (:bg-opacity state))
    :img (:img state)
    :particles (map apply-forces (:particles state))
   })
 
 (defn- draw-state [state]
-  (when (> (q/frame-count) 400)
-    (prn "ending")
-    (q/no-loop))
-  (when (= (q/frame-count) 10)
-    (q/resize (:img state) w h))
-  (q/image (:img state) 0 0)
+  (prn (oscillator-value (:bg-opacity state)))
+  (q/fill 0 (oscillator-value (:bg-opacity state)))
+  (q/rect 0 0 w h)
+  (q/stroke-weight 2)
+  (when (= (q/frame-count) 1)
+    (q/resize (:img state) w 0))
   (doseq [p (:particles state)]
-    (q/line
-     (:x (:prev-pos p))
-     (:y (:prev-pos p))
-     (:x (:pos p))
-     (:y (:pos p)))))
+    (let [x (:x (:pos p))
+          y (:y (:pos p))
+          prev-x (:x (:prev-pos p))
+          prev-y (:y (:prev-pos p))]
+      (q/stroke (colors/with-opacity
+                   (q/color (q/get-pixel (:img state) x y))
+                   100))
+      (q/line
+       prev-x
+       prev-y
+       x
+       y))))
 
 (defn ^:export run-sketch []
   (q/defsketch zareen
@@ -115,7 +147,6 @@
     :update update-state
     :draw draw-state
     :middleware [m/fun-mode]))
-
 
 ; Evaluate this line to reload the page
 ; (run-sketch)

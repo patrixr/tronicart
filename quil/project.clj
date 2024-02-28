@@ -13,7 +13,8 @@
                    :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}}
 
   :plugins [[lein-cljsbuild "1.1.7"]
-            [lein-figwheel "0.5.19"]]
+            [lein-figwheel "0.5.19"]
+            [lein-doo "0.1.11"]]
   :hooks [leiningen.cljsbuild]
 
   :clean-targets ^{:protect false} ["resources/public/js"]
@@ -35,4 +36,10 @@
               :output-to "resources/public/js/main.js"
               :output-dir "resources/public/js/optimized"
               :asset-path "js/optimized"
-              :optimizations :advanced}}]})
+              :optimizations :advanced}}
+            {:id "test"
+             :source-paths ["src", "test"]
+             :compiler
+             {:main "io.tronica.runner"
+              :output-to "resources/public/js/testable.js"
+              :optimizations :none}}]})
