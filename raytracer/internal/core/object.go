@@ -1,6 +1,7 @@
 package core
 
 import (
+	"encoding/json"
 	. "raytracer/internal/geometry"
 	. "raytracer/internal/geometry/shapes"
 	"raytracer/internal/utils"
@@ -9,13 +10,15 @@ import (
 )
 
 type World struct {
-	Objects []Object
+	Objects []Object `yaml:"objects" json:"objects"`
 }
 
 type Object struct {
-	Shape    Shape
-	Material Material
+	Shape    Shape    `json:"shape" yaml:"shape"`
+	Material Material `json:"material" yaml:"material"`
 }
+
+// -----------------------------------------
 
 func (world *World) Intersect(ray Ray, limit utils.Range) (bool, Intersection, *Object) {
 	hitAnything := false
@@ -37,22 +40,49 @@ func (world *World) Intersect(ray Ray, limit utils.Range) (bool, Intersection, *
 	return hitAnything, intersection, hitObject
 }
 
+// -----------------------------------------
+// Marshalling
+// -----------------------------------------
+
 func (s *World) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	objs := make([]map[string]interface{}, 0, 50)
 
-	utils.PanicOnError(unmarshal(&objs))
+	if err := unmarshal(&objs); err != nil {
+		return err
+	}
 
 	for _, o := range objs {
 		obj := Object{}
-		obj.Shape = DecodeShape(o)
-		obj.Material = DecodeMaterial(o)
+		obj.Shape = decodeShape(o)
+		obj.Material = decodeMaterial(o)
 		s.Objects = append(s.Objects, obj)
 	}
 
 	return nil
 }
 
-func DecodeShape(data map[string]interface{}) Shape {
+func (s *World) UnmarshalJSON(data []byte) error {
+	objs := make([]map[string]interface{}, 0, 50)
+
+	if err := json.Unmarshal(data, &objs); err != nil {
+		return err
+	}
+
+	for _, o := range objs {
+		obj := Object{}
+		obj.Shape = decodeShape(o)
+		obj.Material = decodeMaterial(o)
+		s.Objects = append(s.Objects, obj)
+	}
+
+	return nil
+}
+
+// -----------------------------------------
+// Helpers
+// -----------------------------------------
+
+func decodeShape(data map[string]interface{}) Shape {
 	shapeType := data["type"]
 
 	if shapeType == "sphere" {
@@ -67,7 +97,7 @@ func DecodeShape(data map[string]interface{}) Shape {
 	return nil
 }
 
-func DecodeMaterial(data map[string]interface{}) Material {
+func decodeMaterial(data map[string]interface{}) Material {
 	materialType := data["material"]
 
 	if materialType == "matte" {

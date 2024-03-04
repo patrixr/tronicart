@@ -6,10 +6,10 @@ import (
 )
 
 type Intersection struct {
-	Dist          float64
-	Point         Vec3
-	Normal        Vec3
-	OutwardFacing bool
+	Dist          float64 `json:"dist" yaml:"dist"`
+	Point         Vec3    `json:"point" yaml:"point"`
+	Normal        Vec3    `json:"normal" yaml:"normal"`
+	OutwardFacing bool    `json:"outward_facing" yaml:"outwardFacing"`
 }
 
 type Shape interface {

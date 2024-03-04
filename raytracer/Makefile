@@ -3,8 +3,16 @@
 tidy:
 	go mod tidy
 
-run:
-	go run ./cmd/raytracer
+demo:
+	go run ./cli.go demo
 
-build:
-	CGO_ENABLED=0 go build ./cmd/raytracer
+run:
+	go run ./cli.go
+
+wasm:
+	GOARCH=wasm GOOS=js go build -o web/raytracer.wasm ./main.go
+
+build: wasm
+
+dev: wasm
+	npx --yes live-server ./web

@@ -6,23 +6,28 @@ import (
 	"raytracer/internal/colors"
 	. "raytracer/internal/geometry"
 	"raytracer/internal/utils"
+	"sync"
 )
 
+type AspectRatio struct {
+	W int `yaml:"w" json:"w"`
+	H int `yaml:"h" json:"h"`
+}
+
+type Antialiasing struct {
+	Samples int `yaml:"samples" json:"samples"`
+}
+
 type Raytracer struct {
-	Size        int      `yaml:"size"`
-	Viewport    Viewport `yaml:"viewport"`
-	FocalLength float64  `yaml:"focal_length"`
-	Camera      Camera   `yaml:"camera"`
-	World       World    `yaml:"objects"`
+	Size     int      `yaml:"size" json:"size"`
+	Viewport Viewport `yaml:"viewport" json:"viewport"`
+	Camera   Camera   `yaml:"camera" json:"camera"`
+	World    World    `yaml:"objects" json:"objects"`
+	Threads  int      `yaml:"threads" json:"threads"`
 
-	Aspect struct {
-		W int `yaml:"w"`
-		H int `yaml:"h"`
-	} `yaml:"aspect_ratio"`
+	Aspect AspectRatio `yaml:"aspect_ratio" json:"aspectRatio"`
 
-	Antialiasing struct {
-		Samples int `yaml:"samples"`
-	} `yaml:"antialiasing"`
+	Antialiasing Antialiasing `yaml:"antialiasing" json:"antialiasing"`
 }
 
 // -----------------------------------------
@@ -42,7 +47,13 @@ func (rt *Raytracer) ScreenHeight() int {
 func (rt *Raytracer) ViewPortHeight() float64 {
 	theta := rt.Camera.VFOV * (math.Pi / 180)
 	h := math.Tan(theta / 2)
-	return 2 * h * rt.FocalLength
+	return 2 * h * rt.Camera.FocusDist
+}
+
+// -----------------------------------------
+
+func (rt *Raytracer) FocalLength() float64 {
+	return rt.Camera.LookFrom.Sub(rt.Camera.LookAt).Length()
 }
 
 // -----------------------------------------
@@ -56,33 +67,57 @@ func (rt *Raytracer) ViewPortWidth() float64 {
 // -----------------------------------------
 
 func (rt *Raytracer) Render() image.Image {
-	w := rt.ScreenWidth()
-	h := rt.ScreenHeight()
-	img := image.NewNRGBA(image.Rect(0, 0, w, h))
+	screenW := rt.ScreenWidth()
+	screenH := rt.ScreenHeight()
+	img := image.NewNRGBA(image.Rect(0, 0, screenW, screenH))
+	pImg := utils.Protect(img)
+	sectionHeight := screenH / rt.Threads
+
+	wg := sync.WaitGroup{}
+	wg.Add(rt.Threads)
+	for i := 0; i < rt.Threads; i++ {
+		go rt.RenderSection(pImg, &wg, Rect{0, float64(i * sectionHeight), float64(screenW), float64(sectionHeight)})
+	}
+	wg.Wait()
+	return img
+}
+
+func (rt *Raytracer) RenderSection(pImg utils.Protected[*image.NRGBA], wg *sync.WaitGroup, area Rect) {
+	defer wg.Done()
+
+	utils.Log.Info("RenderSection", "area", area)
+
+	u, v, w := rt.Camera.BasisVectors()
 
 	// Calculate the Vec3s across the horizontal and down the vertical viewport edges.
-	viewportU := CreateVector(rt.ViewPortWidth(), 0, 0)
-	viewportV := CreateVector(0, rt.ViewPortHeight(), 0)
+	viewportU := u.Mul(rt.ViewPortWidth())
+	viewportV := v.Mul(-1).Mul(rt.ViewPortHeight())
 
 	// Calculate the horizontal and vertical delta Vec3s from pixel to pixel.
 	pixelDeltaU := viewportU.Div(float64(rt.ScreenWidth()))
 	pixelDeltaV := viewportV.Div(float64(rt.ScreenHeight()))
 
-	viewportUpperLeft := rt.Camera.Origin.
-		SubZ(rt.FocalLength).  // distance between the camera and the viewport
-		Sub(viewportU.Div(2)). // move to the left
-		Add(viewportV.Div(2))  // move up
+	viewportUpperLeft := rt.Camera.LookFrom.
+		Sub(w.Mul(rt.Camera.FocusDist)). // distance between the camera and the viewport
+		Sub(viewportU.Div(2)).           // move to the left
+		Sub(viewportV.Div(2))            // move up
 
 	rootPixel := viewportUpperLeft.Add(pixelDeltaU.Add(pixelDeltaV).Div(2))
 
-	for y := 0; y < h; y++ {
-		for x := 0; x < w; x++ {
+	defocusRadius := rt.Camera.FocusDist * math.Tan(utils.DegreesToRadians(rt.Camera.DefocusAngle)/2.0)
+	defocusDiskU := u.Mul(defocusRadius)
+	defocusDiskV := v.Mul(defocusRadius)
 
+	farRight := int(area.X + area.W)
+	bottom := int(area.Y + area.H)
+
+	for y := int(area.Y); y < bottom; y++ {
+		for x := int(area.X); x < farRight; x++ {
 			avg := colors.CreateColorAverage()
 
 			realPixelLocation := rootPixel.
 				Add(pixelDeltaU.Mul(float64(x))).
-				Sub(pixelDeltaV.Mul(float64(y)))
+				Add(pixelDeltaV.Mul(float64(y)))
 
 			for s := 0; s < rt.Antialiasing.Samples; s++ {
 				// Generate randomized variance to the pixel location per sample
@@ -95,20 +130,30 @@ func (rt *Raytracer) Render() image.Image {
 				// Add the variance to the real pixel location
 				pixelLocation := realPixelLocation.Add(variance)
 
-				ray := CreateRay(rt.Camera.Origin, pixelLocation.Sub(rt.Camera.Origin))
+				var rayOrigin Vec3
+
+				if rt.Camera.DefocusAngle <= 0 {
+					rayOrigin = rt.Camera.LookFrom
+				} else {
+					// Returns a random point in the camera defocus disk
+					p := CreateRandomVectorInUnitDisk()
+					rayOrigin = rt.Camera.LookFrom.
+						Add(defocusDiskU.Mul(p.X)).
+						Add(defocusDiskV.Mul(p.Y))
+				}
+
+				ray := CreateRay(rayOrigin, pixelLocation.Sub(rt.Camera.LookFrom))
 
 				avg.Add(rt.RayColor(ray, 10))
 			}
 
+			img := pImg.Take()
 			img.Set(x, y, avg.Color().WithGammaCorrection())
+			pImg.Release()
 		}
 	}
-
-	return img
 }
 
-// -----------------------------------------
-// Math
 // -----------------------------------------
 
 func (rt *Raytracer) RayColor(ray Ray, maxDepth int) colors.Color {
@@ -153,8 +198,26 @@ func (rt *Raytracer) PrintDetails() {
 	utils.Log.Info("Dimensions", "w", rt.ScreenWidth(), "h", rt.ScreenHeight())
 	utils.Log.Info("Viewport", "w", rt.ViewPortWidth(), "h", rt.ViewPortHeight())
 	utils.Log.Info("Focal Length", "size", rt.FocalLength)
-	utils.Log.Info("Camera", "origin", rt.Camera.Origin)
+	utils.Log.Info("Camera",
+		"origin", rt.Camera.LookFrom,
+		"up", rt.Camera.Vup,
+		"look_at", rt.Camera.LookAt,
+		"vfov", rt.Camera.VFOV)
 	utils.Log.Info("Aspect Ratio", "w", rt.Aspect.W, "h", rt.Aspect.H)
 	utils.Log.Info("Objects", "count", len(rt.World.Objects))
 	utils.Log.Info("Antialiasing", "samples", rt.Antialiasing.Samples)
+}
+
+// -----------------------------------------
+// Configuration
+// -----------------------------------------
+
+func (rt Raytracer) WithSamples(samples int) *Raytracer {
+	rt.Antialiasing.Samples = samples
+	return &rt
+}
+
+func (rt Raytracer) WithObjects(objects ...Object) *Raytracer {
+	rt.World.Objects = objects
+	return &rt
 }

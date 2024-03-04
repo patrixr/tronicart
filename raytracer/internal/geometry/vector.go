@@ -50,6 +50,18 @@ func (v Vec3) Add(v2 Vec3) Vec3 {
 	return CreateVector(v.X+v2.X, v.Y+v2.Y, v.Z+v2.Z)
 }
 
+func (v Vec3) AddX(v2 Vec3) Vec3 {
+	return CreateVector(v.X+v2.X, v.Y, v.Z)
+}
+
+func (v Vec3) AddY(v2 Vec3) Vec3 {
+	return CreateVector(v.X, v.Y+v2.Y, v.Z)
+}
+
+func (v Vec3) AddZ(v2 Vec3) Vec3 {
+	return CreateVector(v.X, v.Y, v.Z+v2.Z)
+}
+
 func (v Vec3) Sub(v2 Vec3) Vec3 {
 	return CreateVector(v.X-v2.X, v.Y-v2.Y, v.Z-v2.Z)
 }
@@ -108,4 +120,13 @@ func (v Vec3) Refract(normal Vec3, etaiOverEtat float64) Vec3 {
 	rOutPerpendicular := v.Add(normal.Mul(cosTheta)).Mul(etaiOverEtat)
 	rOutParallel := normal.Mul(-math.Sqrt(math.Abs(1.0 - rOutPerpendicular.LengthSquared())))
 	return rOutPerpendicular.Add(rOutParallel)
+}
+
+func CreateRandomVectorInUnitDisk() Vec3 {
+	for {
+		p := CreateVector(utils.Rand(-1, 1), utils.Rand(-1, 1), 0)
+		if p.LengthSquared() < 1 {
+			return p
+		}
+	}
 }
