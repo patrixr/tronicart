@@ -1,40 +1,10 @@
 import P5 from "npm:p5"
-
-// ----------------------------------------------
-//  Helpers
-// ----------------------------------------------
-
-function __loadingText() {
-  const loadingDiv = document.createElement("div")
-  loadingDiv.style.position = "absolute"
-  loadingDiv.style.top = "50%"
-  loadingDiv.style.left = "50%"
-  loadingDiv.style.transform = "translate(-50%, -50%)"
-  loadingDiv.innerText = "Loading..."
-  loadingDiv.zIndex = -100
-  return loadingDiv
-}
-
-function __removeCanvasChildren(element) {
-  const canvasElements = element.querySelectorAll("canvas")
-  canvasElements.forEach((canvas) => {
-    canvas.parentNode.removeChild(canvas)
-  })
-}
-
-function __createButton(text, action) {
-  const btn = document.createElement("button")
-  btn.innerText = text
-  btn.style.marginTop = "10px"
-  btn.style.marginRight = "10px"
-  btn.style.padding = "5px"
-  btn.style.border = "none"
-  btn.style.backgroundColor = "lightblue"
-  btn.style.color = "black"
-  btn.style.cursor = "pointer"
-  btn.onclick = action
-  return btn
-}
+import { debounce } from "../lib/helpers.js"
+import {
+  onElementRemoved,
+  removeChildrenBySelector,
+  onElementInView,
+} from "../lib/dom.js"
 
 // ----------------------------------------------
 //  Public API
@@ -48,38 +18,45 @@ function __createButton(text, action) {
  * @returns {HTMLElement} The container div element that holds the P5 canvas.
  */
 export function sketch(sketch, opts = {}) {
-  const div = document.createElement("div")
-  const canvasFrame = document.createElement("div")
-  const loadingDiv = __loadingText()
-  div.id = `p5Container${Date.now()}`
-  div.style.position = "relative"
-  div.style.display = "table"
-  div.style.marginTop = "10px"
-  div.style.marginBottom = "10px"
-  canvasFrame.style.minWidth = "525px"
-  canvasFrame.style.minHeight = "295px"
-  canvasFrame.style.outline = "1px dashed lightgray"
-  canvasFrame.style.padding = "10px"
-  div.appendChild(canvasFrame)
-
+  console.log("Creating sketch...")
+  const div = createContainer()
+  const canvasFrame = createCanvasFrame(div)
+  const loadingDiv = createCenteredText("Loading...")
+  let first = true
   let p5Instance = null
 
-  const replay = () => {
-    div.appendChild(loadingDiv)
-    __removeCanvasChildren(canvasFrame)
-    setTimeout(() => {
-      p5Instance = new P5(sketch, canvasFrame)
-      div.removeChild(loadingDiv)
-    }, 100)
+  const killSketch = () => {
+    if (p5Instance) {
+      console.log("Removing existing sketch...")
+      p5Instance?.remove()
+      removeChildrenBySelector(canvasFrame, "canvas")
+      p5Instance = null
+    }
   }
+
+  onElementRemoved(div, () => {
+    killSketch()
+  })
+
+  const replay = debounce(() => {
+    console.log(first ? "Playing sketch" : "Replaying sketch...")
+    killSketch()
+    p5Instance = new P5(sketch, canvasFrame)
+    if (loadingDiv.isConnected) loadingDiv.parentNode.removeChild(loadingDiv)
+    opts.plugins?.forEach((plugin) => plugin(p5Instance))
+    first = false
+  })
 
   if (opts.autostart ?? true) {
     div.appendChild(loadingDiv)
-    setTimeout(replay, 100)
+    onElementInView(div, replay)
   }
 
   if (opts.canReplay ?? true) {
     div.appendChild(__createButton("Replay", replay))
+  }
+
+  if (opts.canSave ?? true) {
     div.appendChild(
       __createButton("Save", () =>
         p5Instance?.save("p5_capture_" + Date.now() + ".png"),
@@ -98,20 +75,104 @@ export function sketch(sketch, opts = {}) {
  * @param {function} drawer - A function that takes a P5 instance and draws on the canvas.
  * @returns {HTMLElement} The container div element that holds the P5 canvas.
  */
-export function staticSketch(w, h, drawer) {
+export function staticSketch(w, h, setup, drawer) {
+  if (!drawer) {
+    drawer = setup
+    setup = null
+  }
+
+  let state = null
+
   return sketch(
     (p5) => {
+      p5.preload = () => {}
+
       p5.setup = () => {
         p5.createCanvas(w, h)
+        if (setup) {
+          state = setup(p5)
+        }
       }
 
       p5.draw = () => {
-        drawer(p5)
-        p5.noLoop()
+        if (p5.frameCount === 10) {
+          drawer(p5, state)
+          p5.noLoop()
+        }
       }
     },
     {
       canReplay: false,
     },
   )
+}
+
+// ----------------------------------------------
+//  Plugins
+// ----------------------------------------------
+
+export const FPSPlugin =
+  (textSize = 12) =>
+  (p5) => {
+    const draw = p5.draw
+
+    p5.draw = () => {
+      draw()
+      p5.push()
+      p5.strokeWeight(2)
+      p5.fill(125)
+      p5.stroke(125)
+      p5.textSize(textSize)
+      p5.text(`FPS: ${p5.frameRate().toFixed(2)}`, textSize, textSize * 2)
+      p5.pop()
+    }
+  }
+
+// ----------------------------------------------
+//  Helpers
+// ----------------------------------------------
+
+function createCenteredText(text) {
+  const loadingDiv = document.createElement("div")
+  loadingDiv.style.position = "absolute"
+  loadingDiv.style.top = "50%"
+  loadingDiv.style.left = "50%"
+  loadingDiv.style.transform = "translate(-50%, -50%)"
+  loadingDiv.innerText = text
+  loadingDiv.zIndex = -100
+  return loadingDiv
+}
+
+function createCanvasFrame(parent) {
+  const canvasFrame = document.createElement("div")
+  canvasFrame.style.minWidth = "200px"
+  canvasFrame.style.minHeight = "100px"
+  canvasFrame.style.outline = "1px dashed lightgray"
+  canvasFrame.style.padding = "10px"
+  parent.appendChild(canvasFrame)
+  return canvasFrame
+}
+
+function createContainer() {
+  const div = document.createElement("div")
+  div.id = `p5Container${Date.now()}`
+  div.style.position = "relative"
+  div.style.display = "table"
+  div.style.marginTop = "10px"
+  div.style.marginBottom = "10px"
+  return div
+}
+
+function __createButton(text, action) {
+  const btn = document.createElement("button")
+  btn.innerText = text
+  btn.style.marginTop = "10px"
+  btn.style.marginRight = "10px"
+  btn.style.padding = "5px"
+  btn.style.border = "none"
+  btn.style.backgroundColor = "lightblue"
+  btn.style.color = "black"
+  btn.style.cursor = "pointer"
+  btn.onclick = action
+  return btn
 }

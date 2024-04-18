@@ -1,4 +1,4 @@
-# Fluids
+# Differential Growth Basics
 
 I'm playing with the concept of differential growth, a technique used to simulate the growth of organic forms. The idea is to create a bunch of nodes, or "cells" which are bound by rules of attraction amongst themselves:
 
