@@ -5,7 +5,7 @@ draft: true
 # Tesselate
 
 ```js
-import { staticSketch, sketch } from "./components/sketch.js"
+import { draw, sketch } from "./components/sketch.js"
 ```
 
 ```tex
@@ -62,7 +62,7 @@ class Triangle {
 ```
 
 ```js
-staticSketch(500, 500, (p5) => {
+draw(500, 500, (p5) => {
   const t = new Triangle(p5, 0, 0, 50)
   const f = t.flip()
 

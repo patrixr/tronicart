@@ -2,8 +2,6 @@
 
 Trying out a falling sand simulation in p5.js. This is a simple simulation where particles fall down and pile up. This is based on a Coding Train challenge by Daniel Shiffman.
 
-I plan on using this as a based mechanic for other sketches.
-
 ```js
 import { sketch, FPSPlugin } from "./components/sketch.js"
 import { Palette } from "./lib/palette.js"
@@ -76,7 +74,6 @@ sketch(
       tick++
 
       if (tick % framesPerPile === 0) {
-        // framesPerPile = p5.random(10, 100)
         tick = 0
         source = p5.createVector(
           p5.random(p5.width * 0.1, p5.width * 0.9),

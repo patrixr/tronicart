@@ -18,7 +18,6 @@ import {
  * @returns {HTMLElement} The container div element that holds the P5 canvas.
  */
 export function sketch(sketch, opts = {}) {
-  console.log("Creating sketch...")
   const div = createContainer()
   const canvasFrame = createCanvasFrame(div)
   const loadingDiv = createCenteredText("Loading...")
@@ -27,7 +26,6 @@ export function sketch(sketch, opts = {}) {
 
   const killSketch = () => {
     if (p5Instance) {
-      console.log("Removing existing sketch...")
       p5Instance?.remove()
       removeChildrenBySelector(canvasFrame, "canvas")
       p5Instance = null
@@ -39,6 +37,8 @@ export function sketch(sketch, opts = {}) {
   })
 
   const replay = debounce(() => {
+    if (!div.isConnected) return
+
     console.log(first ? "Playing sketch" : "Replaying sketch...")
     killSketch()
     p5Instance = new P5(sketch, canvasFrame)
@@ -75,7 +75,7 @@ export function sketch(sketch, opts = {}) {
  * @param {function} drawer - A function that takes a P5 instance and draws on the canvas.
  * @returns {HTMLElement} The container div element that holds the P5 canvas.
  */
-export function staticSketch(w, h, setup, drawer) {
+export function draw(w, h, setup, drawer) {
   if (!drawer) {
     drawer = setup
     setup = null

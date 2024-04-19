@@ -28,7 +28,7 @@ graph LR
 ```
 
 ```js
-import { staticSketch, sketch } from "./components/sketch.js"
+import { draw, sketch } from "./components/sketch.js"
 import { DifferentialGrowth } from "./lib/differential-growth.js"
 ```
 
@@ -41,7 +41,7 @@ In this sketch, we place cells in the form of a circle, and we let them grow fol
 We want to start with our cells placed as a circle by leveraging using polar coordinates:
 
 ```js
-staticSketch(525, 295, (p5) => {
+draw(525, 295, (p5) => {
   createCircularPath(p5, p5.width / 2, p5.height / 2, 100).forEach((node) => {
     p5.ellipse(node.x, node.y, 5, 5)
   })

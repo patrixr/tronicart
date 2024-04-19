@@ -9,7 +9,7 @@ Leveraging a bitmask to extract the properties of the byte, I could then use the
 ![](/data/images/byte-tiles.png)
 
 ```js
-import { staticSketch, sketch } from "./components/sketch.js"
+import { draw, sketch } from "./components/sketch.js"
 import _ from "npm:lodash"
 ```
 
@@ -140,7 +140,7 @@ function drawTile(p5, x, y, type, size) {
 ```
 
 ```js
-staticSketch(750, 860, (p5) => {
+draw(750, 860, (p5) => {
   p5.background(255)
   const cellSize = 50
   const margin = 5
