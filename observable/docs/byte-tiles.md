@@ -1,4 +1,4 @@
-# Bitwise Tiles
+# Bit operations for creative coding
 
 I'm investigating the idea of converting a byte value to a tile. The idea is to use the properties of the byte to determine the properties of the tile. This could possibly be used with a grayscale image to create a mosaic of tiles.
 
@@ -157,3 +157,9 @@ draw(750, 860, (p5) => {
   }
 })
 ```
+
+## Observations
+
+As of now, it's hard to see the patterns in the tiles. I think it would be beneficial to add some more variation to the tiles to make them more visually distinct. I don't yet have a good use case for this technique, but I believe it could be useful for generating procedural textures or patterns.
+
+In short, to be continued...

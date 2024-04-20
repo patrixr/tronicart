@@ -1,13 +1,9 @@
 import P5 from "npm:p5"
 import { debounce } from "../lib/helpers.js"
-import {
-  onElementRemoved,
-  removeChildrenBySelector,
-  onElementInView,
-} from "../lib/dom.js"
+import { onElementInView, onElementRemoved } from "../lib/dom.js"
 
 // ----------------------------------------------
-//  Public API
+//  Observable helper for P5 sketches
 // ----------------------------------------------
 
 /**
@@ -20,47 +16,37 @@ import {
 export function sketch(sketch, opts = {}) {
   const div = createContainer()
   const canvasFrame = createCanvasFrame(div)
-  const loadingDiv = createCenteredText("Loading...")
-  let first = true
-  let p5Instance = null
 
-  const killSketch = () => {
-    if (p5Instance) {
-      p5Instance?.remove()
-      removeChildrenBySelector(canvasFrame, "canvas")
-      p5Instance = null
-    }
+  let p5 = null
+
+  const stop = () => {
+    p5?.remove()
+    p5 = null
   }
 
-  onElementRemoved(div, () => {
-    killSketch()
-  })
+  const start = () => {
+    p5 = new P5(sketch, canvasFrame)
+    opts.plugins?.forEach((plugin) => plugin(p5))
+  }
+
+  onElementRemoved(div, stop)
 
   const replay = debounce(() => {
     if (!div.isConnected) return
-
-    console.log(first ? "Playing sketch" : "Replaying sketch...")
-    killSketch()
-    p5Instance = new P5(sketch, canvasFrame)
-    if (loadingDiv.isConnected) loadingDiv.parentNode.removeChild(loadingDiv)
-    opts.plugins?.forEach((plugin) => plugin(p5Instance))
-    first = false
+    stop()
+    start()
   })
 
-  if (opts.autostart ?? true) {
-    div.appendChild(loadingDiv)
-    onElementInView(div, replay)
-  }
+  // Auto start the sketch if it's in view
+  onElementInView(div, replay)
 
   if (opts.canReplay ?? true) {
-    div.appendChild(__createButton("Replay", replay))
+    div.appendChild(createButton("Replay", replay))
   }
 
   if (opts.canSave ?? true) {
     div.appendChild(
-      __createButton("Save", () =>
-        p5Instance?.save("p5_capture_" + Date.now() + ".png"),
-      ),
+      createButton("Save", () => p5?.save("p5_capture_" + Date.now() + ".png")),
     )
   }
 
@@ -103,45 +89,14 @@ export function draw(w, h, setup, drawer) {
     },
     {
       canReplay: false,
+      canSave: true,
     },
   )
 }
 
 // ----------------------------------------------
-//  Plugins
+//  Custom elements
 // ----------------------------------------------
-
-export const FPSPlugin =
-  (textSize = 12) =>
-  (p5) => {
-    const draw = p5.draw
-
-    p5.draw = () => {
-      draw()
-      p5.push()
-      p5.strokeWeight(2)
-      p5.fill(125)
-      p5.stroke(125)
-      p5.textSize(textSize)
-      p5.text(`FPS: ${p5.frameRate().toFixed(2)}`, textSize, textSize * 2)
-      p5.pop()
-    }
-  }
-
-// ----------------------------------------------
-//  Helpers
-// ----------------------------------------------
-
-function createCenteredText(text) {
-  const loadingDiv = document.createElement("div")
-  loadingDiv.style.position = "absolute"
-  loadingDiv.style.top = "50%"
-  loadingDiv.style.left = "50%"
-  loadingDiv.style.transform = "translate(-50%, -50%)"
-  loadingDiv.innerText = text
-  loadingDiv.zIndex = -100
-  return loadingDiv
-}
 
 function createCanvasFrame(parent) {
   const canvasFrame = document.createElement("div")
@@ -163,7 +118,7 @@ function createContainer() {
   return div
 }
 
-function __createButton(text, action) {
+function createButton(text, action) {
   const btn = document.createElement("button")
   btn.innerText = text
   btn.style.marginTop = "10px"

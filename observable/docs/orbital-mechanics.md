@@ -66,7 +66,7 @@ class CelestialBody {
 ```
 
 ```js
-import { FPSPlugin, sketch } from "./components/sketch.js"
+import { sketch } from "./components/sketch.js"
 import { Palette } from "./lib/palette.js"
 import { CelestialBody } from "./lib/celestial-body.js"
 

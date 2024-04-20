@@ -18,7 +18,7 @@ The code is based on a [previous implementation of orbital mechanics](/orbital-m
    The bodies should be close enough to interact with each other. If one body is too far away, it might not be influenced by the other two, leading to a 2 body system instead
 
 ```js
-import { FPSPlugin, sketch } from "./components/sketch.js"
+import { sketch } from "./components/sketch.js"
 import { Palette } from "./lib/palette.js"
 import { CelestialBody } from "./lib/celestial-body.js"
 
