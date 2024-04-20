@@ -81,10 +81,8 @@ export function draw(w, h, setup, drawer) {
       }
 
       p5.draw = () => {
-        if (p5.frameCount === 10) {
-          drawer(p5, state)
-          p5.noLoop()
-        }
+        drawer(p5, state)
+        p5.noLoop()
       }
     },
     {
