@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Raytracing using Go and WebAssembly | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/raytracing.9eb18481.js">
+<link rel="modulepreload" href="./_import/components/canvas.648ef583.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/mermaid.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/_esm.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/_esm.js">
+<link rel="modulepreload" href="./_npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs._esm.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+import {registerFile} from "./_observablehq/stdlib.js";
+
+registerFile("./data/rtconfig.json", {"name":"./data/rtconfig.json","mimeType":"application/json","path":"./_file/data/rtconfig.9833053a.json","lastModified":1718264045565});
+
+define({id: "e5aa7b58", outputs: ["render","wasmScript","raytracerScript","canvas"], body: async () => {
+const [{render, wasmScript, raytracerScript}, {canvas}] = await Promise.all([import("./_import/components/raytracing.9eb18481.js"), import("./_import/components/canvas.648ef583.js")]);
+
+return {render,wasmScript,raytracerScript,canvas};
+}});
+
+define({id: "8be527aa", outputs: ["mermaid"], body: async () => {
+const {default: mermaid} = await import("./_observablehq/stdlib/mermaid.js");
+
+return {mermaid};
+}});
+
+define({id: "4eb883e2", inputs: ["mermaid","display"], body: async (mermaid,display) => {
+display(await(
+await mermaid`sequenceDiagram
+    participant W as Browser (JS)
+    participant B as Bridge (Go/Wasm)
+    participant R as Engine (Go/Wasm)
+    W->>B: Queued async <br> render request
+    loop
+        B->>R: Renders scene
+        R-->>B: Image data
+        B-->>W: Callback with <br>  byte array
+    end
+    Note over W: Browser`
+))
+}});
+
+define({id: "0864e47b", mode: "inline", inputs: ["raytracerScript","display"], body: async (raytracerScript,display) => {
+display(await(
+raytracerScript()
+))
+}});
+
+define({id: "884842c7", mode: "inline", inputs: ["wasmScript","display"], body: async (wasmScript,display) => {
+display(await(
+wasmScript()
+))
+}});
+
+define({id: "4a5b3f8e", mode: "inline", inputs: ["canvas","display"], body: async (canvas,display) => {
+display(await(
+canvas(525, 295)
+))
+}});
+
+define({id: "ff4116d1", inputs: ["view","Inputs","render","config"], outputs: ["renderButton"], body: (view,Inputs,render,config) => {
+const renderButton = view(
+  Inputs.button(
+    [
+      ["Low-res preview", () => render(config, "defaultCanvas0", true)],
+      ["Full size", () => render(config, "defaultCanvas0")],
+    ],
+    { value: 0, label: "Render" },
+  ),
+)
+return {renderButton};
+}});
+
+define({id: "ea9ec351", inputs: ["view","Inputs"], outputs: ["samples","size"], body: (view,Inputs) => {
+const samples = view(Inputs.range([1, 500], { step: 1, label: "Samples" }))
+const size = view(Inputs.range([300, 750], { step: 1, label: "Width" }))
+return {samples,size};
+}});
+
+define({id: "57f46c41", inputs: ["FileAttachment","samples","size"], outputs: ["config"], body: async (FileAttachment,samples,size) => {
+const config = await FileAttachment("./data/rtconfig.json").json()
+config.antialiasing.samples = samples
+config.size = size
+return {config};
+}});
+
+define({id: "6ee4a877", inputs: ["display","config"], body: (display,config) => {
+display(config)
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
+    <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
+    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
+    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="raytracing-using-go-and-webassembly" tabindex="-1"><a class="observablehq-header-anchor" href="#raytracing-using-go-and-webassembly">Raytracing using Go and WebAssembly</a></h1>
+<div class="observablehq observablehq--block"><!--:e5aa7b58:--></div>
+<div class="observablehq observablehq--block"><!--:8be527aa:--></div>
+<p>This is an experiment in using Golang and WebAssembly to render a simple raytraced scene. The scene is rendered using a Go program that is compiled to WebAssembly and run in the browser.</p>
+<p>The Go program is a simple raytracer based on the <a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" target="_blank" rel="noopener noreferrer">Ray Tracing in One Weekend</a> book by Peter Shirley. The program defines a simple scene which is then piped to the browser using a <code>Uint8Array</code>. The browser then renders the scene using the <code>ImageData</code> API.</p>
+<h2 id="the-setup" tabindex="-1"><a class="observablehq-header-anchor" href="#the-setup">The setup</a></h2>
+<p>This is a high-level overview of the different components involved:</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4eb883e2:--></div>
+<h2 id="try-it-out" tabindex="-1"><a class="observablehq-header-anchor" href="#try-it-out">Try it out</a></h2>
+<p>Click on the controls located below the canvas to render the scene. The "Low-res preview" button will render a low-resolution version of the scene just to try it out, while the "Full size" button will render the scene at full resolution.</p>
+<div class="warning" label="Warning️">
+  Raytracing can be computationally expensive. Rendering the scene at full resolution with a high number of samples can take a while.
+</div>
+<p><observablehq-loading></observablehq-loading><!--:0864e47b:-->
+<observablehq-loading></observablehq-loading><!--:884842c7:-->
+<observablehq-loading></observablehq-loading><!--:4a5b3f8e:--></p>
+<h2 id="configuration" tabindex="-1"><a class="observablehq-header-anchor" href="#configuration">Configuration</a></h2>
+<div class="observablehq observablehq--block"><!--:ff4116d1:--></div>
+<h3 id="config" tabindex="-1"><a class="observablehq-header-anchor" href="#config">Config</a></h3>
+<div class="observablehq observablehq--block"><!--:ea9ec351:--></div>
+<div class="observablehq observablehq--block"><!--:57f46c41:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:6ee4a877:--></div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./orbital-mechanics"><span>Orbital Mechanics</span></a><a rel="next" href="./three-body-problem"><span>Three Body Problem</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:34:17">Jun 13, 2024</a>.</div>
+</footer>
+</div>

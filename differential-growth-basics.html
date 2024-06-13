@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Differential Growth Basics | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/sketch.d1151e54.js">
+<link rel="modulepreload" href="./_import/lib/differential-growth.d6bf7358.js">
+<link rel="modulepreload" href="./_import/lib/helpers.076832b6.js">
+<link rel="modulepreload" href="./_import/lib/dom.2550fbc7.js">
+<link rel="modulepreload" href="./_npm/p5@1.9.4/_esm.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/mermaid.js">
+<link rel="modulepreload" href="./_npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs._esm.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+
+define({id: "3b9beaab", inputs: ["mermaid","display"], body: async (mermaid,display) => {
+display(await(
+await mermaid`graph LR
+  style A fill:#bbf,stroke-width:2px,color:#fff
+  style B fill:#bbf,stroke-width:2px,color:#fff
+  style C fill:#bbf,stroke-width:2px,color:#fff
+  style D fill:#bbf,stroke-width:2px,color:#fff
+  style E fill:#bbf,stroke-width:2px,color:#fff
+  style F fill:#bbf,stroke-width:2px,color:#fff
+  A[Start] --> B{Is there a cell nearby?}
+  B -->|Yes| C[Move towards it]
+  C --> D{Is there a cell too close?}
+  D -->|Yes| E[Move away from it]
+  E --> B
+  D -->|No| B
+  B -->|No| F[Create a new neighbour]
+  F --> B`
+))
+}});
+
+define({id: "57cc6750", outputs: ["draw","sketch","DifferentialGrowth"], body: async () => {
+const [{draw, sketch}, {DifferentialGrowth}] = await Promise.all([import("./_import/components/sketch.d1151e54.js"), import("./_import/lib/differential-growth.d6bf7358.js")]);
+
+return {draw,sketch,DifferentialGrowth};
+}});
+
+define({id: "2b88d86b", inputs: ["draw","createCircularPath","display"], body: async (draw,createCircularPath,display) => {
+display(await(
+draw(525, 295, (p5) => {
+  createCircularPath(p5, p5.width / 2, p5.height / 2, 100).forEach((node) => {
+    p5.ellipse(node.x, node.y, 5, 5)
+  })
+})
+))
+}});
+
+define({id: "9374bce7", outputs: ["createCircularPath"], body: () => {
+function createCircularPath(p5, cx, cy, radius) {
+  const path = []
+  const cellCount = 40
+  const angleStep = p5.TWO_PI / cellCount
+  for (let angle = 0; angle <= p5.TWO_PI; angle += angleStep) {
+    const x = cx + p5.cos(angle) * radius
+    const y = cy + p5.sin(angle) * radius
+    path.push(p5.createVector(x, y))
+  }
+  return path
+}
+return {createCircularPath};
+}});
+
+define({id: "fbe5652d", inputs: ["sketch","DifferentialGrowth","createCircularPath","display"], body: async (sketch,DifferentialGrowth,createCircularPath,display) => {
+display(await(
+sketch((p5) => {
+  let dg = new DifferentialGrowth({ p5, minSeparation: 30 })
+  const w = 525
+  const h = 295
+
+  p5.setup = () => {
+    p5.createCanvas(w, h)
+    dg.addPath(createCircularPath(p5, w / 2, h / 2, 100))
+  }
+
+  p5.draw = () => {
+    p5.clear()
+    p5.fill(255)
+    dg.update()
+    for (const path of dg.paths) {
+      for (const node of path.nodes) {
+        p5.ellipse(node.x, node.y, 5, 5)
+      }
+    }
+
+    if (p5.frameCount >= 1000) p5.noLoop()
+  }
+})
+))
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
+    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
+    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
+    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#an-example">An example</a></li>
+</ol>
+</nav>
+</aside>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="differential-growth-basics" tabindex="-1"><a class="observablehq-header-anchor" href="#differential-growth-basics">Differential Growth Basics</a></h1>
+<p>I'm playing with the concept of differential growth, a technique used to simulate the growth of organic forms. The idea is to create a bunch of nodes, or "cells" which are bound by rules of attraction amongst themselves:</p>
+<ul>
+<li>Rule 1: A cell must always be within a certain distance of another cell, a basic social instinct</li>
+<li>Rule 2: A cell cannot be too close to another cell, for risks of overcrowding</li>
+</ul>
+<p>To ensure cells are never too isolated, we can create new cells to fill the gaps. This is a simple implementation of the concept, but it can be used to create complex, beautiful, organic forms.</p>
+<p>Here's the basic logic:</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:3b9beaab:--></div>
+<div class="observablehq observablehq--block"><!--:57cc6750:--></div>
+<h2 id="an-example" tabindex="-1"><a class="observablehq-header-anchor" href="#an-example">An example</a></h2>
+<p>In this sketch, we place cells in the form of a circle, and we let them grow following the rules of differential growth.</p>
+<h3 id="placing-our-cells" tabindex="-1"><a class="observablehq-header-anchor" href="#placing-our-cells">Placing our cells</a></h3>
+<p>We want to start with our cells placed as a circle by leveraging using polar coordinates:</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:2b88d86b:--></div>
+<p>Here's the code to place our cells in a circle:</p>
+<div class="observablehq observablehq--block"><!--:9374bce7:--></div>
+<pre data-language="js"><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createCircularPath</span>(<span class="hljs-params">p5, cx, cy, radius</span>) {
+  <span class="hljs-keyword">const</span> path = []
+  <span class="hljs-keyword">const</span> cellCount = <span class="hljs-number">40</span>
+  <span class="hljs-keyword">const</span> angleStep = p5.<span class="hljs-property">TWO_PI</span> / cellCount
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> angle = <span class="hljs-number">0</span>; angle &lt;= p5.<span class="hljs-property">TWO_PI</span>; angle += angleStep) {
+    <span class="hljs-keyword">const</span> x = cx + p5.<span class="hljs-title function_">cos</span>(angle) * radius
+    <span class="hljs-keyword">const</span> y = cy + p5.<span class="hljs-title function_">sin</span>(angle) * radius
+    path.<span class="hljs-title function_">push</span>(p5.<span class="hljs-title function_">createVector</span>(x, y))
+  }
+  <span class="hljs-keyword">return</span> path
+}
+</code></pre>
+<h3 id="in-action" tabindex="-1"><a class="observablehq-header-anchor" href="#in-action">In action</a></h3>
+<p>When we run our differential growth simulation, we can see the cells moving based on our rules, which creates this organic behaviour</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:fbe5652d:--></div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./byte-tiles"><span>Bit operations for creative coding</span></a><a rel="next" href="./falling-sand"><span>Falling Sand</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:34:17">Jun 13, 2024</a>.</div>
+</footer>
+</div>

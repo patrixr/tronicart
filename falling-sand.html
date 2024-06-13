@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Falling Sand | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/sketch.d1151e54.js">
+<link rel="modulepreload" href="./_import/lib/palette.9f1650fc.js">
+<link rel="modulepreload" href="./_import/lib/helpers.076832b6.js">
+<link rel="modulepreload" href="./_import/lib/dom.2550fbc7.js">
+<link rel="modulepreload" href="./_npm/p5@1.9.4/_esm.js">
+<link rel="modulepreload" href="./_npm/color-scheme@1.0.1/_esm.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+
+define({id: "57454651", outputs: ["sketch","Palette"], body: async () => {
+const [{sketch}, {Palette}] = await Promise.all([import("./_import/components/sketch.d1151e54.js"), import("./_import/lib/palette.9f1650fc.js")]);
+
+return {sketch,Palette};
+}});
+
+define({id: "076a941f", outputs: ["tileSize","h","w","makeGrid","get","oob","set","empty"], body: () => {
+const tileSize = 2
+const h = 350
+const w = 500
+const makeGrid = (w, h, tileSize) => {
+  const tileCountX = Math.floor(w / tileSize)
+  const tileCountY = Math.floor(h / tileSize)
+  const arr = new Array(tileCountX * tileCountY).fill(null)
+  arr.w = Math.floor(w / tileSize)
+  arr.h = Math.floor(h / tileSize)
+  arr.tileSize = tileSize
+  return arr
+}
+
+const get = (g, x, y) => g[y * g.w + x]
+const oob = (g, x, y) => x < 0 || x >= g.w || y < 0 || y >= g.h
+const set = (g, x, y, v) => {
+  if (oob(g, x, y)) return false
+  const idx = y * g.w + x
+  if (!g[idx]) {
+    g[idx] = v
+    return true
+  }
+  return false
+}
+const empty = (g, x, y) => {
+  if (oob(g, x, y)) return false
+  return !g[y * g.w + x]
+}
+return {tileSize,h,w,makeGrid,get,oob,set,empty};
+}});
+
+define({id: "8f29ffec", inputs: ["sketch","makeGrid","w","h","tileSize","Palette","set","get","empty","display"], body: async (sketch,makeGrid,w,h,tileSize,Palette,set,get,empty,display) => {
+display(await(
+sketch((p5) => {
+  let grid = makeGrid(w, h, tileSize)
+  let nextGrid = makeGrid(w, h, tileSize)
+  let tick = 0
+  let source = null
+  let framesPerPile = 50
+  const palette = new Palette({ p5, scheme: "mono" })
+
+  p5.setup = () => {
+    p5.createCanvas(w, h)
+    p5.noStroke()
+    source = p5.createVector(
+      p5.random(p5.width * 0.1, p5.width * 0.9),
+      p5.height * 0.1,
+    )
+  }
+
+  /**
+   * Spawns particles at a given position.
+   * @param {number} realX - The real X coordinate where particles will spawn.
+   * @param {number} realY - The real Y coordinate where particles will spawn.
+   */
+  const spawn = (realX, realY) => {
+    const x = Math.floor(realX / tileSize)
+    const y = Math.floor(realY / tileSize)
+    for (let i = 0; i < 10; i++) {
+      const dx = Math.floor(p5.random(-3, 3))
+      const dy = Math.floor(p5.random(-3, 3))
+      set(grid, x + dx, y + dy, palette.lerped(100))
+    }
+  }
+
+  p5.draw = () => {
+    p5.background(0)
+
+    // Switch source every `framesPerPile` frames
+    if (++tick % framesPerPile === 0) {
+      tick = 0
+
+      source = p5.createVector(
+        p5.random(p5.width * 0.1, p5.width * 0.9),
+        p5.height * 0.1,
+      )
+    }
+
+    if (source && p5.frameCount < 2500) {
+      spawn(source.x, source.y)
+    }
+
+    // Compute the next version of the grid
+    nextGrid = makeGrid(w, h, tileSize)
+    for (let x = grid.w - 1; x >= 0; x--) {
+      for (let y = grid.h - 1; y >= 0; y--) {
+        const v = get(grid, x, y)
+
+        if (v) {
+          if (y === grid.h - 1) {
+            set(nextGrid, x, y, v)
+          } else if (empty(grid, x, y + 1)) {
+            set(nextGrid, x, y + 1, v)
+          } else if (empty(grid, x + 1, y + 1)) {
+            set(nextGrid, x + 1, y + 1, v)
+          } else if (empty(grid, x - 1, y + 1)) {
+            set(nextGrid, x - 1, y + 1, v)
+          } else {
+            set(nextGrid, x, y, v)
+          }
+        }
+      }
+    }
+
+    // Draw the sand particles
+    for (let x = 0; x < grid.w; x++) {
+      for (let y = 0; y < grid.h; y++) {
+        const v = get(nextGrid, x, y)
+        if (v) {
+          p5.fill(v)
+          p5.rect(x * tileSize, y * tileSize, tileSize, tileSize)
+        }
+      }
+    }
+
+    grid = nextGrid
+  }
+})
+))
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
+    <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
+    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
+    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+</nav>
+</aside>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="falling-sand" tabindex="-1"><a class="observablehq-header-anchor" href="#falling-sand">Falling Sand</a></h1>
+<p>Trying out a falling sand simulation in p5.js. This is a simple simulation where particles fall down and pile up. This is based on a Coding Train challenge by Daniel Shiffman.</p>
+<div class="observablehq observablehq--block"><!--:57454651:--></div>
+<div class="observablehq observablehq--block"><!--:076a941f:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:8f29ffec:--></div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./differential-growth-basics"><span>Differential Growth Basics</span></a><a rel="next" href="./orbital-mechanics"><span>Orbital Mechanics</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:34:17">Jun 13, 2024</a>.</div>
+</footer>
+</div>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Orbital Mechanics | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="preload" as="style" href="./_npm/katex@0.16.10/dist/katex.min.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="./_npm/katex@0.16.10/dist/katex.min.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/sketch.d1151e54.js">
+<link rel="modulepreload" href="./_import/lib/palette.9f1650fc.js">
+<link rel="modulepreload" href="./_import/lib/celestial-body.d112ecd6.js">
+<link rel="modulepreload" href="./_import/lib/helpers.076832b6.js">
+<link rel="modulepreload" href="./_import/lib/dom.2550fbc7.js">
+<link rel="modulepreload" href="./_npm/p5@1.9.4/_esm.js">
+<link rel="modulepreload" href="./_npm/color-scheme@1.0.1/_esm.js">
+<link rel="modulepreload" href="./_import/lib/coordinates.d6ccc6ad.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/tex.js">
+<link rel="modulepreload" href="./_npm/katex@0.16.10/_esm.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+
+define({id: "a29243e1", inputs: ["tex","display"], body: async (tex,display) => {
+display(await(
+tex.block`F = G \frac{m_1 m_2}{r^2}`
+))
+}});
+
+define({id: "fd252a1b", outputs: ["sketch","Palette","CelestialBody","h","w"], body: async () => {
+const [{sketch}, {Palette}, {CelestialBody}] = await Promise.all([import("./_import/components/sketch.d1151e54.js"), import("./_import/lib/palette.9f1650fc.js"), import("./_import/lib/celestial-body.d112ecd6.js")]);
+
+CelestialBody.MAX_TRAIL_LEN = 100
+
+const h = 500
+const w = 500
+return {sketch,Palette,CelestialBody,h,w};
+}});
+
+define({id: "0f7913e2", inputs: ["sketch","Palette","CelestialBody","w","h","display"], body: async (sketch,Palette,CelestialBody,w,h,display) => {
+display(await(
+sketch((p5) => {
+  const palette = new Palette({ p5 })
+  const sun = new CelestialBody({ p5, x: w / 2, y: h / 2, mass: 500 })
+  const bodies = sun.spawnSatellites(3)
+  const all = [sun, ...bodies]
+
+  p5.setup = () => {
+    p5.createCanvas(w, h)
+    p5.frameRate(60)
+    p5.strokeWeight(5)
+    p5.noFill()
+  }
+
+  p5.draw = () => {
+    p5.background(0, 30)
+
+    bodies.forEach((body, idx) => {
+      body.update(all)
+
+      for (let i = 0; i < body.trail.length - 1; ++i) {
+        const pt1 = body.trail[i].pos
+        const pt2 = body.trail[i + 1].pos
+        p5.stroke(palette.lerped())
+        p5.line(pt1.x, pt1.y, pt2.x, pt2.y)
+      }
+    })
+
+    p5.noStroke()
+    p5.fill(255, 204, 0)
+    p5.circle(sun.pos.x, sun.pos.y, 50)
+  }
+})
+))
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
+    <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
+    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
+    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
+    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#how-to-implement-basic-orbital-mechanics">How to implement basic orbital mechanics</a></li>
+<li class="observablehq-secondary-link"><a href="#simulation">Simulation</a></li>
+</ol>
+</nav>
+</aside>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="orbital-mechanics" tabindex="-1"><a class="observablehq-header-anchor" href="#orbital-mechanics">Orbital Mechanics</a></h1>
+<p>This sketch simulates Orbital Mechanics in a two-dimensional space using p5.js.
+The goal is to create a minimalistic and interactive visualization of celestial bodies moving under the influence of gravity.</p>
+<p><a href="#simulation">-&gt; Jump to simulation</a></p>
+<h2 id="how-to-implement-basic-orbital-mechanics" tabindex="-1"><a class="observablehq-header-anchor" href="#how-to-implement-basic-orbital-mechanics">How to implement basic orbital mechanics</a></h2>
+<p>The code leverages very simple and fundamental principles of physics and mathematics to simulate the motion of celestial bodies in space. Note that this is <strong>not</strong> a physics engine but merely a visual representation of the interactions between the bodies through <strong>simple gravitational forces</strong>.</p>
+<p>The main formula used in the simulation is <strong>Newton's Law of Universal Gravitation</strong>, which describes the force of attraction between two objects based on their masses and the distance between them. The force between two objects is directly proportional to the product of their masses and inversely proportional to the square of the distance between them.</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:a29243e1:--></div>
+<p>In this equation:</p>
+<ul>
+<li>( F ) is the force between the two objects</li>
+<li>( G ) is the gravitational constant</li>
+<li>( m1 ) and ( m2 ) are the masses of the two objects</li>
+<li>( r ) is the distance between the two objects</li>
+</ul>
+<p>Here's a simple version of the implementation.</p>
+<p>For the sake of simplicity, the Gravity constant ( G ) is forced to a value of <code>1</code> for this simulation.</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">const</span> G = <span class="hljs-number">1</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">CelestialBody</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">{ p5, x, y, mass }</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span> = p5
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">pos</span> = p5.<span class="hljs-title function_">createVector</span>(x, y)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">vel</span> = <span class="hljs-title function_">randomVelocity</span>()
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">acc</span> = p5.<span class="hljs-title function_">createVector</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">mass</span> = mass
+  }
+
+  <span class="hljs-title function_">applyForce</span>(<span class="hljs-params">force</span>) {
+    <span class="hljs-keyword">let</span> f = p5.<span class="hljs-property">Vector</span>.<span class="hljs-title function_">div</span>(force, <span class="hljs-variable language_">this</span>.<span class="hljs-property">mass</span>)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">acc</span>.<span class="hljs-title function_">add</span>(f)
+  }
+
+  <span class="hljs-title function_">update</span>(<span class="hljs-params">bodies</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">vel</span>.<span class="hljs-title function_">add</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">acc</span>)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">pos</span>.<span class="hljs-title function_">add</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">vel</span>)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">acc</span>.<span class="hljs-title function_">mult</span>(<span class="hljs-number">0</span>)
+    bodies.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">other</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (other !== <span class="hljs-variable language_">this</span>) {
+        <span class="hljs-keyword">const</span> force = <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">attract</span>(other)
+        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">applyForce</span>(force)
+      }
+    })
+  }
+
+  <span class="hljs-title function_">attract</span>(<span class="hljs-params">other</span>) {
+    <span class="hljs-keyword">let</span> force = p5.<span class="hljs-property">Vector</span>.<span class="hljs-title function_">sub</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">pos</span>, other.<span class="hljs-property">pos</span>)
+    <span class="hljs-keyword">let</span> distance = <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-title function_">constrain</span>(force.<span class="hljs-title function_">mag</span>(), <span class="hljs-number">5</span>, <span class="hljs-number">25</span>)
+    <span class="hljs-keyword">let</span> strength = (G * (<span class="hljs-variable language_">this</span>.<span class="hljs-property">mass</span> * other.<span class="hljs-property">mass</span>)) / (distance * distance)
+    force.<span class="hljs-title function_">setMag</span>(strength)
+    <span class="hljs-keyword">return</span> force
+  }
+}
+</code></pre>
+<div class="observablehq observablehq--block"><!--:fd252a1b:--></div>
+<h2 id="simulation" tabindex="-1"><a class="observablehq-header-anchor" href="#simulation">Simulation</a></h2>
+<div id="simulation">
+<p>This simulation shows a central celestial body (the sun) and three smaller bodies (satellites) orbiting around it. The trails represent the paths taken by the satellites as they move under the influence of gravity.</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:0f7913e2:--></div>
+<pre data-language="js"><code class="language-js"><span class="hljs-title function_">sketch</span>(<span class="hljs-function">(<span class="hljs-params">p5</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> palette = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Palette</span>({ p5 })
+  <span class="hljs-keyword">const</span> sun = <span class="hljs-keyword">new</span> <span class="hljs-title class_">CelestialBody</span>({ p5, <span class="hljs-attr">x</span>: w / <span class="hljs-number">2</span>, <span class="hljs-attr">y</span>: h / <span class="hljs-number">2</span>, <span class="hljs-attr">mass</span>: <span class="hljs-number">500</span> })
+  <span class="hljs-keyword">const</span> bodies = sun.<span class="hljs-title function_">spawnSatellites</span>(<span class="hljs-number">3</span>)
+  <span class="hljs-keyword">const</span> all = [sun, ...bodies]
+
+  p5.<span class="hljs-property">setup</span> = <span class="hljs-function">() =&gt;</span> {
+    p5.<span class="hljs-title function_">createCanvas</span>(w, h)
+    p5.<span class="hljs-title function_">frameRate</span>(<span class="hljs-number">60</span>)
+    p5.<span class="hljs-title function_">strokeWeight</span>(<span class="hljs-number">5</span>)
+    p5.<span class="hljs-title function_">noFill</span>()
+  }
+
+  p5.<span class="hljs-property">draw</span> = <span class="hljs-function">() =&gt;</span> {
+    p5.<span class="hljs-title function_">background</span>(<span class="hljs-number">0</span>, <span class="hljs-number">30</span>)
+
+    bodies.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">body, idx</span>) =&gt;</span> {
+      body.<span class="hljs-title function_">update</span>(all)
+
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; body.<span class="hljs-property">trail</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>; ++i) {
+        <span class="hljs-keyword">const</span> pt1 = body.<span class="hljs-property">trail</span>[i].<span class="hljs-property">pos</span>
+        <span class="hljs-keyword">const</span> pt2 = body.<span class="hljs-property">trail</span>[i + <span class="hljs-number">1</span>].<span class="hljs-property">pos</span>
+        p5.<span class="hljs-title function_">stroke</span>(palette.<span class="hljs-title function_">lerped</span>())
+        p5.<span class="hljs-title function_">line</span>(pt1.<span class="hljs-property">x</span>, pt1.<span class="hljs-property">y</span>, pt2.<span class="hljs-property">x</span>, pt2.<span class="hljs-property">y</span>)
+      }
+    })
+
+    p5.<span class="hljs-title function_">noStroke</span>()
+    p5.<span class="hljs-title function_">fill</span>(<span class="hljs-number">255</span>, <span class="hljs-number">204</span>, <span class="hljs-number">0</span>)
+    p5.<span class="hljs-title function_">circle</span>(sun.<span class="hljs-property">pos</span>.<span class="hljs-property">x</span>, sun.<span class="hljs-property">pos</span>.<span class="hljs-property">y</span>, <span class="hljs-number">50</span>)
+  }
+})
+</code></pre>
+</div></main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./falling-sand"><span>Falling Sand</span></a><a rel="next" href="./raytracing-wasm"><span>Raytracing using Go and WebAssembly</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:34:17">Jun 13, 2024</a>.</div>
+</footer>
+</div>

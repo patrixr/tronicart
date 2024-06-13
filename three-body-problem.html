@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Three Body Problem | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/sketch.d1151e54.js">
+<link rel="modulepreload" href="./_import/lib/palette.9f1650fc.js">
+<link rel="modulepreload" href="./_import/lib/celestial-body.d112ecd6.js">
+<link rel="modulepreload" href="./_import/lib/helpers.076832b6.js">
+<link rel="modulepreload" href="./_import/lib/dom.2550fbc7.js">
+<link rel="modulepreload" href="./_npm/p5@1.9.4/_esm.js">
+<link rel="modulepreload" href="./_npm/color-scheme@1.0.1/_esm.js">
+<link rel="modulepreload" href="./_import/lib/coordinates.d6ccc6ad.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+
+define({id: "4a5235c0", outputs: ["sketch","Palette","CelestialBody","h","w"], body: async () => {
+const [{sketch}, {Palette}, {CelestialBody}] = await Promise.all([import("./_import/components/sketch.d1151e54.js"), import("./_import/lib/palette.9f1650fc.js"), import("./_import/lib/celestial-body.d112ecd6.js")]);
+
+CelestialBody.MAX_TRAIL_LEN = 400
+
+const h = 1080 / 3
+const w = 1920 / 3
+return {sketch,Palette,CelestialBody,h,w};
+}});
+
+define({id: "03143039", inputs: ["sketch","Palette","w","h","CelestialBody","display"], body: async (sketch,Palette,w,h,CelestialBody,display) => {
+display(await(
+sketch((p5) => {
+  const palette = new Palette({ p5 })
+
+  const bodies = []
+  const numBodies = 3
+  const radius = 0.15 * w
+  const angleIncrement = (2 * Math.PI) / numBodies
+  const startAngle = 0 //Math.PI
+  for (let i = 0; i < numBodies; i++) {
+    const x = w / 2 + radius * Math.cos(startAngle + i * angleIncrement)
+    const y = h / 2 + radius * Math.sin(startAngle + i * angleIncrement)
+    bodies.push(new CelestialBody({ p5, x, y, mass: 100 }))
+  }
+
+  p5.setup = () => {
+    p5.createCanvas(w, h)
+    p5.frameRate(60)
+    p5.noStroke()
+    p5.fill(255)
+  }
+
+  p5.draw = () => {
+    p5.push()
+    p5.background(0)
+
+    // Base rotation
+    p5.translate(w / 2, h / 2)
+    p5.rotate(p5.PI / 2)
+    p5.translate(-w / 2, -h / 2)
+
+    const centerOfGravity = CelestialBody.centerOfMass(bodies)
+    p5.translate(w / 2 - centerOfGravity.x, h / 2 - centerOfGravity.y)
+    bodies.forEach((body, idx) => {
+      body.update(bodies)
+
+      p5.noFill()
+      p5.strokeWeight(5)
+
+      if (body.trail.length < 2) return
+
+      for (let i = 0; i < body.trail.length - 1; ++i) {
+        const c = palette.lerped(60, body.trail[i].tick)
+        const pt1 = body.trail[i].pos
+        const pt2 = body.trail[i + 1].pos
+        const alpha = p5.map(i, 0, body.trail.length, 0, 255)
+        c.setAlpha(alpha)
+        p5.stroke(c)
+        p5.line(pt1.x, pt1.y, pt2.x, pt2.y)
+      }
+
+      // Draw halo around body
+      p5.noStroke()
+      p5.fill(255, 50)
+      p5.circle(body.pos.x, body.pos.y, 30)
+      p5.fill(255, 70)
+      p5.circle(body.pos.x, body.pos.y, 20)
+      p5.strokeWeight(1)
+      p5.noFill()
+
+      // Draw lines between bodies
+      const nextBody = bodies[(idx + 1) % bodies.length]
+      p5.stroke(255, 204, 100, 100)
+      p5.line(body.pos.x, body.pos.y, nextBody.pos.x, nextBody.pos.y)
+    })
+    p5.pop()
+  }
+})
+))
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
+    <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
+    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
+    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./three-body-problem">Three Body Problem</a></li>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#chaos-theory">Chaos theory</a></li>
+<li class="observablehq-secondary-link"><a href="#setting-up-the-simulation">Setting up the simulation</a></li>
+<li class="observablehq-secondary-link"><a href="#simulation">Simulation</a></li>
+</ol>
+</nav>
+</aside>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="three-body-problem" tabindex="-1"><a class="observablehq-header-anchor" href="#three-body-problem">Three Body Problem</a></h1>
+<p>This sketch simulates a three-body system in a two-dimensional space using p5.js. It is inspired by the <a href="https://en.wikipedia.org/wiki/The_Three-Body_Problem_(novel)" target="_blank" rel="noopener noreferrer">book</a> and <a href="https://en.wikipedia.org/wiki/3_Body_Problem_(TV_series)" target="_blank" rel="noopener noreferrer">TV Series</a> titled "3 Body Problem"</p>
+<p>To go straight to the simulation, please <a href="#simulation">scroll to the simulation</a> below.</p>
+<h2 id="chaos-theory" tabindex="-1"><a class="observablehq-header-anchor" href="#chaos-theory">Chaos theory</a></h2>
+<p>The system consists of three celestial bodies that interact with each other through gravity, influencing their positions and movements over time. This is a classic example of a chaotic system, where small changes in initial conditions can lead to vastly different outcomes. The simulation demonstrates how the three-body system evolves dynamically, showcasing the complex and unpredictable nature of <strong>chaotic systems</strong>.</p>
+<h2 id="setting-up-the-simulation" tabindex="-1"><a class="observablehq-header-anchor" href="#setting-up-the-simulation">Setting up the simulation</a></h2>
+<p>The code is based on a <a href="./orbital-mechanics">previous implementation of orbital mechanics</a>. The main requirements for this simulation are:</p>
+<ol>
+<li><strong>The 3 celestial bodies should be of comparable mass</strong> <br>
+This problem will not work if one or more bodies have a mass that is significantly different than the others. We can think of the earth, moon and sun, which is not a 3 body problem because the sun is so massive that it dominates the system.</li>
+<li><strong>One body should not be too far away from the other two</strong> <br>
+The bodies should be close enough to interact with each other. If one body is too far away, it might not be influenced by the other two, leading to a 2 body system instead</li>
+</ol>
+<div class="observablehq observablehq--block"><!--:4a5235c0:--></div>
+<h2 id="simulation" tabindex="-1"><a class="observablehq-header-anchor" href="#simulation">Simulation</a></h2>
+<div id="simulation">
+<div class="warning" label="Warning️">
+  Chaotic systems can easily get out of control and lead to unstable or unpredictable behavior. Should it look odd, please use the "Replay" button to restart the simulation.
+</div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:03143039:--></div>
+<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C55F-DGLNAo/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/C55F-DGLNAo/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener noreferrer"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/C55F-DGLNAo/?utm_source=ig_embed&amp;utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank" rel="noopener noreferrer">A post shared by Patrick 🪐🧿 (@patrix.r)</a></p></div></blockquote> <script async="" src="//www.instagram.com/embed.js"></script>
+</div></main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./raytracing-wasm"><span>Raytracing using Go and WebAssembly</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:34:17">Jun 13, 2024</a>.</div>
+</footer>
+</div>
