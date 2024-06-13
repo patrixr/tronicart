@@ -6,7 +6,7 @@ on:
 
 jobs:
   blog:
-    name: Ghost blog
+    name: Observable blog
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
@@ -14,75 +14,23 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
-
-      - uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 7.29.3
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        working-directory: ./observable
+        run: npm install
         
-      - name: Init ghost
-        run: pnpm run ghost:init
-
-      - name: Start ghost
-        run: pnpm run ghost:start
-
-      - name: Build ghost
-        run: pnpm run ghost:build
-
-      - name: Stop ghost
-        run: pnpm run ghost:stop
+      - name: Build
+        working-directory: ./observable
+        run: npm run build
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_PERSONAL_TOKEN }}
-          publish_dir: ./ghost/static
+          publish_dir: ./observable/dist
           cname: tronica.io
-
-  build:
-    name: Package build/test/deploy
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    # To use Remote Caching, uncomment the next lines and follow the steps below.
-    # env:
-    #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      - uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 7.29.3
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: 19
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
-      - name: Test
-        run: pnpm test:ci
-
-      - name: Build
-        run: pnpm build:ci
-
-      - name: Configure npm access
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
-      - name: Publish @tronicart/cc
-        run: pnpm publish --access public --no-git-checks --filter '@tronicart/cc'
