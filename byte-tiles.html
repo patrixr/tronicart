@@ -4,13 +4,13 @@
 <title>Bit operations for creative coding | Tronicart</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="preload" as="style" href="./_observablehq/theme-near-midnight.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-near-midnight.css">
 <link rel="modulepreload" href="./_observablehq/client.js">
 <link rel="modulepreload" href="./_observablehq/runtime.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.js">
-<link rel="modulepreload" href="./_import/components/sketch.d1151e54.js">
+<link rel="modulepreload" href="./_import/components/sketch.1ec87144.js">
 <link rel="modulepreload" href="./_npm/lodash@4.17.21/_esm.js">
 <link rel="modulepreload" href="./_import/lib/helpers.076832b6.js">
 <link rel="modulepreload" href="./_import/lib/dom.2550fbc7.js">
@@ -20,7 +20,7 @@
 import {define} from "./_observablehq/client.js";
 
 define({id: "506d0ce0", outputs: ["draw","sketch","_"], body: async () => {
-const [{draw, sketch}, {default: _}] = await Promise.all([import("./_import/components/sketch.d1151e54.js"), import("./_npm/lodash@4.17.21/_esm.js")]);
+const [{draw, sketch}, {default: _}] = await Promise.all([import("./_import/components/sketch.1ec87144.js"), import("./_npm/lodash@4.17.21/_esm.js")]);
 
 return {draw,sketch,_};
 }});
@@ -166,6 +166,7 @@ draw(750, 860, (p5) => {
     <li class="observablehq-link observablehq-link-active"><a href="./byte-tiles">Bit operations for creative coding</a></li>
     <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
     <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./hand-drawn">Hand drawn lines</a></li>
     <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
     <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
     <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
@@ -188,7 +189,9 @@ draw(750, 860, (p5) => {
 <p>I'm investigating the idea of converting a byte value to a tile. The idea is to use the properties of the byte to determine the properties of the tile. This could possibly be used with a grayscale image to create a mosaic of tiles.</p>
 <p>Before I figure out an artwork to create with this concept, I want to experiment with the idea. I'll start by creating a simple grid of tiles, each tile representing a byte value.</p>
 <p>Leveraging a bitmask to extract the properties of the byte, I could then use these properties to draw the tile. Here's a set or <strong>arbitrary rules</strong> I'll use to determine the properties of the tile based on the binary representation of the byte:</p>
-<p><img src="./_file/data/images/byte-tiles.706933d1.png" alt=""></p>
+<div style="background: #AAAAAA; width: 500px; margin: 30px 0px;">
+<img src="./_file/data/images/byte-tiles.706933d1.png">
+</div>
 <div class="observablehq observablehq--block"><!--:506d0ce0:--></div>
 <h2 id="extracting-properties" tabindex="-1"><a class="observablehq-header-anchor" href="#extracting-properties">Extracting properties</a></h2>
 <p>Now that we have a set of rules to determine the properties of the tile, we need to extract these properties from the byte value. We can do this by using a bitmask to extract the bits that represent each property.</p>
@@ -213,6 +216,6 @@ draw(750, 860, (p5) => {
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./"><span>Tronicart</span></a><a rel="next" href="./differential-growth-basics"><span>Differential Growth Basics</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:35:11">Jun 13, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-17T12:17:34">Jun 17, 2024</a>.</div>
 </footer>
 </div>

@@ -1,18 +1,81 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Hi | Tronicart</title>
+<title>Tronicart</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="preload" as="style" href="./_observablehq/theme-near-midnight.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-near-midnight.css">
 <link rel="modulepreload" href="./_observablehq/client.js">
 <link rel="modulepreload" href="./_observablehq/runtime.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/sketch.1ec87144.js">
+<link rel="modulepreload" href="./_import/lib/helpers.076832b6.js">
+<link rel="modulepreload" href="./_import/lib/dom.2550fbc7.js">
+<link rel="modulepreload" href="./_npm/p5@1.9.4/_esm.js">
 <script type="module">
 
-import "./_observablehq/client.js";
+import {define} from "./_observablehq/client.js";
+
+define({id: "6e92b139", outputs: ["sketch","P5"], body: async () => {
+const {sketch, P5} = await import("./_import/components/sketch.1ec87144.js");
+
+return {sketch,P5};
+}});
+
+define({id: "d4cd58dc", inputs: ["sketch","display"], body: async (sketch,display) => {
+display(await(
+sketch((p5) => {
+  let dotCount = 100
+  let dots = []
+
+  p5.setup = () => {
+    p5.createCanvas(600, 600)
+    p5.stroke(150)
+    p5.fill(0)
+
+    for (let i = 0; i < dotCount; i++) {
+      dots.push({
+        x: p5.random(p5.width),
+        y: p5.random(p5.height),
+        vx: p5.random(-1, 1),
+        vy: p5.random(-1, 1)
+      })
+    }
+  }
+
+  p5.draw = () => {
+    p5.clear()
+    for (let i = 0; i < dotCount; i++) {
+      const dot = dots[i]
+      dot.x += dot.vx
+      dot.y += dot.vy
+
+      if (dot.x < 0 || dot.x > p5.width) {
+        dot.vx *= -1
+      }
+      if (dot.y < 0 || dot.y > p5.height) {
+        dot.vy *= -1
+      }
+
+      p5.ellipse(dot.x, dot.y, 5, 5)
+
+      for (let j = 0; j < dotCount; j++) {
+        if (i !== j) {
+          const other = dots[j]
+          const distance = p5.dist(dot.x, dot.y, other.x, other.y)
+          if (distance < 70) {
+            p5.line(dot.x, dot.y, other.x, other.y)
+          }
+        }
+      }
+    }
+
+  }
+})
+))
+}});
 
 </script>
 <input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
@@ -26,22 +89,125 @@ import "./_observablehq/client.js";
     <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
     <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
     <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./hand-drawn">Hand drawn lines</a></li>
     <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
     <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
     <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
   </ol>
 </nav>
 <script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
-<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
-<nav>
-</nav>
-</aside>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
-<h1 id="hi" tabindex="-1"><a class="observablehq-header-anchor" href="#hi">Hi</a></h1>
+<div class="observablehq observablehq--block"><!--:6e92b139:--></div>
+<div class="hero">
+  <h1>Tronicart</h1>
+  <h2>
+    A playground for creative coding expeiments
+  </h2>
+</div>
+<div>
+<p>A quiet corner of the internet where I share my explorations and musings at the crossroads of coding and creativity.</p>
+<p>Tronicart began as a personal project, a way to document my own learning and to connect with others who find joy in the confluence of technology and art.</p>
+<h2 id="what-is-creative-coding-%3F" tabindex="-1"><a class="observablehq-header-anchor" href="#what-is-creative-coding-%3F">What is creative coding ?</a></h2>
+<p>For those new to the concept, creative coding is about writing software with the intent to create something expressive instead of something purely functional.</p>
+<p>As an example, you could write a program that generates a piece of music, or a program that creates a visual artwork. The goal is to create something that is aesthetically pleasing or thought-provoking.</p>
+<p>Here's a simple example of creative coding in action. The following code generates a random dots which move in a singular direction. Those that are within a certain distance of each other are connected by a line.</p>
+</div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:d4cd58dc:--></div>
+<pre data-language="js"><code class="language-js"><span class="hljs-title function_">sketch</span>(<span class="hljs-function">(<span class="hljs-params">p5</span>) =&gt;</span> {
+  <span class="hljs-keyword">let</span> dotCount = <span class="hljs-number">100</span>
+  <span class="hljs-keyword">let</span> dots = []
+
+  p5.<span class="hljs-property">setup</span> = <span class="hljs-function">() =&gt;</span> {
+    p5.<span class="hljs-title function_">createCanvas</span>(<span class="hljs-number">600</span>, <span class="hljs-number">600</span>)
+    p5.<span class="hljs-title function_">stroke</span>(<span class="hljs-number">150</span>)
+    p5.<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>)
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; dotCount; i++) {
+      dots.<span class="hljs-title function_">push</span>({
+        <span class="hljs-attr">x</span>: p5.<span class="hljs-title function_">random</span>(p5.<span class="hljs-property">width</span>),
+        <span class="hljs-attr">y</span>: p5.<span class="hljs-title function_">random</span>(p5.<span class="hljs-property">height</span>),
+        <span class="hljs-attr">vx</span>: p5.<span class="hljs-title function_">random</span>(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>),
+        <span class="hljs-attr">vy</span>: p5.<span class="hljs-title function_">random</span>(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
+      })
+    }
+  }
+
+  p5.<span class="hljs-property">draw</span> = <span class="hljs-function">() =&gt;</span> {
+    p5.<span class="hljs-title function_">clear</span>()
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; dotCount; i++) {
+      <span class="hljs-keyword">const</span> dot = dots[i]
+      dot.<span class="hljs-property">x</span> += dot.<span class="hljs-property">vx</span>
+      dot.<span class="hljs-property">y</span> += dot.<span class="hljs-property">vy</span>
+
+      <span class="hljs-keyword">if</span> (dot.<span class="hljs-property">x</span> &lt; <span class="hljs-number">0</span> || dot.<span class="hljs-property">x</span> &gt; p5.<span class="hljs-property">width</span>) {
+        dot.<span class="hljs-property">vx</span> *= -<span class="hljs-number">1</span>
+      }
+      <span class="hljs-keyword">if</span> (dot.<span class="hljs-property">y</span> &lt; <span class="hljs-number">0</span> || dot.<span class="hljs-property">y</span> &gt; p5.<span class="hljs-property">height</span>) {
+        dot.<span class="hljs-property">vy</span> *= -<span class="hljs-number">1</span>
+      }
+
+      p5.<span class="hljs-title function_">ellipse</span>(dot.<span class="hljs-property">x</span>, dot.<span class="hljs-property">y</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>)
+
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; dotCount; j++) {
+        <span class="hljs-keyword">if</span> (i !== j) {
+          <span class="hljs-keyword">const</span> other = dots[j]
+          <span class="hljs-keyword">const</span> distance = p5.<span class="hljs-title function_">dist</span>(dot.<span class="hljs-property">x</span>, dot.<span class="hljs-property">y</span>, other.<span class="hljs-property">x</span>, other.<span class="hljs-property">y</span>)
+          <span class="hljs-keyword">if</span> (distance &lt; <span class="hljs-number">70</span>) {
+            p5.<span class="hljs-title function_">line</span>(dot.<span class="hljs-property">x</span>, dot.<span class="hljs-property">y</span>, other.<span class="hljs-property">x</span>, other.<span class="hljs-property">y</span>)
+          }
+        }
+      }
+    }
+
+  }
+})
+</code></pre>
+<style>
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  font-family: var(--sans-serif);
+  margin: 4rem 0 0rem;
+  text-wrap: balance;
+  text-align: left;
+}
+
+.hero h1 {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  max-width: none;
+  font-size: 14vw;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero h2 {
+  margin: 0;
+  max-width: 34em;
+  font-size: 20px;
+  font-style: initial;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--theme-foreground-muted);
+}
+
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 90px;
+  }
+}
+
+</style>
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="next" href="./byte-tiles"><span>Bit operations for creative coding</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:35:11">Jun 13, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-17T12:17:34">Jun 17, 2024</a>.</div>
 </footer>
 </div>

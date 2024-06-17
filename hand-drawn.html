@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Hand drawn lines | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-near-midnight.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-near-midnight.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/sketch.1ec87144.js">
+<link rel="modulepreload" href="./_import/lib/helpers.076832b6.js">
+<link rel="modulepreload" href="./_import/lib/dom.2550fbc7.js">
+<link rel="modulepreload" href="./_npm/p5@1.9.4/_esm.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+
+define({id: "526333c4", outputs: ["draw","P5"], body: async () => {
+const {draw, P5} = await import("./_import/components/sketch.1ec87144.js");
+
+return {draw,P5};
+}});
+
+define({id: "4ae589b9", inputs: ["draw","Line","display"], body: async (draw,Line,display) => {
+display(await(
+draw(300, 300, (p5) => {
+  p5.stroke(50)
+  p5.noFill()
+  p5.background("#F9F0EA")
+
+  const samples = [0, 0.1, 0.3, 0.5, 0.7]
+  samples.forEach((wobbliness, idx) => {
+    new Line(p5, 100, 50 + 50 * idx, 200, 50 + 50 * idx, { wobbliness }).draw()
+    p5.text(wobbliness, 70, 50 + 50 * idx)
+  })
+})
+))
+}});
+
+define({id: "7ccbb4a9", inputs: ["draw","Line","display"], body: async (draw,Line,display) => {
+display(await(
+draw(300, 300, (p5) => {
+  p5.noFill()
+  p5.textAlign(p5.CENTER)
+  p5.textStyle(p5.NORMAL)
+  p5.background("#F9F0EA")
+
+  const samples = [0, 0.1, 0.4, 0.7]
+
+  samples.forEach((wobbliness, idx) => {
+    const centerX = 150
+    const centerY = 150
+    const r = 20 + idx * 30
+    const totalPoints = 100
+    const angleStep = p5.TWO_PI / totalPoints
+
+    for (let i = 0; i <= totalPoints; i++) {
+      const angle = i * angleStep
+      const x1 = centerX + p5.cos(angle) * r
+      const y1 = centerY + p5.sin(angle) * r
+      const x2 = centerX + p5.cos(angle + angleStep) * r
+      const y2 = centerY + p5.sin(angle + angleStep) * r
+
+      p5.stroke(50)
+      p5.fill(100)
+      new Line(p5, x1, y1, x2, y2, { wobbliness }).draw()
+      p5.noStroke()
+      p5.text(wobbliness, centerX, centerY - r - 10)
+    }
+  })
+})
+))
+}});
+
+define({id: "092eacb2", inputs: ["P5"], outputs: ["Line"], body: (P5) => {
+class Line {
+  static PROGRESS_INC = 0.01
+  static WOBBLE_SCALE = 20
+
+  constructor(p5, x1, y1, x2, y2, opts = {}) {
+    this.p5 = p5
+    this.progress = 0
+    this.wobbliness = p5.constrain(opts.wobbliness ?? 0.3, 0, 1)
+    this.source = p5.createVector(x1, y1)
+    this.target = p5.createVector(x2, y2)
+    this.prev = this.source.copy()
+    this.points = [this.source]
+
+    while (!opts.animated && this.progress < 1) {
+      this.update()
+    }
+  }
+
+  update() {
+    if (this.progress >= 1) return
+
+    this.progress = this.p5.constrain(this.progress + Line.PROGRESS_INC, 0, 1)
+
+    const prev = this.points[this.points.length - 1]
+    const noise = this.p5.noise(prev.x / 100, prev.y / 100)
+    const wobble =
+      this.p5.map(noise, 0, 1, -1, 1) * this.wobbliness * Line.WOBBLE_SCALE
+    const nextPoint = P5.Vector.lerp(this.source, this.target, this.progress)
+    const ortho = P5.Vector.sub(nextPoint, this.source)
+      .rotate(this.p5.HALF_PI)
+      .normalize()
+
+    this.points.push(P5.Vector.add(nextPoint, ortho.mult(wobble)))
+  }
+
+  draw() {
+    this.p5.beginShape()
+    this.points.forEach((p) => this.p5.curveVertex(p.x, p.y))
+    this.p5.endShape()
+  }
+}
+return {Line};
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
+    <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
+    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./hand-drawn">Hand drawn lines</a></li>
+    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
+    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
+    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#drawing-a-circle">Drawing a circle</a></li>
+<li class="observablehq-secondary-link"><a href="#implementation">Implementation</a></li>
+</ol>
+</nav>
+</aside>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="hand-drawn-lines" tabindex="-1"><a class="observablehq-header-anchor" href="#hand-drawn-lines">Hand drawn lines</a></h1>
+<p>I'm experimenting with drawing hand-drawn lines in p5.js. I want basic lines that kinda "wobble" due to human imperfection. The idea is to use a noise function and draw the line point by point with a slight deviation from the straight path.</p>
+<div class="observablehq observablehq--block"><!--:526333c4:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4ae589b9:--></div>
+<h2 id="drawing-a-circle" tabindex="-1"><a class="observablehq-header-anchor" href="#drawing-a-circle">Drawing a circle</a></h2>
+<p>If we have a way to draw a line, then I <em>assume</em> we can draw a circle using small segments. Let's try it out:</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:7ccbb4a9:--></div>
+<pre data-language="js"><code class="language-js"><span class="hljs-title function_">draw</span>(<span class="hljs-number">300</span>, <span class="hljs-number">300</span>, <span class="hljs-function">(<span class="hljs-params">p5</span>) =&gt;</span> {
+  p5.<span class="hljs-title function_">noFill</span>()
+  p5.<span class="hljs-title function_">textAlign</span>(p5.<span class="hljs-property">CENTER</span>)
+  p5.<span class="hljs-title function_">textStyle</span>(p5.<span class="hljs-property">NORMAL</span>)
+  p5.<span class="hljs-title function_">background</span>(<span class="hljs-string">"#F9F0EA"</span>)
+
+  <span class="hljs-keyword">const</span> samples = [<span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.7</span>]
+
+  samples.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">wobbliness, idx</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> centerX = <span class="hljs-number">150</span>
+    <span class="hljs-keyword">const</span> centerY = <span class="hljs-number">150</span>
+    <span class="hljs-keyword">const</span> r = <span class="hljs-number">20</span> + idx * <span class="hljs-number">30</span>
+    <span class="hljs-keyword">const</span> totalPoints = <span class="hljs-number">100</span>
+    <span class="hljs-keyword">const</span> angleStep = p5.<span class="hljs-property">TWO_PI</span> / totalPoints
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= totalPoints; i++) {
+      <span class="hljs-keyword">const</span> angle = i * angleStep
+      <span class="hljs-keyword">const</span> x1 = centerX + p5.<span class="hljs-title function_">cos</span>(angle) * r
+      <span class="hljs-keyword">const</span> y1 = centerY + p5.<span class="hljs-title function_">sin</span>(angle) * r
+      <span class="hljs-keyword">const</span> x2 = centerX + p5.<span class="hljs-title function_">cos</span>(angle + angleStep) * r
+      <span class="hljs-keyword">const</span> y2 = centerY + p5.<span class="hljs-title function_">sin</span>(angle + angleStep) * r
+
+      p5.<span class="hljs-title function_">stroke</span>(<span class="hljs-number">50</span>)
+      p5.<span class="hljs-title function_">fill</span>(<span class="hljs-number">100</span>)
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">Line</span>(p5, x1, y1, x2, y2, { wobbliness }).<span class="hljs-title function_">draw</span>()
+      p5.<span class="hljs-title function_">noStroke</span>()
+      p5.<span class="hljs-title function_">text</span>(wobbliness, centerX, centerY - r - <span class="hljs-number">10</span>)
+    }
+  })
+})
+</code></pre>
+<h2 id="implementation" tabindex="-1"><a class="observablehq-header-anchor" href="#implementation">Implementation</a></h2>
+<p>Here is the <code>Line</code> class that draws the wobbly lines. The <code>update</code> method calculates the next point in the line and the <code>draw</code> method renders the line.</p>
+<p>By default the lines are drawn in one go, but you can pass an <code>animated</code> option to draw the line point by point, which will require calling the <code>update</code> method in a loop.</p>
+<div class="observablehq observablehq--block"><!--:092eacb2:--></div>
+<pre data-language="js"><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Line</span> {
+  <span class="hljs-keyword">static</span> <span class="hljs-variable constant_">PROGRESS_INC</span> = <span class="hljs-number">0.01</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-variable constant_">WOBBLE_SCALE</span> = <span class="hljs-number">20</span>
+
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">p5, x1, y1, x2, y2, opts = {}</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span> = p5
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">progress</span> = <span class="hljs-number">0</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">wobbliness</span> = p5.<span class="hljs-title function_">constrain</span>(opts.<span class="hljs-property">wobbliness</span> ?? <span class="hljs-number">0.3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">source</span> = p5.<span class="hljs-title function_">createVector</span>(x1, y1)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">target</span> = p5.<span class="hljs-title function_">createVector</span>(x2, y2)
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">prev</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">source</span>.<span class="hljs-title function_">copy</span>()
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">points</span> = [<span class="hljs-variable language_">this</span>.<span class="hljs-property">source</span>]
+
+    <span class="hljs-keyword">while</span> (!opts.<span class="hljs-property">animated</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">progress</span> &lt; <span class="hljs-number">1</span>) {
+      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">update</span>()
+    }
+  }
+
+  <span class="hljs-title function_">update</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">progress</span> &gt;= <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span>
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">progress</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-title function_">constrain</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">progress</span> + <span class="hljs-title class_">Line</span>.<span class="hljs-property">PROGRESS_INC</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)
+
+    <span class="hljs-keyword">const</span> prev = <span class="hljs-variable language_">this</span>.<span class="hljs-property">points</span>[<span class="hljs-variable language_">this</span>.<span class="hljs-property">points</span>.<span class="hljs-property">length</span> - <span class="hljs-number">1</span>]
+    <span class="hljs-keyword">const</span> noise = <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-title function_">noise</span>(prev.<span class="hljs-property">x</span> / <span class="hljs-number">100</span>, prev.<span class="hljs-property">y</span> / <span class="hljs-number">100</span>)
+    <span class="hljs-keyword">const</span> wobble =
+      <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-title function_">map</span>(noise, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) * <span class="hljs-variable language_">this</span>.<span class="hljs-property">wobbliness</span> * <span class="hljs-title class_">Line</span>.<span class="hljs-property">WOBBLE_SCALE</span>
+    <span class="hljs-keyword">const</span> nextPoint = <span class="hljs-variable constant_">P5</span>.<span class="hljs-property">Vector</span>.<span class="hljs-title function_">lerp</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">source</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">target</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">progress</span>)
+    <span class="hljs-keyword">const</span> ortho = <span class="hljs-variable constant_">P5</span>.<span class="hljs-property">Vector</span>.<span class="hljs-title function_">sub</span>(nextPoint, <span class="hljs-variable language_">this</span>.<span class="hljs-property">source</span>)
+      .<span class="hljs-title function_">rotate</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-property">HALF_PI</span>)
+      .<span class="hljs-title function_">normalize</span>()
+
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">points</span>.<span class="hljs-title function_">push</span>(<span class="hljs-variable constant_">P5</span>.<span class="hljs-property">Vector</span>.<span class="hljs-title function_">add</span>(nextPoint, ortho.<span class="hljs-title function_">mult</span>(wobble)))
+  }
+
+  <span class="hljs-title function_">draw</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-title function_">beginShape</span>()
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">points</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">p</span>) =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-title function_">curveVertex</span>(p.<span class="hljs-property">x</span>, p.<span class="hljs-property">y</span>))
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">p5</span>.<span class="hljs-title function_">endShape</span>()
+  }
+}
+</code></pre>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./falling-sand"><span>Falling Sand</span></a><a rel="next" href="./orbital-mechanics"><span>Orbital Mechanics</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-17T12:17:34">Jun 17, 2024</a>.</div>
+</footer>
+</div>

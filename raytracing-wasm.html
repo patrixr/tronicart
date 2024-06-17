@@ -4,10 +4,10 @@
 <title>Raytracing using Go and WebAssembly | Tronicart</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-parchment.css">
+<link rel="preload" as="style" href="./_observablehq/theme-near-midnight.css">
 <link rel="preload" as="style" href="./_observablehq/stdlib/inputs.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-near-midnight.css">
 <link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.css">
 <link rel="modulepreload" href="./_observablehq/client.js">
 <link rel="modulepreload" href="./_observablehq/runtime.js">
@@ -24,7 +24,7 @@
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/rtconfig.json", {"name":"./data/rtconfig.json","mimeType":"application/json","path":"./_file/data/rtconfig.9833053a.json","lastModified":1718264102030});
+registerFile("./data/rtconfig.json", {"name":"./data/rtconfig.json","mimeType":"application/json","path":"./_file/data/rtconfig.9833053a.json","lastModified":1718626643580});
 
 define({id: "e5aa7b58", outputs: ["render","wasmScript","raytracerScript","canvas"], body: async () => {
 const [{render, wasmScript, raytracerScript}, {canvas}] = await Promise.all([import("./_import/components/raytracing.9eb18481.js"), import("./_import/components/canvas.648ef583.js")]);
@@ -114,12 +114,24 @@ display(config)
     <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
     <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
     <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./hand-drawn">Hand drawn lines</a></li>
     <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
     <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
   </ol>
 </nav>
 <script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#the-setup">The setup</a></li>
+<li class="observablehq-secondary-link"><a href="#limitations">Limitations</a></li>
+<li class="observablehq-secondary-link"><a href="#try-it-out">Try it out</a></li>
+<li class="observablehq-secondary-link"><a href="#configuration">Configuration</a></li>
+</ol>
+</nav>
+</aside>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
 <h1 id="raytracing-using-go-and-webassembly" tabindex="-1"><a class="observablehq-header-anchor" href="#raytracing-using-go-and-webassembly">Raytracing using Go and WebAssembly</a></h1>
@@ -130,6 +142,8 @@ display(config)
 <h2 id="the-setup" tabindex="-1"><a class="observablehq-header-anchor" href="#the-setup">The setup</a></h2>
 <p>This is a high-level overview of the different components involved:</p>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4eb883e2:--></div>
+<h2 id="limitations" tabindex="-1"><a class="observablehq-header-anchor" href="#limitations">Limitations</a></h2>
+<p>I've discovered a main limitation with this approach: Goroutines are not supported in WebAssembly. This means that the Go program can't take advantage of parallelism to speed up the rendering process. Things still work fine but go routines will run sequentially instead of concurrently.</p>
 <h2 id="try-it-out" tabindex="-1"><a class="observablehq-header-anchor" href="#try-it-out">Try it out</a></h2>
 <p>Click on the controls located below the canvas to render the scene. The "Low-res preview" button will render a low-resolution version of the scene just to try it out, while the "Full size" button will render the scene at full resolution.</p>
 <div class="warning" label="Warning️">
@@ -147,6 +161,6 @@ display(config)
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./orbital-mechanics"><span>Orbital Mechanics</span></a><a rel="next" href="./three-body-problem"><span>Three Body Problem</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-13T07:35:11">Jun 13, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-06-17T12:17:34">Jun 17, 2024</a>.</div>
 </footer>
 </div>

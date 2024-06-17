@@ -1,5 +1,5 @@
 import P5 from "../../_npm/p5@1.9.4/_esm.js"
-import { circlePoints } from "./coordinates.d6ccc6ad.js"
+import { circlePoints } from "./math.07d34282.js"
 
 /**
  * Represents a celestial body with physics and visual properties.
