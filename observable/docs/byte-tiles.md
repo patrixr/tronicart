@@ -6,7 +6,9 @@ Before I figure out an artwork to create with this concept, I want to experiment
 
 Leveraging a bitmask to extract the properties of the byte, I could then use these properties to draw the tile. Here's a set or **arbitrary rules** I'll use to determine the properties of the tile based on the binary representation of the byte:
 
-![](/data/images/byte-tiles.png)
+<div style="background: #AAAAAA; width: 500px; margin: 30px 0px;">
+<img src="/data/images/byte-tiles.png" />
+</div>
 
 ```js
 import { draw, sketch } from "./components/sketch.js"

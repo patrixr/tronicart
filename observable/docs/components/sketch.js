@@ -2,6 +2,8 @@ import P5 from "npm:p5"
 import { debounce } from "../lib/helpers.js"
 import { onElementInView, onElementRemoved } from "../lib/dom.js"
 
+export { P5 }
+
 // ----------------------------------------------
 //  Observable helper for P5 sketches
 // ----------------------------------------------

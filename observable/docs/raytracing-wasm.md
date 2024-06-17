@@ -1,5 +1,5 @@
 ---
-toc: false
+toc: true
 ---
 
 # Raytracing using Go and WebAssembly
@@ -34,6 +34,10 @@ sequenceDiagram
     end
     Note over W: Browser
 ```
+
+## Limitations
+
+I've discovered a main limitation with this approach: Goroutines are not supported in WebAssembly. This means that the Go program can't take advantage of parallelism to speed up the rendering process. Things still work fine but go routines will run sequentially instead of concurrently.
 
 ## Try it out
 
