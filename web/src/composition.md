@@ -1,5 +1,6 @@
 ---
 toc: false
+draft: true
 title: "Compostable Sketches - Part 1"
 ---
 
@@ -25,6 +26,8 @@ animation() // draws the animation
 
 If I'm being honest, I also think this functional approach looks cool. Has a visual simplicity that I love.
 Once again probably the wrong reason to do something, but nobody here to stop me.
+
+##
 
 ```typescript
 console.log("hello")

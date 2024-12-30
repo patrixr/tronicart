@@ -72,7 +72,7 @@ sketch((p5) => {
   }
 
   p5.draw = () => {
-    p5.background(0)
+    p5.background(255)
 
     // Switch source every `framesPerPile` frames
     if (++tick % framesPerPile === 0) {
