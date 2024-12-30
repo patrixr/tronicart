@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>Compostable Sketches | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-parchment.d89d0dee.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.d89d0dee.css">
+<link rel="modulepreload" href="./_observablehq/client.a39530f5.js">
+<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
+<link rel="modulepreload" href="./_import/components/sketch.16785f60.js">
+<link rel="modulepreload" href="./_import/lib/composer.da2f16ee.js">
+<link rel="modulepreload" href="./_import/lib/helpers.23012005.js">
+<link rel="modulepreload" href="./_import/lib/dom.46cf68a8.js">
+<link rel="modulepreload" href="./_node/p5@1.11.2/index.1b9ecc21.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.a39530f5.js";
+
+define({id: "291b583f", outputs: ["shape","center","rotate"], body: () => {
+// Draws a rectangle
+const shape = (size = 50) => {
+  return (ctx, next) => {
+    ctx.p5.rect(0, 0, size, size)
+    next(ctx)
+  }
+}
+
+// Centers the scene
+const center = () => (ctx, next) => {
+  ctx.p5.translate(ctx.p5.width / 2, ctx.p5.height / 2)
+  next(ctx)
+}
+
+// Rotates the scene
+const rotate = () => {
+  let angle = 0
+
+  return (ctx, next) => {
+    ctx.p5.rotate((angle += 0.02))
+    next(ctx)
+  }
+}
+return {shape,center,rotate};
+}});
+
+define({id: "b1dd1ee2", inputs: ["renderAnimation","compose","shape","display"], body: async (renderAnimation,compose,shape,display) => {
+display(await(
+renderAnimation(compose({ size: 50 }, [shape()]))
+))
+}});
+
+define({id: "217bf3bd", inputs: ["renderAnimation","compose","center","shape","display"], body: async (renderAnimation,compose,center,shape,display) => {
+display(await(
+renderAnimation(compose({}, [center(), shape()]))
+))
+}});
+
+define({id: "0aaae3f5", inputs: ["renderAnimation","compose","center","rotate","shape","display"], body: async (renderAnimation,compose,center,rotate,shape,display) => {
+display(await(
+renderAnimation(compose({}, [center(), rotate(), shape()]))
+))
+}});
+
+define({id: "238cfd1a", outputs: ["sketch","compose"], body: async () => {
+const [{sketch}, {compose}] = await Promise.all([import("./_import/components/sketch.16785f60.js"), import("./_import/lib/composer.da2f16ee.js")]);
+
+return {sketch,compose};
+}});
+
+define({id: "e3b0c442", body: () => {
+
+}});
+
+define({id: "b6cfcbe7", body: () => {
+/*sketch((p5) => {
+  const animation = compose({ angle: 0 }, [
+    clear("#222"),
+    translate(100, 100),
+    shape(40),
+  ])
+
+  p5.setup = () => {
+    p5.createCanvas(200, 200)
+    p5.noStroke()
+    p5.fill("#ff9900")
+  }
+
+  p5.draw = () => animation(p5)
+})*/
+}});
+
+define({id: "0d6858d9", inputs: ["sketch"], outputs: ["renderAnimation"], body: (sketch) => {
+const renderAnimation = (animation) =>
+  sketch((p5) => {
+    p5.setup = () => {
+      p5.rectMode(p5.CENTER)
+      p5.createCanvas(100, 100)
+      p5.noStroke()
+      p5.fill("#ff9900")
+    }
+
+    p5.draw = () => {
+      p5.background(0)
+      animation(p5)
+    }
+  })
+return {renderAnimation};
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+  </ol>
+  <div id="observablehq-search"><input type="search" placeholder="Search"></div>
+  <div id="observablehq-search-results"></div>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.f25bcaa4.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <ol>
+    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./composition">Compostable Sketches</a></li>
+    <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
+    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
+    <li class="observablehq-link"><a href="./hand-drawn">Hand drawn lines</a></li>
+    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
+    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
+    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
+    <li class="observablehq-link"><a href="./triangles">Triangles</a></li>
+  </ol>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<h1 id="compostable-sketches" tabindex="-1"><a class="observablehq-header-anchor" href="#compostable-sketches">Compostable Sketches</a></h1>
+<p>I have long attempted to build up a <strong>reusable and composable</strong> system for creating animations in p5.js.
+Most of them worked great up until a certain point where the complexity of the animations grew beyond the capabilities of the system.</p>
+<p>And it would appear I have not learned my lesson, so I am doing it again.</p>
+<h2 id="the-idea" tabindex="-1"><a class="observablehq-header-anchor" href="#the-idea">The idea</a></h2>
+<p>My previous attempts have been mainly inspired by video game engines and their entity-component systems.
+This time, I wanna to take a more creative/flexible approach to the problem.</p>
+<p>Here's what I have in mind:</p>
+<pre data-language="typescript"><code class="language-typescript"><span class="hljs-keyword">const</span> animation = <span class="hljs-title function_">compose</span>(<span class="hljs-comment">/* state */</span>, <span class="hljs-comment">/* effects */</span>)
+
+<span class="hljs-title function_">animation</span>() <span class="hljs-comment">// draws the animation</span>
+</code></pre>
+<p>If I'm being honest, I also think this functional approach looks cool. Has a visual simplicity that I love.
+Once again probably the wrong reason to do something, but nobody here to stop me.</p>
+<p><a href="#implementation">-&gt; Jump to implementation</a></p>
+<h2 id="in-action" tabindex="-1"><a class="observablehq-header-anchor" href="#in-action">In action</a></h2>
+<p>Let's try out that concept with a few examples</p>
+<h3 id="build-out-some-effects" tabindex="-1"><a class="observablehq-header-anchor" href="#build-out-some-effects">Build out some effects</a></h3>
+<p>To begin, let's define a few simple effects that we can compose together.</p>
+<div class="observablehq observablehq--block"><!--:291b583f:--></div>
+<pre data-language="js"><code class="language-js"><span class="hljs-comment">// Draws a rectangle</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">shape</span> = (<span class="hljs-params">size = <span class="hljs-number">50</span></span>) =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">ctx, next</span>) =&gt;</span> {
+    ctx.<span class="hljs-property">p5</span>.<span class="hljs-title function_">rect</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size, size)
+    <span class="hljs-title function_">next</span>(ctx)
+  }
+}
+
+<span class="hljs-comment">// Centers the scene</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">center</span> = (<span class="hljs-params"></span>) =&gt; <span class="hljs-function">(<span class="hljs-params">ctx, next</span>) =&gt;</span> {
+  ctx.<span class="hljs-property">p5</span>.<span class="hljs-title function_">translate</span>(ctx.<span class="hljs-property">p5</span>.<span class="hljs-property">width</span> / <span class="hljs-number">2</span>, ctx.<span class="hljs-property">p5</span>.<span class="hljs-property">height</span> / <span class="hljs-number">2</span>)
+  <span class="hljs-title function_">next</span>(ctx)
+}
+
+<span class="hljs-comment">// Rotates the scene</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">rotate</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">let</span> angle = <span class="hljs-number">0</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">ctx, next</span>) =&gt;</span> {
+    ctx.<span class="hljs-property">p5</span>.<span class="hljs-title function_">rotate</span>((angle += <span class="hljs-number">0.02</span>))
+    <span class="hljs-title function_">next</span>(ctx)
+  }
+}
+</code></pre>
+<h3 id="composing-effects" tabindex="-1"><a class="observablehq-header-anchor" href="#composing-effects">Composing effects</a></h3>
+<p>Drawing only the shape:</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-title function_">compose</span>({ <span class="hljs-attr">size</span>: <span class="hljs-number">50</span> }, [<span class="hljs-title function_">shape</span>()])
+</code></pre>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:b1dd1ee2:--></div>
+<p>In this instance we notice the square is a bit cropped, so we can add the <code>center</code> effect to fix that:</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-title function_">compose</span>({}, [<span class="hljs-title function_">center</span>(), <span class="hljs-title function_">shape</span>()])
+</code></pre>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:217bf3bd:--></div>
+<p>Finally, let's add some rotation to the mix:</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-title function_">compose</span>({}, [<span class="hljs-title function_">center</span>(), <span class="hljs-title function_">rotate</span>(), <span class="hljs-title function_">shape</span>()])
+</code></pre>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:0aaae3f5:--></div>
+<h2 id="implementation" tabindex="-1"><a class="observablehq-header-anchor" href="#implementation">Implementation</a></h2>
+<p>Building out a composition system isn't exactly rocket science, but there are some quirks to it that I am discovering as we speak.
+I'll try to boil it down to the essentials:</p>
+<h3 id="performance" tabindex="-1"><a class="observablehq-header-anchor" href="#performance">Performance</a></h3>
+<p>Functional-style patterns aren't known for their performance, but I am not too worried about that.
+However I did want to avoid the <strong>overhead of creating a new function</strong> for each step in the pipeline.</p>
+<h3 id="code" tabindex="-1"><a class="observablehq-header-anchor" href="#code">Code</a></h3>
+<p>As of writing, I went or a simple enough approach which looks like this:</p>
+<pre data-language="typescript"><code class="language-typescript"><span class="hljs-comment">// Defines the context object passed to effects</span>
+<span class="hljs-comment">// Contains both the p5 instance and current state</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Context</span>&lt;T&gt; {
+  <span class="hljs-keyword">public</span> <span class="hljs-attr">p5</span>: <span class="hljs-variable constant_">P5</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-attr">state</span>: T
+}
+
+<span class="hljs-comment">// Represents the next step in a pipeline (called from effects)</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">NextFn</span>&lt;T&gt; = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">ctx</span>: <span class="hljs-title class_">Context</span>&lt;T&gt;</span>) =&gt;</span> <span class="hljs-built_in">any</span>
+
+<span class="hljs-comment">// Effect function type that represent a visual effect to apply</span>
+<span class="hljs-comment">// - Receives current context and next function in pipeline</span>
+<span class="hljs-comment">// - Responsible for calling next() to continue the chain</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">Fx</span>&lt;T&gt; = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">ctx</span>: <span class="hljs-title class_">Context</span>&lt;T&gt;, <span class="hljs-attr">next</span>: <span class="hljs-title class_">NextFn</span>&lt;T&gt;</span>) =&gt;</span> <span class="hljs-built_in">void</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> compose&lt;T&gt;(<span class="hljs-attr">data</span>: T, ...<span class="hljs-attr">effects</span>: (<span class="hljs-title class_">Fx</span>&lt;T&gt; | <span class="hljs-title class_">Fx</span>&lt;T&gt;[])[]): <span class="hljs-title class_">DrawFn</span> {
+  <span class="hljs-keyword">const</span> steps = effects.<span class="hljs-title function_">flat</span>()
+
+  <span class="hljs-keyword">let</span> state = { ...data }
+  <span class="hljs-keyword">let</span> idx = <span class="hljs-number">0</span>
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">pipeline</span> = (<span class="hljs-params"><span class="hljs-attr">ctx</span>: <span class="hljs-title class_">Context</span>&lt;T&gt;</span>) =&gt; {
+    <span class="hljs-keyword">if</span> (!steps[idx]) <span class="hljs-keyword">return</span>
+    state = ctx.<span class="hljs-property">state</span>
+    steps[idx++](ctx, pipeline)
+  }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">p5</span>) =&gt;</span> {
+    idx = <span class="hljs-number">0</span>
+    <span class="hljs-title function_">pipeline</span>({ state, p5 })
+  }
+}
+</code></pre>
+<div class="observablehq observablehq--block"><!--:238cfd1a:--></div>
+<div class="observablehq observablehq--block"><!--:e3b0c442:--></div>
+<div class="observablehq observablehq--block"><!--:b6cfcbe7:--></div>
+<div class="observablehq observablehq--block"><!--:0d6858d9:--></div>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./byte-tiles"><span>Bit operations for creative coding</span></a><a rel="next" href="./differential-growth-basics"><span>Differential Growth Basics</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-12-30T08:14:56">Dec 30, 2024</a>.</div>
+</footer>
+</div>
+</body>
+</html>

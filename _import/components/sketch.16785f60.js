@@ -65,7 +65,7 @@ export function draw(w, h, setupOrDrawer, drawer) {
 }
 function createCanvasFrame(parent) {
   const canvasFrame = document.createElement("div");
-  canvasFrame.style.minWidth = "200px";
+  canvasFrame.style.minWidth = "100px";
   canvasFrame.style.minHeight = "100px";
   canvasFrame.style.outline = "1px dashed lightgray";
   canvasFrame.style.padding = "10px";
