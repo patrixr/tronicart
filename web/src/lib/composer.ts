@@ -40,7 +40,7 @@ export function compose<T>(data: T, ...effects: (Fx<T> | Fx<T>[])[]): DrawFn {
   let state = { ...data }
   let idx = 0
 
-  const pipeline = (ctx?: Context<T>) => {
+  const pipeline = (ctx: Context<T>) => {
     if (!steps[idx]) return
     state = ctx.state
     steps[idx++](ctx, pipeline)
