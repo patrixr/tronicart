@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf docs/.observablehq/cache",
+    "build": "rm -rf dist && observable build",
+    "dev": "observable preview",
+    "deploy": "observable deploy",
+    "observable": "observable",
+    "postbuild": "cp src/data/wasm_exec.js src/data/raytracer.wasm ./dist/_file/data"
+  },
+  "dependencies": {
+    "@observablehq/framework": "latest",
+    "color-scheme": "^1.0.1",
+    "d3-dsv": "^3.0.1",
+    "d3-time-format": "^4.1.0",
+    "p5": "^1.9.2"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.7.6"
+  }
+}
