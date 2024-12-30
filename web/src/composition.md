@@ -1,10 +1,10 @@
 ---
 toc: false
 draft: false
-title: "Compostable Sketches"
+title: "Composable Sketches"
 ---
 
-# Compostable Sketches
+# Composable Sketches
 
 I have long attempted to build up a **reusable and composable** system for creating animations in p5.js.
 Most of them worked great up until a certain point where the complexity of the animations grew beyond the capabilities of the system.
