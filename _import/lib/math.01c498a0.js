@@ -84,3 +84,8 @@ export class Ray {
     return null;
   }
 }
+export function polarToCartesian(r, theta) {
+  const x = r * Math.cos(theta);
+  const y = r * Math.sin(theta);
+  return [x, y];
+}

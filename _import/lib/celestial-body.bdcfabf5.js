@@ -1,5 +1,5 @@
-import P5 from "../../_node/p5@1.11.2/index.1b9ecc21.js";
-import { circlePoints } from "./math.e381bcd0.js";
+import P5 from "../../_node/p5@1.11.2/index.8e5b333a.js";
+import { circlePoints } from "./math.01c498a0.js";
 export class CelestialBody {
   static G = 1;
   static ID = 0;

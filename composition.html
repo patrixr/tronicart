@@ -10,17 +10,18 @@
 <link rel="preload" as="style" href="./_observablehq/theme-parchment.d89d0dee.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.d89d0dee.css">
-<link rel="modulepreload" href="./_observablehq/client.b6605194.js">
-<link rel="modulepreload" href="./_observablehq/runtime.9393ab6d.js">
-<link rel="modulepreload" href="./_observablehq/stdlib.95bfbf7e.js">
-<link rel="modulepreload" href="./_import/components/sketch.16785f60.js">
-<link rel="modulepreload" href="./_import/lib/composer.da2f16ee.js">
+<link rel="modulepreload" href="./_observablehq/client.24f05b63.js">
+<link rel="modulepreload" href="./_observablehq/runtime.f168f711.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.0e911bb9.js">
+<link rel="modulepreload" href="./_import/components/sketch.96f782c4.js">
+<link rel="modulepreload" href="./_import/lib/composer.027053f6.js">
+<link rel="modulepreload" href="./_import/components/p5.08228e06.js">
 <link rel="modulepreload" href="./_import/lib/helpers.23012005.js">
 <link rel="modulepreload" href="./_import/lib/dom.46cf68a8.js">
-<link rel="modulepreload" href="./_node/p5@1.11.2/index.1b9ecc21.js">
+<link rel="modulepreload" href="./_node/p5@1.11.2/index.8e5b333a.js">
 <script type="module">
 
-import {define} from "./_observablehq/client.b6605194.js";
+import {define} from "./_observablehq/client.24f05b63.js";
 
 define({id: "291b583f", outputs: ["shape","center","rotate"], body: () => {
 // Draws a rectangle
@@ -67,37 +68,16 @@ renderAnimation(compose({}, [center(), rotate(), shape()]))
 ))
 }});
 
-define({id: "238cfd1a", outputs: ["sketch","compose"], body: async () => {
-const [{sketch}, {compose}] = await Promise.all([import("./_import/components/sketch.16785f60.js"), import("./_import/lib/composer.da2f16ee.js")]);
+define({id: "7533f3e6", outputs: ["sketch","compose","compile"], body: async () => {
+const [{sketch}, {compose, compile}] = await Promise.all([import("./_import/components/sketch.96f782c4.js"), import("./_import/lib/composer.027053f6.js")]);
 
-return {sketch,compose};
+return {sketch,compose,compile};
 }});
 
-define({id: "e3b0c442", body: () => {
-
-}});
-
-define({id: "b6cfcbe7", body: () => {
-/*sketch((p5) => {
-  const animation = compose({ angle: 0 }, [
-    clear("#222"),
-    translate(100, 100),
-    shape(40),
-  ])
-
-  p5.setup = () => {
-    p5.createCanvas(200, 200)
-    p5.noStroke()
-    p5.fill("#ff9900")
-  }
-
-  p5.draw = () => animation(p5)
-})*/
-}});
-
-define({id: "0d6858d9", inputs: ["sketch"], outputs: ["renderAnimation"], body: (sketch) => {
-const renderAnimation = (animation) =>
+define({id: "0e22e249", inputs: ["sketch","compile"], outputs: ["renderAnimation"], body: (sketch,compile) => {
+const renderAnimation = (composition) =>
   sketch((p5) => {
+    const animation = compile(() => {}, [composition])
     p5.setup = () => {
       p5.rectMode(p5.CENTER)
       p5.createCanvas(100, 100)
@@ -107,7 +87,7 @@ const renderAnimation = (animation) =>
 
     p5.draw = () => {
       p5.background(0)
-      animation(p5)
+      animation.draw(p5)
     }
   })
 return {renderAnimation};
@@ -125,7 +105,7 @@ return {renderAnimation};
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.176e2af2.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.238ba1d4.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
   <ol>
     <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./composition">Composable Sketches</a></li>
@@ -138,8 +118,18 @@ return {renderAnimation};
     <li class="observablehq-link"><a href="./triangles">Triangles</a></li>
   </ol>
 </nav>
-<script>{const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
 <div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#the-idea">The idea</a></li>
+<li class="observablehq-secondary-link"><a href="#in-action">In action</a></li>
+<li class="observablehq-secondary-link"><a href="#implementation">Implementation</a></li>
+</ol>
+</nav>
+</aside>
 <main id="observablehq-main" class="observablehq">
 <h1 id="composable-sketches" tabindex="-1"><a class="observablehq-header-anchor" href="#composable-sketches">Composable Sketches</a></h1>
 <p>I have long attempted to build up a <strong>reusable and composable</strong> system for creating animations in p5.js.
@@ -239,14 +229,12 @@ However I did want to avoid the <strong>overhead of creating a new function</str
   }
 }
 </code></pre>
-<div class="observablehq observablehq--block"><!--:238cfd1a:--></div>
-<div class="observablehq observablehq--block"><!--:e3b0c442:--></div>
-<div class="observablehq observablehq--block"><!--:b6cfcbe7:--></div>
-<div class="observablehq observablehq--block"><!--:0d6858d9:--></div>
+<div class="observablehq observablehq--block"><!--:7533f3e6:--></div>
+<div class="observablehq observablehq--block"><!--:0e22e249:--></div>
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./byte-tiles"><span>Bit operations for creative coding</span></a><a rel="next" href="./differential-growth-basics"><span>Differential Growth Basics</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-12-30T08:15:30">Dec 30, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-06T09:12:25">Jan 6, 2025</a>.</div>
 </footer>
 </div>
 </body>

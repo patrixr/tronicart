@@ -1,5 +1,11 @@
-import ColorScheme from "../../_node/color-scheme@1.0.1/index.18fc79b9.js";
+import ColorScheme from "../../_node/color-scheme@1.0.1/index.e992fd29.js";
 export class Palette {
+  ALL_SCHEMES;
+  ALL_VARIATIONS;
+  config;
+  p5;
+  index;
+  colors;
   constructor(config = {}) {
     this.ALL_SCHEMES = ["mono", "contrast", "triade", "tetrade", "analogic"];
     this.ALL_VARIATIONS = ["default", "pastel", "soft", "light", "hard", "pale"];
@@ -42,9 +48,6 @@ export class Palette {
    *
    * This function calculates the current and next color based on the frame count and interpolates between them.
    * The interpolation amount is based on the current frame within the timeframe, creating a smooth transition.
-   *
-   * @param {number} [timeFrame=60] - The number of frames over which to interpolate between each color.
-   * @returns {p5.Color} The interpolated color.
    */
   lerped(timeFrame = 60, tick = this.p5.frameCount) {
     let currentIndex = this.p5.floor(tick / timeFrame) % this.colors.length;

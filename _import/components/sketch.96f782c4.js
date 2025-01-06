@@ -1,4 +1,4 @@
-import P5 from "../../_node/p5@1.11.2/index.1b9ecc21.js";
+import { P5 } from "./p5.08228e06.js";
 import { debounce } from "../lib/helpers.23012005.js";
 import { onElementInView, onElementRemoved } from "../lib/dom.46cf68a8.js";
 export { P5 };
