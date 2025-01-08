@@ -93,17 +93,36 @@ sketch((p5) => {
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.238ba1d4.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.c6ce1030.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <section>
+    <summary>Experiments</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./experiments/raytracing-wasm">Raytracing with Go and Wasm</a></li>
+    <li class="observablehq-link"><a href="./experiments/three-body-problem">Three body problem</a></li>
+    <li class="observablehq-link"><a href="./experiments/hand-drawn">Hand-drawn lines</a></li>
+    <li class="observablehq-link"><a href="./experiments/bitwise-tiles">Bitwise creativity</a></li>
+    </ol>
+  </section>
+  <details open>
+    <summary>Creative algorithms</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./algorithms/composition">Composable sketches</a></li>
+    <li class="observablehq-link"><a href="./algorithms/differential-growth-basics">Differential growth</a></li>
+    <li class="observablehq-link"><a href="./algorithms/orbital-mechanics">Orbital mechanics</a></li>
+    </ol>
+  </details>
+  <details>
+    <summary>Playgrounds</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./playgrounds/falling-sand">Falling sand</a></li>
+    <li class="observablehq-link"><a href="./playgrounds/triangles">Triangles</a></li>
+    <li class="observablehq-link"><a href="./playgrounds/hexmesh/index.md">Hexmesh</a></li>
+    </ol>
+  </details>
   <ol>
-    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
-    <li class="observablehq-link"><a href="./composition">Composable Sketches</a></li>
-    <li class="observablehq-link"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
-    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
-    <li class="observablehq-link"><a href="./hand-drawn">Hand drawn lines</a></li>
-    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
-    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
-    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
-    <li class="observablehq-link"><a href="./triangles">Triangles</a></li>
+    <li class="observablehq-link"><a href="https://github.com/patrixr" target="_blank"><span>Github</span></a></li>
+    <li class="observablehq-link"><a href="https://x.com/tronicapps" target="_blank"><span>Twitter</span></a></li>
+    <li class="observablehq-link"><a href="https://objkt.com/users/tz1dQEFRNPdx2TXqfcprr1XCKdcUfir9geTP" target="_blank"><span>NFTs</span></a></li>
   </ol>
 </nav>
 <script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
@@ -218,8 +237,8 @@ sketch((p5) => {
 </style>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="next" href="./byte-tiles"><span>Bit operations for creative coding</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-06T09:12:25">Jan 6, 2025</a>.</div>
+<nav><a rel="next" href="./experiments/raytracing-wasm"><span>Raytracing with Go and Wasm</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-08T10:09:40">Jan 8, 2025</a>.</div>
 </footer>
 </div>
 </body>

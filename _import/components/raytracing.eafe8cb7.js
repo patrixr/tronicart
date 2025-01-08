@@ -4,6 +4,7 @@ export function render(config, canvasId = "defaultCanvas0", lowRes = false) {
     cfg.antialiasing.samples = 1;
     cfg.antialiasing.size = 500;
   }
+  ;
   window.RT.renderFromJson(JSON.stringify(cfg), (res) => {
     const { Bytes, Width, Height, Status } = res;
     const canvas = document.getElementById(canvasId);
@@ -11,19 +12,15 @@ export function render(config, canvasId = "defaultCanvas0", lowRes = false) {
       console.error(res);
       return;
     }
-    const imageData = new ImageData(
-      new Uint8ClampedArray(Bytes),
-      Width,
-      Height
-    );
+    const imageData = new ImageData(new Uint8ClampedArray(Bytes), Width, Height);
     canvas.width = Width;
     canvas.height = Height;
-    canvas.getContext("2d").putImageData(imageData, 0, 0);
+    canvas?.getContext("2d")?.putImageData(imageData, 0, 0);
   });
 }
 export function wasmScript() {
   const script = document.createElement("script");
-  script.src = "_file/data/wasm_exec.js";
+  script.src = "/_file/data/wasm_exec.js";
   return script;
 }
 export function raytracerScript() {
@@ -32,7 +29,7 @@ export function raytracerScript() {
     setTimeout(() => {
       console.log("Loading raytracer.wasm")
       const go = new Go();
-      WebAssembly.instantiateStreaming(fetch("_file/data/raytracer.wasm"), go.importObject).then((result) => {
+      WebAssembly.instantiateStreaming(fetch("/_file/data/raytracer.wasm"), go.importObject).then((result) => {
           go.run(result.instance);
       });
     }, 1000)

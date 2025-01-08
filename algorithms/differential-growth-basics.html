@@ -7,23 +7,23 @@
 <title>Differential Growth Basics | Tronicart</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="preload" as="style" href="./_observablehq/theme-parchment.d89d0dee.css">
+<link rel="preload" as="style" href="../_observablehq/theme-parchment.d89d0dee.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
-<link rel="stylesheet" type="text/css" href="./_observablehq/theme-parchment.d89d0dee.css">
-<link rel="modulepreload" href="./_observablehq/client.24f05b63.js">
-<link rel="modulepreload" href="./_observablehq/runtime.f168f711.js">
-<link rel="modulepreload" href="./_observablehq/stdlib.0e911bb9.js">
-<link rel="modulepreload" href="./_import/components/sketch.96f782c4.js">
-<link rel="modulepreload" href="./_import/lib/differential-growth.2f9c14bd.js">
-<link rel="modulepreload" href="./_observablehq/stdlib/mermaid.e4ef739c.js">
-<link rel="modulepreload" href="./_import/components/p5.08228e06.js">
-<link rel="modulepreload" href="./_import/lib/helpers.23012005.js">
-<link rel="modulepreload" href="./_import/lib/dom.46cf68a8.js">
-<link rel="modulepreload" href="./_node/p5@1.11.2/index.8e5b333a.js">
-<link rel="modulepreload" href="./_npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs.aaab8952.js">
+<link rel="stylesheet" type="text/css" href="../_observablehq/theme-parchment.d89d0dee.css">
+<link rel="modulepreload" href="../_observablehq/client.24f05b63.js">
+<link rel="modulepreload" href="../_observablehq/runtime.f168f711.js">
+<link rel="modulepreload" href="../_observablehq/stdlib.0e911bb9.js">
+<link rel="modulepreload" href="../_import/components/sketch.96f782c4.js">
+<link rel="modulepreload" href="../_import/lib/differential-growth.2f9c14bd.js">
+<link rel="modulepreload" href="../_observablehq/stdlib/mermaid.e4ef739c.js">
+<link rel="modulepreload" href="../_import/components/p5.08228e06.js">
+<link rel="modulepreload" href="../_import/lib/helpers.23012005.js">
+<link rel="modulepreload" href="../_import/lib/dom.46cf68a8.js">
+<link rel="modulepreload" href="../_node/p5@1.11.2/index.8e5b333a.js">
+<link rel="modulepreload" href="../_npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs.aaab8952.js">
 <script type="module">
 
-import {define} from "./_observablehq/client.24f05b63.js";
+import {define} from "../_observablehq/client.24f05b63.js";
 
 define({id: "3b9beaab", inputs: ["mermaid","display"], body: async (mermaid,display) => {
 display(await(
@@ -45,8 +45,8 @@ await mermaid`graph LR
 ))
 }});
 
-define({id: "57cc6750", outputs: ["draw","sketch","DifferentialGrowth"], body: async () => {
-const [{draw, sketch}, {DifferentialGrowth}] = await Promise.all([import("./_import/components/sketch.96f782c4.js"), import("./_import/lib/differential-growth.2f9c14bd.js")]);
+define({id: "be1359c8", outputs: ["draw","sketch","DifferentialGrowth"], body: async () => {
+const [{draw, sketch}, {DifferentialGrowth}] = await Promise.all([import("../_import/components/sketch.96f782c4.js"), import("../_import/lib/differential-growth.2f9c14bd.js")]);
 
 return {draw,sketch,DifferentialGrowth};
 }});
@@ -112,21 +112,40 @@ sketch((p5) => {
 <nav id="observablehq-sidebar">
   <ol>
     <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
-    <li class="observablehq-link"><a href="./">Tronicart</a></li>
+    <li class="observablehq-link"><a href="../">Tronicart</a></li>
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.238ba1d4.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.c6ce1030.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <section>
+    <summary>Experiments</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../experiments/raytracing-wasm">Raytracing with Go and Wasm</a></li>
+    <li class="observablehq-link"><a href="../experiments/three-body-problem">Three body problem</a></li>
+    <li class="observablehq-link"><a href="../experiments/hand-drawn">Hand-drawn lines</a></li>
+    <li class="observablehq-link"><a href="../experiments/bitwise-tiles">Bitwise creativity</a></li>
+    </ol>
+  </section>
+  <details open class="observablehq-section-active">
+    <summary>Creative algorithms</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./composition">Composable sketches</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./differential-growth-basics">Differential growth</a></li>
+    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital mechanics</a></li>
+    </ol>
+  </details>
+  <details>
+    <summary>Playgrounds</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../playgrounds/falling-sand">Falling sand</a></li>
+    <li class="observablehq-link"><a href="../playgrounds/triangles">Triangles</a></li>
+    <li class="observablehq-link"><a href="../playgrounds/hexmesh/index.md">Hexmesh</a></li>
+    </ol>
+  </details>
   <ol>
-    <li class="observablehq-link"><a href="./byte-tiles">Bit operations for creative coding</a></li>
-    <li class="observablehq-link"><a href="./composition">Composable Sketches</a></li>
-    <li class="observablehq-link observablehq-link-active"><a href="./differential-growth-basics">Differential Growth Basics</a></li>
-    <li class="observablehq-link"><a href="./falling-sand">Falling Sand</a></li>
-    <li class="observablehq-link"><a href="./hand-drawn">Hand drawn lines</a></li>
-    <li class="observablehq-link"><a href="./orbital-mechanics">Orbital Mechanics</a></li>
-    <li class="observablehq-link"><a href="./raytracing-wasm">Raytracing using Go and WebAssembly</a></li>
-    <li class="observablehq-link"><a href="./three-body-problem">Three Body Problem</a></li>
-    <li class="observablehq-link"><a href="./triangles">Triangles</a></li>
+    <li class="observablehq-link"><a href="https://github.com/patrixr" target="_blank"><span>Github</span></a></li>
+    <li class="observablehq-link"><a href="https://x.com/tronicapps" target="_blank"><span>Twitter</span></a></li>
+    <li class="observablehq-link"><a href="https://objkt.com/users/tz1dQEFRNPdx2TXqfcprr1XCKdcUfir9geTP" target="_blank"><span>NFTs</span></a></li>
   </ol>
 </nav>
 <script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
@@ -149,7 +168,7 @@ sketch((p5) => {
 <p>To ensure cells are never too isolated, we can create new cells to fill the gaps. This is a simple implementation of the concept, but it can be used to create complex, beautiful, organic forms.</p>
 <p>Here's the basic logic:</p>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:3b9beaab:--></div>
-<div class="observablehq observablehq--block"><!--:57cc6750:--></div>
+<div class="observablehq observablehq--block"><!--:be1359c8:--></div>
 <h2 id="an-example" tabindex="-1"><a class="observablehq-header-anchor" href="#an-example">An example</a></h2>
 <p>In this sketch, we place cells in the form of a circle, and we let them grow following the rules of differential growth.</p>
 <h3 id="placing-our-cells" tabindex="-1"><a class="observablehq-header-anchor" href="#placing-our-cells">Placing our cells</a></h3>
@@ -174,8 +193,8 @@ sketch((p5) => {
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:fbe5652d:--></div>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./composition"><span>Composable Sketches</span></a><a rel="next" href="./falling-sand"><span>Falling Sand</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-06T09:12:25">Jan 6, 2025</a>.</div>
+<nav><a rel="prev" href="./composition"><span>Composable sketches</span></a><a rel="next" href="./orbital-mechanics"><span>Orbital mechanics</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-08T10:09:40">Jan 8, 2025</a>.</div>
 </footer>
 </div>
 </body>
