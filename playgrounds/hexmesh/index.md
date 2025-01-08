@@ -6,7 +6,7 @@ draft: false
 
 ```ts
 import { sketch } from "../../components/sketch.js"
-import composer from "./index.js"
+import composer from "./sketch.js"
 ```
 
 ```js
