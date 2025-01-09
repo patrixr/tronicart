@@ -13,6 +13,7 @@
 <link rel="modulepreload" href="../_observablehq/client.24f05b63.js">
 <link rel="modulepreload" href="../_observablehq/runtime.f168f711.js">
 <link rel="modulepreload" href="../_observablehq/stdlib.0e911bb9.js">
+<link rel="modulepreload" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js">
 <link rel="modulepreload" href="../_import/components/sketch.96f782c4.js">
 <link rel="modulepreload" href="../_import/lib/palette.79fe7a6d.js">
 <link rel="modulepreload" href="../_import/components/p5.08228e06.js">
@@ -20,6 +21,34 @@
 <link rel="modulepreload" href="../_import/lib/dom.46cf68a8.js">
 <link rel="modulepreload" href="../_node/color-scheme@1.0.1/index.e992fd29.js">
 <link rel="modulepreload" href="../_node/p5@1.11.2/index.8e5b333a.js">
+
+<meta name="description" content="Creative coding and art">
+<meta name="keywords" content="creative, code, art, github">
+<meta name="author" content="Patrick Rabier">
+
+<meta property="og:title" content="Falling Sand">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/playgrounds/falling-sand">
+<meta property="og:image" content="https://tronica.io/_file/data/images/og-thumb.png">
+<meta name="twitter:card" content="Creative coding and art">
+<meta name="twitter:site" content="@tronicapps">
+<meta name="twitter:creator" content="@tronicapps">
+
+<link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/styles/themes/default.css">
+<script type="module" src="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js"></script>
+
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GCRE839L0Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GCRE839L0Y');
+</script>
+  
+
 <script type="module">
 
 import {define} from "../_observablehq/client.24f05b63.js";
@@ -164,7 +193,7 @@ sketch((p5) => {
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.c6ce1030.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.a1212c59.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
   <section>
     <summary>Experiments</summary>
     <ol>
@@ -182,12 +211,20 @@ sketch((p5) => {
     <li class="observablehq-link"><a href="../algorithms/orbital-mechanics">Orbital mechanics</a></li>
     </ol>
   </details>
+  <details>
+    <summary>Articles</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../articles/state-management">An outlook on state management</a></li>
+    <li class="observablehq-link"><a href="../articles/custom-react-hook">Custom React API hook</a></li>
+    <li class="observablehq-link"><a href="../articles/observable-seo">Observable SEO</a></li>
+    </ol>
+  </details>
   <details open class="observablehq-section-active">
     <summary>Playgrounds</summary>
     <ol>
     <li class="observablehq-link observablehq-link-active"><a href="./falling-sand">Falling sand</a></li>
     <li class="observablehq-link"><a href="./triangles">Triangles</a></li>
-    <li class="observablehq-link"><a href="./hexmesh/index.md">Hexmesh</a></li>
+    <li class="observablehq-link"><a href="./hexmesh/">Hexmesh</a></li>
     </ol>
   </details>
   <ol>
@@ -210,8 +247,8 @@ sketch((p5) => {
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:57617d90:--></div>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="../algorithms/orbital-mechanics"><span>Orbital mechanics</span></a><a rel="next" href="./triangles"><span>Triangles</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-08T10:15:12">Jan 8, 2025</a>.</div>
+<nav><a rel="prev" href="../articles/observable-seo"><span>Observable SEO</span></a><a rel="next" href="./triangles"><span>Triangles</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-09T14:32:55">Jan 9, 2025</a>.</div>
 </footer>
 </div>
 </body>

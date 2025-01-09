@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://tronica.io/sitemap-0.xml
+Sitemap: https://tronica.io/sitemap-index.xml

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>Custom React API hook | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="../_observablehq/theme-parchment.d89d0dee.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="../_observablehq/theme-parchment.d89d0dee.css">
+<link rel="modulepreload" href="../_observablehq/client.24f05b63.js">
+<link rel="modulepreload" href="../_observablehq/runtime.f168f711.js">
+<link rel="modulepreload" href="../_observablehq/stdlib.0e911bb9.js">
+<link rel="modulepreload" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js">
+<link rel="modulepreload" href="../_observablehq/stdlib/mermaid.e4ef739c.js">
+<link rel="modulepreload" href="../_npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs.aaab8952.js">
+
+<meta name="description" content="Creative coding and art">
+<meta name="keywords" content="creative, code, art, github">
+<meta name="author" content="Patrick Rabier">
+
+<meta property="og:title" content="Custom React API hook">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/articles/custom-react-hook">
+<meta property="og:image" content="https://tronica.io/_file/data/images/og-thumb.png">
+<meta name="twitter:card" content="Creative coding and art">
+<meta name="twitter:site" content="@tronicapps">
+<meta name="twitter:creator" content="@tronicapps">
+
+<link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/styles/themes/default.css">
+<script type="module" src="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js"></script>
+
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GCRE839L0Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GCRE839L0Y');
+</script>
+  
+
+<script type="module">
+
+import {define} from "../_observablehq/client.24f05b63.js";
+
+define({id: "ec205be4", inputs: ["mermaid","display"], body: async (mermaid,display) => {
+display(await(
+await mermaid`flowchart LR
+    A[Request] --> B[Loading: true]
+    B --> C[Trigger Request]
+    C --> D{Response OK?}
+     --> |Yes| F[Update State]
+    D -->|No| G[Set error state]
+    G --> I
+    F --> I[Set Loading State to false]
+    I --> J[End]`
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="../">Tronicart</a></li>
+  </ol>
+  <div id="observablehq-search"><input type="search" placeholder="Search"></div>
+  <div id="observablehq-search-results"></div>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.a1212c59.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <section>
+    <summary>Experiments</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../experiments/raytracing-wasm">Raytracing with Go and Wasm</a></li>
+    <li class="observablehq-link"><a href="../experiments/three-body-problem">Three body problem</a></li>
+    <li class="observablehq-link"><a href="../experiments/hand-drawn">Hand-drawn lines</a></li>
+    <li class="observablehq-link"><a href="../experiments/bitwise-tiles">Bitwise creativity</a></li>
+    </ol>
+  </section>
+  <details open>
+    <summary>Creative algorithms</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../algorithms/composition">Composable sketches</a></li>
+    <li class="observablehq-link"><a href="../algorithms/differential-growth-basics">Differential growth</a></li>
+    <li class="observablehq-link"><a href="../algorithms/orbital-mechanics">Orbital mechanics</a></li>
+    </ol>
+  </details>
+  <details open class="observablehq-section-active">
+    <summary>Articles</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./state-management">An outlook on state management</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./custom-react-hook">Custom React API hook</a></li>
+    <li class="observablehq-link"><a href="./observable-seo">Observable SEO</a></li>
+    </ol>
+  </details>
+  <details>
+    <summary>Playgrounds</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../playgrounds/falling-sand">Falling sand</a></li>
+    <li class="observablehq-link"><a href="../playgrounds/triangles">Triangles</a></li>
+    <li class="observablehq-link"><a href="../playgrounds/hexmesh/">Hexmesh</a></li>
+    </ol>
+  </details>
+  <ol>
+    <li class="observablehq-link"><a href="https://github.com/patrixr" target="_blank"><span>Github</span></a></li>
+    <li class="observablehq-link"><a href="https://x.com/tronicapps" target="_blank"><span>Twitter</span></a></li>
+    <li class="observablehq-link"><a href="https://objkt.com/users/tz1dQEFRNPdx2TXqfcprr1XCKdcUfir9geTP" target="_blank"><span>NFTs</span></a></li>
+  </ol>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#introduction">Introduction</a></li>
+<li class="observablehq-secondary-link"><a href="#designing-the-hook">Designing the hook</a></li>
+<li class="observablehq-secondary-link"><a href="#preparing-the-api-service">Preparing the API service</a></li>
+<li class="observablehq-secondary-link"><a href="#writing-the-hook">Writing the hook</a></li>
+<li class="observablehq-secondary-link"><a href="#usage-in-a-component">Usage in a component</a></li>
+<li class="observablehq-secondary-link"><a href="#conclusion">Conclusion</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="custom-react-api-hook" tabindex="-1"><a class="observablehq-header-anchor" href="#custom-react-api-hook">Custom React API hook</a></h1>
+<div class="note">
+    This article was originally published in 2019 on <a href="https://dev.to/patrixr/react-writing-a-custom-api-hook-l16" target="_blank" rel="noopener noreferrer">dev.to</a>.
+    I had a fair amount of traction at the time, given that packages such as `react-query` were not yet mainstream.
+    Overall it was my own way of learning how hooks worked.
+</div>
+<p>Let's write a handy custom react hook to take care of the usual API logic we've all written time and time again.</p>
+<h2 id="introduction" tabindex="-1"><a class="observablehq-header-anchor" href="#introduction">Introduction</a></h2>
+<p>After a couple of years away from React, I'm re-educating myself on the best practices. This means : <strong><a href="./reactjs.org/docs/hooks-reference">Hooks</a></strong></p>
+<p>One of the very (<strong>very</strong>) common flow we find across our apps is that of loading data from the API and displaying it.</p>
+<p>It usually looks somewhat like this :</p>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:ec205be4:--></div>
+<p>This has a tendency to result in very <strong>cluttered</strong> components. Let's use our newfound knowledge of hooks to solve this.</p>
+<h2 id="designing-the-hook" tabindex="-1"><a class="observablehq-header-anchor" href="#designing-the-hook">Designing the hook</a></h2>
+<p>Based on the flow described above, it's pretty easy to define the data that we want our hook to provide. It will return :</p>
+<ul>
+<li>The response data</li>
+<li>A loading flag</li>
+<li>An error (nulled on success)</li>
+<li>A retry method</li>
+</ul>
+<p>Given that I still appreciate delegating the request code to a service class, my thought is to have the hook call the service.</p>
+<p>Leading to the following usage:</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">const</span> [user, isLoading, error, retry] = <span class="hljs-title function_">useAPI</span>(<span class="hljs-string">"loadUserById"</span>, <span class="hljs-number">56</span>)
+</code></pre>
+<h2 id="preparing-the-api-service" tabindex="-1"><a class="observablehq-header-anchor" href="#preparing-the-api-service">Preparing the API service</a></h2>
+<p>Let's use a little service class, in which we can place all of our beautiful ajax code.</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">APIService</span> {
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">loadUsers</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-comment">// ... ajax magic</span>
+  }
+
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">loadUserById</span>(<span class="hljs-params">id</span>) {
+    <span class="hljs-comment">// ... ajax magic</span>
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">APIService</span>()
+</code></pre>
+<h2 id="writing-the-hook" tabindex="-1"><a class="observablehq-header-anchor" href="#writing-the-hook">Writing the hook</a></h2>
+<p>Our goal here is simply to combine standard react hooks to create all of our required fields.</p>
+<h3 id="the-state" tabindex="-1"><a class="observablehq-header-anchor" href="#the-state">The state</a></h3>
+<p>React already provides us with the <a href="https://reactjs.org/docs/hooks-reference.html#usestate" target="_blank" rel="noopener noreferrer">useState</a> hook to create and update state properties.</p>
+<p>Let's generate our fields :</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">useAPI</span>(<span class="hljs-params">method, ...params</span>) {
+  <span class="hljs-keyword">const</span> [data, setData] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>)
+  <span class="hljs-keyword">const</span> [isLoading, setIsLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>)
+  <span class="hljs-keyword">const</span> [error, onError] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>)
+}
+</code></pre>
+<h3 id="calling-the-service" tabindex="-1"><a class="observablehq-header-anchor" href="#calling-the-service">Calling the service</a></h3>
+<p>The React hook that comes in play here is <a href="https://reactjs.org/docs/hooks-reference.html#useeffect" target="_blank" rel="noopener noreferrer">useEffect</a>, in which we can run our asynchronous code.</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">// ... async code</span>
+}, [])
+</code></pre>
+<p>However, we've decided that the hook would return a <code>retry</code> method. So let's move the asynchronous code to its own function</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchData</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-comment">// ... async code</span>
+}
+
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-title function_">fetchData</span>()
+}, [])
+</code></pre>
+<p>Let's now call the correct service method, based on the hook's arguments</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchData</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-comment">// Clear previous errors</span>
+  <span class="hljs-title function_">onError</span>(<span class="hljs-literal">null</span>)
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Start loading indicator</span>
+    <span class="hljs-title function_">setIsLoading</span>(<span class="hljs-literal">true</span>)
+
+    <span class="hljs-comment">// Fetch and set data</span>
+    <span class="hljs-title function_">setData</span>(<span class="hljs-keyword">await</span> <span class="hljs-title class_">APIService</span>[method](...params))
+  } <span class="hljs-keyword">catch</span> (e) {
+    <span class="hljs-comment">// Set the error message in case of failure</span>
+    <span class="hljs-title function_">setError</span>(e)
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-comment">// Clear loading indicator</span>
+    <span class="hljs-title function_">setIsLoading</span>(<span class="hljs-literal">false</span>)
+  }
+}
+
+<span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-title function_">fetchData</span>()
+}, [])
+</code></pre>
+<h3 id="result" tabindex="-1"><a class="observablehq-header-anchor" href="#result">Result</a></h3>
+<p>And voila ! Our hook is ready for consumption.</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">useAPI</span>(<span class="hljs-params">method, ...params</span>) {
+  <span class="hljs-comment">// ---- State</span>
+  <span class="hljs-keyword">const</span> [data, setData] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>)
+  <span class="hljs-keyword">const</span> [isLoading, setIsLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>)
+  <span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">null</span>)
+
+  <span class="hljs-comment">// ---- API</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">fetchData</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-title function_">onError</span>(<span class="hljs-literal">null</span>)
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-title function_">setIsLoading</span>(<span class="hljs-literal">true</span>)
+      <span class="hljs-title function_">setData</span>(<span class="hljs-keyword">await</span> <span class="hljs-title class_">APIService</span>[method](...params))
+    } <span class="hljs-keyword">catch</span> (e) {
+      <span class="hljs-title function_">setError</span>(e)
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setIsLoading</span>(<span class="hljs-literal">false</span>)
+    }
+  }
+
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">fetchData</span>()
+  }, [])
+
+  <span class="hljs-keyword">return</span> [data, isLoading, error, fetchData]
+}
+</code></pre>
+<h2 id="usage-in-a-component" tabindex="-1"><a class="observablehq-header-anchor" href="#usage-in-a-component">Usage in a component</a></h2>
+<p>Let's write a little example of how that might be used in a component</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">HomeScreen</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [users, isLoading, error, retry] = <span class="hljs-title function_">useAPI</span>(<span class="hljs-string">"loadUsers"</span>)
+
+  <span class="hljs-comment">// --- Display error</span>
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ErrorPopup</span> <span class="hljs-attr">msg</span>=<span class="hljs-string">{error.message}</span> <span class="hljs-attr">retryCb</span>=<span class="hljs-string">{retry}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ErrorPopup</span>&gt;</span></span>
+  }
+
+  <span class="hljs-comment">// --- Template</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">View</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">LoadingSpinner</span> <span class="hljs-attr">loading</span>=<span class="hljs-string">{isLoading}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">LoadingSpinner</span>&gt;</span>
+      {users &amp;&amp; users.length &gt; 0 &amp;&amp; <span class="hljs-tag">&lt;<span class="hljs-name">UserList</span> <span class="hljs-attr">users</span>=<span class="hljs-string">{users}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">UserList</span>&gt;</span>}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">View</span>&gt;</span></span>
+  )
+}
+</code></pre>
+<h2 id="conclusion" tabindex="-1"><a class="observablehq-header-anchor" href="#conclusion">Conclusion</a></h2>
+<p>There are many ways to avoid re-writing common code across the application.</p>
+<p>In the past I've often delegated some of that to a <code>Store</code>, or used <code>Mixins</code> to create components with all that logic ready to use.</p>
+<p><strong>Custom hooks</strong> give us a whole new flavour and open up new strategies for dealing with problems.</p>
+<p>Happy to witness the evolution of practices.</p>
+<p>Cheers,</p>
+<p>Patrick</p>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./state-management"><span>An outlook on state management</span></a><a rel="next" href="./observable-seo"><span>Observable SEO</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-09T14:32:55">Jan 9, 2025</a>.</div>
+</footer>
+</div>
+</body>
+</html>

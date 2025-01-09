@@ -15,6 +15,7 @@
 <link rel="modulepreload" href="../_observablehq/client.24f05b63.js">
 <link rel="modulepreload" href="../_observablehq/runtime.f168f711.js">
 <link rel="modulepreload" href="../_observablehq/stdlib.0e911bb9.js">
+<link rel="modulepreload" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js">
 <link rel="modulepreload" href="../_import/components/raytracing.eafe8cb7.js">
 <link rel="modulepreload" href="../_import/components/canvas.f4db0867.js">
 <link rel="modulepreload" href="../_observablehq/stdlib/mermaid.e4ef739c.js">
@@ -22,12 +23,40 @@
 <link rel="modulepreload" href="../_npm/htl@0.3.1/063eb405.js">
 <link rel="modulepreload" href="../_npm/isoformat@0.2.1/c68fbd73.js">
 <link rel="modulepreload" href="../_npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs.aaab8952.js">
+
+<meta name="description" content="Creative coding and art">
+<meta name="keywords" content="creative, code, art, github">
+<meta name="author" content="Patrick Rabier">
+
+<meta property="og:title" content="Raytracing using Go and WebAssembly">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/experiments/raytracing-wasm">
+<meta property="og:image" content="https://tronica.io/_file/data/images/og-thumb.png">
+<meta name="twitter:card" content="Creative coding and art">
+<meta name="twitter:site" content="@tronicapps">
+<meta name="twitter:creator" content="@tronicapps">
+
+<link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/styles/themes/default.css">
+<script type="module" src="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js"></script>
+
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GCRE839L0Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GCRE839L0Y');
+</script>
+  
+
 <script type="module">
 
 import {define} from "../_observablehq/client.24f05b63.js";
 import {registerFile} from "../_observablehq/stdlib.0e911bb9.js";
 
-registerFile("../data/rtconfig.json", {"name":"../data/rtconfig.json","mimeType":"application/json","path":"../_file/data/rtconfig.9833053a.json","lastModified":1736331297144,"size":964});
+registerFile("../data/rtconfig.json", {"name":"../data/rtconfig.json","mimeType":"application/json","path":"../_file/data/rtconfig.9833053a.json","lastModified":1736433162022,"size":964});
 
 define({id: "4338bdb9", outputs: ["render","wasmScript","raytracerScript","canvas"], body: async () => {
 const [{render, wasmScript, raytracerScript}, {canvas}] = await Promise.all([import("../_import/components/raytracing.eafe8cb7.js"), import("../_import/components/canvas.f4db0867.js")]);
@@ -117,7 +146,7 @@ display(config)
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.c6ce1030.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.a1212c59.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
   <section class="observablehq-section-active">
     <summary>Experiments</summary>
     <ol>
@@ -136,11 +165,19 @@ display(config)
     </ol>
   </details>
   <details>
+    <summary>Articles</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../articles/state-management">An outlook on state management</a></li>
+    <li class="observablehq-link"><a href="../articles/custom-react-hook">Custom React API hook</a></li>
+    <li class="observablehq-link"><a href="../articles/observable-seo">Observable SEO</a></li>
+    </ol>
+  </details>
+  <details>
     <summary>Playgrounds</summary>
     <ol>
     <li class="observablehq-link"><a href="../playgrounds/falling-sand">Falling sand</a></li>
     <li class="observablehq-link"><a href="../playgrounds/triangles">Triangles</a></li>
-    <li class="observablehq-link"><a href="../playgrounds/hexmesh/index.md">Hexmesh</a></li>
+    <li class="observablehq-link"><a href="../playgrounds/hexmesh/">Hexmesh</a></li>
     </ol>
   </details>
   <ol>
@@ -168,6 +205,7 @@ display(config)
 <div class="observablehq observablehq--block"><!--:8be527aa:--></div>
 <p>This is an experiment in using Golang and WebAssembly to render a simple raytraced scene. The scene is rendered using a Go program that is compiled to WebAssembly and run in the browser.</p>
 <p>The Go program is a simple raytracer based on the <a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html" target="_blank" rel="noopener noreferrer">Ray Tracing in One Weekend</a> book by Peter Shirley. The program defines a simple scene which is then piped to the browser using a <code>Uint8Array</code>. The browser then renders the scene using the <code>ImageData</code> API.</p>
+<p><img src="../_file/data/images/rt-render-1.73846890.png" alt=""></p>
 <h2 id="the-setup" tabindex="-1"><a class="observablehq-header-anchor" href="#the-setup">The setup</a></h2>
 <p>This is a high-level overview of the different components involved:</p>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4eb883e2:--></div>
@@ -190,7 +228,7 @@ display(config)
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="../"><span>Tronicart</span></a><a rel="next" href="./three-body-problem"><span>Three body problem</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-08T10:15:12">Jan 8, 2025</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-09T14:32:55">Jan 9, 2025</a>.</div>
 </footer>
 </div>
 </body>

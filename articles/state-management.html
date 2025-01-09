@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.0">
+<title>An outlook on state management | Tronicart</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="../_observablehq/theme-parchment.d89d0dee.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="../_observablehq/theme-parchment.d89d0dee.css">
+<link rel="modulepreload" href="../_observablehq/client.24f05b63.js">
+<link rel="modulepreload" href="../_observablehq/runtime.f168f711.js">
+<link rel="modulepreload" href="../_observablehq/stdlib.0e911bb9.js">
+<link rel="modulepreload" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js">
+
+<meta name="description" content="Creative coding and art">
+<meta name="keywords" content="creative, code, art, github">
+<meta name="author" content="Patrick Rabier">
+
+<meta property="og:title" content="An outlook on state management">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/articles/state-management">
+<meta property="og:image" content="https://tronica.io/_file/data/images/og-thumb.png">
+<meta name="twitter:card" content="Creative coding and art">
+<meta name="twitter:site" content="@tronicapps">
+<meta name="twitter:creator" content="@tronicapps">
+
+<link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/styles/themes/default.css">
+<script type="module" src="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js"></script>
+
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GCRE839L0Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GCRE839L0Y');
+</script>
+  
+
+<script type="module">
+
+import "../_observablehq/client.24f05b63.js";
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="../">Tronicart</a></li>
+  </ol>
+  <div id="observablehq-search"><input type="search" placeholder="Search"></div>
+  <div id="observablehq-search-results"></div>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.a1212c59.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <section>
+    <summary>Experiments</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../experiments/raytracing-wasm">Raytracing with Go and Wasm</a></li>
+    <li class="observablehq-link"><a href="../experiments/three-body-problem">Three body problem</a></li>
+    <li class="observablehq-link"><a href="../experiments/hand-drawn">Hand-drawn lines</a></li>
+    <li class="observablehq-link"><a href="../experiments/bitwise-tiles">Bitwise creativity</a></li>
+    </ol>
+  </section>
+  <details open>
+    <summary>Creative algorithms</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../algorithms/composition">Composable sketches</a></li>
+    <li class="observablehq-link"><a href="../algorithms/differential-growth-basics">Differential growth</a></li>
+    <li class="observablehq-link"><a href="../algorithms/orbital-mechanics">Orbital mechanics</a></li>
+    </ol>
+  </details>
+  <details open class="observablehq-section-active">
+    <summary>Articles</summary>
+    <ol>
+    <li class="observablehq-link observablehq-link-active"><a href="./state-management">An outlook on state management</a></li>
+    <li class="observablehq-link"><a href="./custom-react-hook">Custom React API hook</a></li>
+    <li class="observablehq-link"><a href="./observable-seo">Observable SEO</a></li>
+    </ol>
+  </details>
+  <details>
+    <summary>Playgrounds</summary>
+    <ol>
+    <li class="observablehq-link"><a href="../playgrounds/falling-sand">Falling sand</a></li>
+    <li class="observablehq-link"><a href="../playgrounds/triangles">Triangles</a></li>
+    <li class="observablehq-link"><a href="../playgrounds/hexmesh/">Hexmesh</a></li>
+    </ol>
+  </details>
+  <ol>
+    <li class="observablehq-link"><a href="https://github.com/patrixr" target="_blank"><span>Github</span></a></li>
+    <li class="observablehq-link"><a href="https://x.com/tronicapps" target="_blank"><span>Twitter</span></a></li>
+    <li class="observablehq-link"><a href="https://objkt.com/users/tz1dQEFRNPdx2TXqfcprr1XCKdcUfir9geTP" target="_blank"><span>NFTs</span></a></li>
+  </ol>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#not-a-tutorial">Not a tutorial</a></li>
+<li class="observablehq-secondary-link"><a href="#what-is-a-stateful-system">What is a stateful system ?</a></li>
+<li class="observablehq-secondary-link"><a href="#side-effects">Side effects</a></li>
+<li class="observablehq-secondary-link"><a href="#how-resources-define-practices">How resources define practices</a></li>
+<li class="observablehq-secondary-link"><a href="#is-the-grass-greener-on-the-other-side">Is the grass greener on the other side ?</a></li>
+<li class="observablehq-secondary-link"><a href="#the-birth-of-flux">The birth of flux</a></li>
+<li class="observablehq-secondary-link"><a href="#thanks">Thanks</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="an-outlook-on-state-management" tabindex="-1"><a class="observablehq-header-anchor" href="#an-outlook-on-state-management">An outlook on state management</a></h1>
+<div class="note">
+    This article was originally published in 2019 on <a href="https://dev.to/patrixr/an-outlook-on-state-management-469c" target="_blank" rel="noopener noreferrer">dev.to</a>.
+    It was written in the context of a time where React practices weren't as mature as they are today.
+    I had felt using Redux was made much harder than it needed to be, and wanted to reflect on the roots of the problem.
+</div>
+<p>This article takes a step back to reflect on today's state management practices in <em>front-end</em> web development.</p>
+<h2 id="not-a-tutorial" tabindex="-1"><a class="observablehq-header-anchor" href="#not-a-tutorial">Not a tutorial</a></h2>
+<p>With today's resources, it would likely take you less than a minute to discover an abundance of great tech guides on how to write robust web applications.</p>
+<p>If you've spent a bit of time doing that, you've surely landed on tutorials for <em>"state container"</em> libraries and patterns, aka <em>"stores"</em>. Most famously <strong>Redux</strong> which is often used in React apps, or it's Vue counterpart <strong>Vuex</strong>.</p>
+<p>Frankly, I could not write better tutorials if I tried. Instead, what I want to do here is spend a moment to think about <strong>WHY</strong> we are doing all of that, to learn what it truly means to write a good app.</p>
+<p>Before we continue, I will give a quick shoutout to Hassan Djirdeh's great tutorial on <a href="https://medium.com/fullstackio/managing-state-in-vue-js-23a0352b1c87" target="_blank" rel="noopener noreferrer">Managing State in Vue.js</a>. If you are looking for a more technical and hands-on article, definitely check it out.</p>
+<h2 id="what-is-a-stateful-system" tabindex="-1"><a class="observablehq-header-anchor" href="#what-is-a-stateful-system">What is a stateful system ?</a></h2>
+<p>If you've never asked yourself the question of whether your system was of a stateful nature, then the odds are that it was.</p>
+<p>Let's try to define it as best we can :</p>
+<blockquote>
+<p><em>An application is categorized as stateful if it stores data that will in turn affect the behaviour and output of the system</em></p>
+</blockquote>
+<p>To give that definition some context, let's take a simple example :</p>
+<p>Example: <em>A user logs into your application. The code retrieves a piece of user related data and stores it. The next time you open the application, the app reads that stored data, understands that you are logged in and directly opens your profile page.</em></p>
+<p>In the above example the <strong>state</strong>, which consists of the user's data, affects the <strong>behaviour</strong> of the app which here decides to show you a different page.</p>
+<p>Writing an app in that manner is <em>so incredibly common</em> that we rarely take a moment to think about it.</p>
+<p>... <em>but we really should</em></p>
+<h2 id="side-effects" tabindex="-1"><a class="observablehq-header-anchor" href="#side-effects">Side effects</a></h2>
+<p>Here is a common definition of a software bug</p>
+<blockquote>
+<p><em>A software bug is an error, flaw, failure or fault in a computer program or system that causes it to produce an incorrect or unexpected result, or to behave in unintended ways</em></p>
+</blockquote>
+<p>Source: <a href="https://en.wikipedia.org/wiki/Software_bug" target="_blank" rel="noopener noreferrer">Wikipedia</a></p>
+<p>Let's bring our attention to one word:</p>
+<blockquote>
+<p>... or to <strong>behave</strong> in unintended ways</p>
+</blockquote>
+<p>Also present in the definition of a stateful system:</p>
+<blockquote>
+<p>...will in turn affect the <strong>behaviour</strong> and output of the system</p>
+</blockquote>
+<p>Though this would seem obvious to some, poorly managing our data is a <strong>direct cause</strong> of bugs, leading to instability. One common term is <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)" target="_blank" rel="noopener noreferrer">side effects</a>.</p>
+<p>All of this loops back to data:</p>
+<ul>
+<li>Data is unpredictable</li>
+<li>Data can be faulty</li>
+<li>Data can be mutated</li>
+</ul>
+<p>Let's tie this all together with some scenarios to illustrate those side-effects.</p>
+<h3 id="case-1-unexpected-mutation" tabindex="-1"><a class="observablehq-header-anchor" href="#case-1-unexpected-mutation">Case 1: Unexpected mutation</a></h3>
+<p>Let's start with a sample of data:</p>
+<pre data-language="javascript"><code class="language-javascript">{
+	<span class="hljs-attr">message</span>: <span class="hljs-string">'This is my first post'</span>,
+	<span class="hljs-attr">timestamp</span>: <span class="hljs-number">1560044669311</span>
+}
+</code></pre>
+<p>We decide to display the <strong>date</strong> as a user friendly <strong>string</strong> showing how long ago the message was posted e.g "<em>1 hour ago</em>"</p>
+<p>Our junior developer, not knowing any better, decides to format it nicely, <strong>mutating</strong> the data in the process:</p>
+<pre data-language="javascript"><code class="language-javascript">post.<span class="hljs-property">timestamp</span> = <span class="hljs-title function_">moment</span>(post.<span class="hljs-property">timestamp</span>).<span class="hljs-title function_">fromNow</span>()
+</code></pre>
+<p>If reading this line gave you an uneasy feeling, congratulations, you understand the <strong>dangers</strong> of data mutation.</p>
+<p><strong>Fast forward</strong> to moments later in the application's life, when another piece of code reads that post, <strong>expecting</strong> a number value.</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(post.<span class="hljs-property">timestamp</span>) <span class="hljs-comment">// =&gt; '1 hour ago'</span>
+<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(post.<span class="hljs-property">timestamp</span>) <span class="hljs-comment">// =&gt; Invalid Date</span>
+</code></pre>
+<p>This, as you can expect, returns an invalid date, eventually leading up to a <strong>bug</strong>.</p>
+<h3 id="case-2-multiple-sources-of-data" tabindex="-1"><a class="observablehq-header-anchor" href="#case-2-multiple-sources-of-data">Case 2: Multiple sources of data</a></h3>
+<p>A JWT token is returned after a successful user login. It is added to the <strong>local storage</strong> and attached to requests when connecting to the server.</p>
+<p>The app is structured with multiple <strong>service classes</strong>, nicely representing the different functionalities of the API, e.g</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> { ... }
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">SearchService</span> { ... }
+</code></pre>
+<p>It wouldn't be too far fetched to have all of them hold an <strong>authToken</strong> property to use when calling the API.</p>
+<p>e.g</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-title function_">apiCall</span>(<span class="hljs-params"></span>) {
+	<span class="hljs-title function_">ajax</span>(<span class="hljs-string">'/some/url'</span>, { <span class="hljs-title class_">Authorization</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">authToken</span> })
+}
+</code></pre>
+<p>And with every user based application, comes a <strong>logout</strong> feature:</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-title function_">logout</span>(<span class="hljs-params"></span>) {
+	<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">'jwt'</span>, <span class="hljs-literal">null</span>);
+	<span class="hljs-title class_">UserService</span>.<span class="hljs-title function_">clearToken</span>();
+	<span class="hljs-title class_">SearchService</span>.<span class="hljs-title function_">clearToken</span>();
+}
+</code></pre>
+<p>That <em>kinda</em> works, not great but let's go with it for the sake of making our point.</p>
+<p>Now comes a feature request, we want our user to be able to interact with his playlists. Simple, we add a new service :</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="hljs-keyword">class</span> <span class="hljs-title class_">PlaylistService</span> { ... }
+</code></pre>
+<p><strong>!Problem!</strong> we forgot to clear the token of that new service in the logout method.</p>
+<p>What would now happen if I logged out of the app, we can imagine a multitude of bugs:</p>
+<ul>
+<li>The app could modify user data even after logout</li>
+<li>The app could act on behalf of the wrong user</li>
+<li>The app could believe a user is still logged in</li>
+</ul>
+<p>Some would think that there's nothing inherently wrong in the architecture we're portraying but we shouldn't need to remember to clear the PlaylistService token. In the robust system we're about to build, <strong>we won't need to</strong>.</p>
+<h2 id="how-resources-define-practices" tabindex="-1"><a class="observablehq-header-anchor" href="#how-resources-define-practices">How resources define practices</a></h2>
+<p>We don't need to go far back in history to remember when a computer's memory was measured in megabytes, even kilobytes.</p>
+<p>When we work on systems with limited resources, there's a good incentive in <strong>mutating</strong> data and <strong>reusing</strong> memory. The risks of side effects in exchange of a low memory footprint is a fair <strong>tradeoff</strong>.</p>
+<p>Today resources are usually plentiful. We can allow ourselves to use more data for the sake of <strong>stability</strong>.</p>
+<p>What does that mean in every day life:</p>
+<ul>
+<li>Writing <a href="https://en.wikipedia.org/wiki/Pure_function" target="_blank" rel="noopener noreferrer">pure functions</a></li>
+<li>Recreating alternate datasets instead of mutating them</li>
+<li>Using language features to secure data (e.g <code>const</code>)</li>
+<li>Carefully selecting libraries e.g
+<ul>
+<li><a href="https://immutable-js.github.io/immutable-js/" target="_blank" rel="noopener noreferrer">Immutable.js</a> as its name suggests, it is specifically made to provide non-mutable structures</li>
+<li><a href="https://momentjs.com" target="_blank" rel="noopener noreferrer">Moment.js</a> although a very powerful tool, it is also known for having mutating methods, tread carefully</li>
+</ul>
+</li>
+</ul>
+<p>Practices change over <strong>time</strong> and across <strong>fields</strong>. Web development is now seeing patterns borrowed from <a href="https://en.wikipedia.org/wiki/Functional_programming" target="_blank" rel="noopener noreferrer">functional programming</a> as the two worlds start to mesh together. A great example of that is <a href="https://elm-lang.org" target="_blank" rel="noopener noreferrer">Elm</a>, a functional language that compiles to JavaScript.</p>
+<h2 id="is-the-grass-greener-on-the-other-side" tabindex="-1"><a class="observablehq-header-anchor" href="#is-the-grass-greener-on-the-other-side">Is the grass greener on the other side ?</a></h2>
+<p>We've gone over a lot of downsides of building stateful systems. One question arises: <strong>Could we build stateless web apps</strong> ?
+Although stateless designs have existed on the backend side for a while, it is not a question we often ask ourselves for front-end apps.</p>
+<p>Nothing prevents us technically from doing so, but applications are often <strong>designed as stateful</strong>. An example of that would be a shopping cart: a feature revolving around the ability to <strong>store</strong> and <strong>edit</strong> data.</p>
+<p>Building an app with a state, although prone to side-effects, offers a lot of <strong>convenience</strong> often taken for granted. The absence of local data would double efforts only to get around that restriction.</p>
+<p>So we know that the state is not going away, and we know that it is prone to errors. So how can we <strong>manage</strong> it efficiently.</p>
+<h2 id="the-birth-of-flux" tabindex="-1"><a class="observablehq-header-anchor" href="#the-birth-of-flux">The birth of flux</a></h2>
+<p>The most popular store containers are derived from the Flux pattern. Despite the differences we may find, they all try to solve the <strong>same problem</strong> and share <strong>core values</strong>.</p>
+<h3 id="formalization" tabindex="-1"><a class="observablehq-header-anchor" href="#formalization">Formalization</a></h3>
+<p>By their sheer existence, those containers bring the state to the front line of the application, and under the eyes of developers.</p>
+<p>No longer on the sidelines, it transforms the data into something <strong>official</strong>, <strong>noticeable</strong> and therefore <strong>worth taking care of</strong>.</p>
+<h3 id="direct-access" tabindex="-1"><a class="observablehq-header-anchor" href="#direct-access">Direct access</a></h3>
+<p>Apps are typically built as a tree structure of components. The data <strong>cascades</strong> down the tree, being passed on and on.</p>
+<p>That opens up a great number of opportunities for mishandling data. We could jokingly call that a software version of the <a href="https://en.wikipedia.org/wiki/Chinese_whispers" target="_blank" rel="noopener noreferrer">Chinese whispers</a> game.</p>
+<p>Flux-inspired stores can mitigate the risks, as components can retrieve the data straight from a source of truth.</p>
+<p>The Chinese whispers analogy displays how <strong>information distortion</strong> is greater the longer the chain is. This also leads us to a fair assumption that state containers are more valuable in <strong>larger apps</strong>.</p>
+<h3 id="single-source-of-truth" tabindex="-1"><a class="observablehq-header-anchor" href="#single-source-of-truth">Single source of truth</a></h3>
+<p>Having a piece of information stored in multiple parts of the app has its own share of risks. It creates opportunities for it to get <strong>out of sync</strong>.</p>
+<p>A managed store solves that by providing a single location in which to store information. It can be described as a <strong>golden source</strong> of data.</p>
+<h3 id="encapsulation" tabindex="-1"><a class="observablehq-header-anchor" href="#encapsulation">Encapsulation</a></h3>
+<p>State containers will typically avoid exposing the state directly. For the simple purpose of <strong>protecting</strong> it from unexpected mutations.</p>
+<p>For updates which are required, the store will expose a set of methods which will apply precisely the required changes to the data.</p>
+<p>By exposing <strong>limited and controlled mutations</strong>, it reduces the number of potential unexpected and uncontrolled changes.</p>
+<h3 id="accountability-and-traceability" tabindex="-1"><a class="observablehq-header-anchor" href="#accountability-and-traceability">Accountability and traceability</a></h3>
+<p>When dealing with <strong>bugs</strong> caused by an unexpected or wrong mutation, finding the source of that mutation can quickly become a hassle. Every piece of code is a potential suspect.</p>
+<p>Luckily, a state manager only allows changes through a <strong>limited</strong> set of entry points. This <strong>narrows down</strong> the list of suspects: either the mutator method itself, or whichever code called it.</p>
+<h2 id="thanks" tabindex="-1"><a class="observablehq-header-anchor" href="#thanks">Thanks</a></h2>
+<p>Many thanks to those who have suffered through the entirety of the article.</p>
+<p><em>Quick disclaimer: everything written here is the product of my understanding, experience and opinions, and should by no means be considered an absolute source of truth.</em></p>
+<p>In addition, I would love to hear your thoughts and comments on this topic.
+If anyone wishes to contribute and suggest changes, the paper will be available on my <a href="https://github.com/patrixr" target="_blank" rel="noopener noreferrer">github</a>.</p>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="../algorithms/orbital-mechanics"><span>Orbital mechanics</span></a><a rel="next" href="./custom-react-hook"><span>Custom React API hook</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-09T14:32:55">Jan 9, 2025</a>.</div>
+</footer>
+</div>
+</body>
+</html>
