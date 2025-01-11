@@ -1,0 +1,47 @@
+{
+  "name": "@tronicart/cc",
+  "version": "1.0.6",
+  "description": "P5 reusable goodies",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "pnpm run build:esm && pnpm run build:umd",
+    "build:esm": "tsc --module esnext --outDir dist",
+    "build:umd": "webpack -c ./webpack.umd.config.js",
+    "test": "ava",
+    "clean": "rm -rf dist umd"
+  },
+  "exports": {
+    "./*": "./dist/*"
+  },
+  "keywords": [
+    "p5",
+    "typescript",
+    "lib",
+    "canvas"
+  ],
+  "author": "Patrick",
+  "license": "ISC",
+  "dependencies": {
+    "canvas-capture": "^2.1.1",
+    "color-scheme": "^1.0.1"
+  },
+  "peerDependencies": {
+    "p5": "^1.6.0"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

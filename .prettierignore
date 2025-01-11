@@ -1,0 +1,6 @@
+coverage
+dist
+assets
+lib/types/graphql.codegen.d.ts
+docs
+**/*.md

@@ -1,0 +1,29 @@
+{
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf docs/.observablehq/cache",
+    "build": "rm -rf dist && observable build",
+    "dev": "observable preview --no-open",
+    "deploy": "observable deploy",
+    "observable": "observable",
+    "postbuild": "npm run sitemap && cp src/data/wasm_exec.js src/data/raytracer.wasm ./dist/_file/data",
+    "sitemap": "tsx scripts/sitemap.ts"
+  },
+  "dependencies": {
+    "@observablehq/framework": "latest",
+    "color-scheme": "^1.0.1",
+    "d3-dsv": "^3.0.1",
+    "d3-time-format": "^4.1.0",
+    "p5": "^1.11.2"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.7.6",
+    "@types/yargs": "^17.0.33",
+    "sitemap": "^8.0.0",
+    "yargs": "^17.7.2"
+  }
+}

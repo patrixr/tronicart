@@ -1,0 +1,21 @@
+{
+  "name": "isometric",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "vite serve",
+    "build": "vite build",
+    "release": "RELEASE=1 vite build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tronicart/cc": "workspace:*",
+    "p5": "^1.6.0"
+  },
+  "devDependencies": {
+    "vite": "^4.2.1",
+    "vite-plugin-obfuscator": "^1.0.5",
+    "vite-plugin-zip-pack": "^1.0.5"
+  }
+}

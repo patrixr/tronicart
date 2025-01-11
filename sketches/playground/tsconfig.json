@@ -1,0 +1,9 @@
+{
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "./dist/**/*"],
+  "include": ["**/*.ts"],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "esModuleInterop": true
+  }
+}

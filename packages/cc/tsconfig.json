@@ -1,0 +1,12 @@
+{
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "dist/**/*"],
+  "include": ["**/*.ts"],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "lib",
+    "outDir": "./dist/esm",
+    "declaration": true,
+    "declarationMap": true,
+    "module": "ESNEXT"
+  }
+}

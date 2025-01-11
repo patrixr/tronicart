@@ -1,0 +1,26 @@
+{
+  "name": "@tronicart/batch-capture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./cli/index.js",
+  "bin": {
+    "batch-capture": "./cli/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrixr/p5-workspace.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patrixr/p5-workspace/issues"
+  },
+  "homepage": "https://github.com/patrixr/p5-workspace#readme",
+  "dependencies": {
+    "debug": "^4.3.4",
+    "generic-pool": "^3.8.2",
+    "lodash": "^4.17.21",
+    "mkdirp": "^1.0.4",
+    "puppeteer": "^19.7.5"
+  }
+}

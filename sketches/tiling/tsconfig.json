@@ -1,0 +1,14 @@
+{
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "dist/**/*"],
+  "include": ["**/*.ts"],
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "esModuleInterop": true
+  },
+  "devDependencies": {
+    "vite": "^4.2.1",
+    "vite-plugin-obfuscator": "^1.0.5",
+    "vite-plugin-zip-pack": "^1.0.5"
+  }
+}

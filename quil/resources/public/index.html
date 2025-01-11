@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sketch</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-capture@2.1.1/dist/canvas-capture.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+    #sketch-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 100%;
+      background: #f8f8f8;
+      border-left: 1px solid #e7e7e7;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      display: none; /* Sidebar is hidden by default */
+    }
+    #sketch-sidebar h2 {
+      font-size: 16px;
+      margin-top: 0;
+    }
+    #sketch-sidebar a {
+      display: block;
+      margin: 5px 0;
+      text-decoration: none;
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
+    #sketch-sidebar a:hover {
+      text-decoration: underline;
+    }
+    #sketch {
+      transition: margin-right 0.5s; /* Smooth transition for sidebar toggle */
+    }
+    #sketch.expanded {
+      margin-right: 210px; /* Same as sidebar width + padding */
+    }
+  </style>
+</head>
+<body>
+  <div id="sketch"></div>
+  <div id="sketch-sidebar">
+    <h2>Sketches</h2>
+    <div id="sketch-links"></div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Function to persist sketch name and redirect
+    function startSketch(sketchName) {
+      window.location.hash = sketchName;
+      io.tronica.bootstrap.launcher.start_sketch(sketchName);
+      document.getElementById('sketch-sidebar').style.display = 'none'; // Hide sidebar
+      document.getElementById('sketch').classList.remove('expanded');
+    }
+
+    // Function to create sidebar items for each sketch
+    function createSketchSidebar() {
+      const sketches = io.tronica.bootstrap.launcher.list_sketches();
+      const sidebarElement = document.getElementById('sketch-links');
+
+      sketches.forEach(function(sketchName) {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = sketchName;
+        link.onclick = function(event) {
+          event.preventDefault();
+          startSketch(sketchName);
+        };
+        sidebarElement.appendChild(link);
+      });
+    }
+
+    // Check if a sketch is provided in the URL
+    window.onload = function() {
+      const selectedSketch = window.location.hash.replace('#', '');
+      createSketchSidebar(); // Always create the sidebar
+      if (selectedSketch && io.tronica.bootstrap.launcher.list_sketches().includes(selectedSketch)) {
+        startSketch(selectedSketch);
+      } else {
+        // Show the sidebar if no specific sketch is requested
+        document.getElementById('sketch-sidebar').style.display = 'block';
+        document.getElementById('sketch').classList.add('expanded');
+      }
+    };
+  </script>
+</body>
+</html>
