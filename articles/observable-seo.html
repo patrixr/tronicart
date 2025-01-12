@@ -10,25 +10,48 @@
 <link rel="preload" as="style" href="../_observablehq/theme-parchment.d89d0dee.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="../_observablehq/theme-parchment.d89d0dee.css">
-<link rel="modulepreload" href="../_observablehq/client.24f05b63.js">
+<link rel="modulepreload" href="../_observablehq/client.a725201a.js">
 <link rel="modulepreload" href="../_observablehq/runtime.f168f711.js">
 <link rel="modulepreload" href="../_observablehq/stdlib.0e911bb9.js">
 <link rel="modulepreload" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js">
 
-<meta name="description" content="Creative coding and art">
+<meta name="description" content="Observable: SEO optimization">
 <meta name="keywords" content="creative, code, art, github, 0">
 <meta name="author" content="Patrick Rabier">
 
 <meta property="og:title" content="Observable: SEO optimization">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/articles/observable-seo">
-<meta property="og:image" content="https://tronica.io/_file/data/images/og-thumb.png">
-<meta name="twitter:card" content="Creative coding and art">
+<meta property="og:image" content="https://tronica.io/_file/data/static/og-thumb.png">
+<meta name="twitter:card" content="Observable: SEO optimization">
 <meta name="twitter:site" content="@tronicapps">
 <meta name="twitter:creator" content="@tronicapps">
 
+<link rel="icon" href="../_file/data/static/favicon-32x32.6f5dce35.png" sizes="32x32">
+<link rel="icon" href="../_file/data/static/favicon-16x16.827eb093.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../_file/data/static/apple-touch-icon.045844fa.png">
+<link rel="manifest" href="../_file/data/static/manifest.7a9e07ce.json">
+
 <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/styles/themes/default.css">
 <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Observable: SEO optimization",
+  "image": "https://tronica.io/_file/data/static/og-thumb.png,
+  "keywords": "creative code art github 0",
+  "publisher": "Tronica",
+  "url": "https://tronica.io/articles/observable-seo",
+  "description": "Observable: SEO optimization",
+  "author": {
+    "@type": "Person",
+    "name": "Patrick Rabier"
+  }
+}
+</script>
 
 
 <!-- Google tag (gtag.js) -->
@@ -44,7 +67,7 @@
 
 <script type="module">
 
-import "../_observablehq/client.24f05b63.js";
+import "../_observablehq/client.a725201a.js";
 
 </script>
 </head>
@@ -58,7 +81,7 @@ import "../_observablehq/client.24f05b63.js";
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.a1212c59.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.59969b84.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
   <section>
     <summary>Experiments</summary>
     <ol>
@@ -108,7 +131,8 @@ import "../_observablehq/client.24f05b63.js";
 <li class="observablehq-secondary-link"><a href="#meta-tags">Meta tags</a></li>
 <li class="observablehq-secondary-link"><a href="#google-analytics">Google analytics</a></li>
 <li class="observablehq-secondary-link"><a href="#sitemap-and-robots-txt">Sitemap and robots.txt</a></li>
-<li class="observablehq-secondary-link"><a href="#report-details">Report details</a></li>
+<li class="observablehq-secondary-link"><a href="#adding-a-favicon">Adding a favicon</a></li>
+<li class="observablehq-secondary-link"><a href="#adding-structured-data">Adding structured data</a></li>
 </ol>
 </nav>
 </aside>
@@ -119,35 +143,74 @@ import "../_observablehq/client.24f05b63.js";
 </div>
 <p>If you're reading this, you should know you are looking at a website generated thanks to <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a>.
 I can't express how much I <strong>love</strong> this platform. I get to write code, markdown pages, creative sketches all in one place. So I wanted to see how visible it would be to the world, with some SEO benchmarks.</p>
-<p>At time of writing, their documentation is a bit sparse on the subject, so I'll be experimenting a bit to improve the SEO rating of this website.</p>
+<p>At time of writing, the Observable documentation is a bit sparse on the subject, so I'll be experimenting a bit to improve the SEO rating of this website.</p>
+<p>Before starting, I've given myself one key constaint: to keep the process of creating pages <strong>as simple as possible</strong>.
+In practice, this mainly means that I don't want to have to manually add meta tags to each page manually.</p>
 <h2 id="determining-the-baseline" tabindex="-1"><a class="observablehq-header-anchor" href="#determining-the-baseline">Determining the baseline</a></h2>
-<p>To begin, we will use a tool called <a href="https://seositecheckup.com/" target="_blank" rel="noopener noreferrer">SEO Site Checkup</a> to determine the current SEO rating of the website.
-It's a free tool that provides a quick overview of the website's SEO performance.</p>
-<p>After running the tests, we obtained a score of <strong>76/100</strong>.</p>
-<blockquote>
-<p><em>First impressions: not bad</em>.</p>
-</blockquote>
+<p>I used <a href="https://seositecheckup.com/" target="_blank" rel="noopener noreferrer">SEO Site Checkup</a> to determine the website's current SEO rating. It provides a quick overview of SEO performance.
+My initial score was <strong>76/100</strong>. Not bad!</p>
 <p><img src="../_file/data/images/seo-score-jan-25.4afcedea.png" alt=""></p>
-<p>I've listed the key recommendations below, click below to see the full details.</p>
-<a href="#report-details">
-  <wa-button variant="neutral">Jump to report</wa-button>
-</a>
-<p>Now that we've established the baseline, let's dive into some key areas for improvement.</p>
+<p>Key recommendations are listed below. Click to see the full report.</p>
+<wa-details style="margin-bottom: 30px; background: rgba(0,0,0,0.1);" summary="Full Report">
+  <table style="border-collapse: collapse; width: 100%;">
+    <tbody>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="danger">High</wa-badge></td>
+        <td>Add a <strong>meta description</strong> tag to provide a brief and informative summary of the page's content for search engines.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="danger">High</wa-badge></td>
+        <td>To ensure that Search Engines can accurately identify the topic of this webpage, it is important to include the <strong>most common keywords</strong> in the title tag, meta description, and heading tags.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="danger">High</wa-badge></td>
+        <td>Connect your webpage with <strong>social media</strong> networks using APIs or AddThis, as social signals are becoming increasingly important for search engines to validate a site's trustworthiness and authority.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="danger">High</wa-badge></td>
+        <td>To improve the website experience for your visitors, it is recommended to eliminate any <strong>render-blocking resources</strong> on this webpage.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="danger">High</wa-badge></td>
+        <td>Consider using <strong>structured data</strong> in your webpage as it can help search engines gain a better understanding of your content.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="warning">Medium</wa-badge></td>
+        <td>Add a <strong>sitemap</strong> file to help search engine crawlers index content more thoroughly and quickly.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="warning">Medium</wa-badge></td>
+        <td>Add a <strong>robots.txt</strong> file to properly communicate with web crawlers and prevent unwanted access to sensitive content.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="warning">Medium</wa-badge></td>
+        <td>Add a <strong>Google Analytics</strong> script to this website to help in diagnosing potential SEO issues by monitoring site visitors and traffic sources.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="warning">Medium</wa-badge></td>
+        <td>Using <strong>social media meta tags</strong> can improve the appearance and content of shared links on social media platforms, potentially increasing click-through rates and engagement with the page.</td>
+      </tr>
+      <tr>
+        <td><wa-badge style="width: 60px" appearance="filled outlined" variant="warning">Medium</wa-badge></td>
+        <td>Avoid performance and security issues by adding "rel=noopener" or "rel=noreferrer" to your "target=\_blank" links.</td>
+      </tr>
+    </tbody>
+  </table>
+</wa-details>
+
 <h2 id="meta-tags" tabindex="-1"><a class="observablehq-header-anchor" href="#meta-tags">Meta tags</a></h2>
-<p>Observable supports customization of the <code>&lt;head&gt;</code> tag through a <a href="https://observablehq.com/framework/config#head" target="_blank" rel="noopener noreferrer">custom header function</a> in it's configuration file.</p>
-<p>This function has access to the <a href="https://observablehq.com/framework/markdown#front-matter" target="_blank" rel="noopener noreferrer">yaml front matter</a> of each page, which is where we can store the information of our meta tags.</p>
+<p>Observable lets you customize the <code>&lt;head&gt;</code> tag via a <a href="https://observablehq.com/framework/config#head" target="_blank" rel="noopener noreferrer">custom header function</a> in its configuration file.
+This function accesses each page's <a href="https://observablehq.com/framework/markdown#front-matter" target="_blank" rel="noopener noreferrer">YAML front matter</a> for meta tag information.</p>
 <p>For example, this is how we can define the meta tags for this page:</p>
 <pre data-language="yaml"><code class="language-yaml"><span class="hljs-meta">---</span>
 <span class="hljs-attr">keywords:</span> <span class="hljs-string">seo,</span> <span class="hljs-string">observablehq,</span> <span class="hljs-string">web</span>
 <span class="hljs-attr">description:</span> <span class="hljs-string">Improving</span> <span class="hljs-string">the</span> <span class="hljs-string">SEO</span> <span class="hljs-string">rating</span> <span class="hljs-string">of</span> <span class="hljs-string">an</span> <span class="hljs-string">Observable</span> <span class="hljs-string">website</span>
 <span class="hljs-meta">---
 </span></code></pre>
-<p>This is what we'll use to add our custom tags:</p>
-<pre data-language="typescript"><code class="language-typescript"><span class="hljs-comment">// observablehq.config.ts</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
-  <span class="hljs-attr">title</span>: <span class="hljs-string">"Tronicart"</span>,
-
-  <span class="hljs-comment">// Other configurations...</span>
+<p>Although handy, I do want to support some defaults in the case I forget to add these.</p>
+<p>After playing around with the <code>observablehq.config.ts</code> configuration, this is what I've come up with:</p>
+<pre data-language="typescript"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-comment">// ...</span>
 
   <span class="hljs-attr">head</span>: <span class="hljs-function">(<span class="hljs-params">{ title, data, path }</span>) =&gt;</span> {
     <span class="hljs-comment">// Some sensible default values</span>
@@ -167,7 +230,8 @@ It's a free tool that provides a quick overview of the website's SEO performance
 }
 </code></pre>
 <h2 id="google-analytics" tabindex="-1"><a class="observablehq-header-anchor" href="#google-analytics">Google analytics</a></h2>
-<p>SEO ratings are also influenced by the presence of Google Analytics on the website. This can be achieved with a simple addition to the <code>&lt;head&gt;</code> using the same method as we did before:</p>
+<p>SEO ratings are also influenced by the presence of Google Analytics on the website.
+This can be achieved with a simple addition to the <code>&lt;head&gt;</code> using the same method as we did before:</p>
 <p>First, we'll create a small helper in our configuration file:</p>
 <pre data-language="typescript"><code class="language-typescript"><span class="hljs-keyword">const</span> <span class="hljs-title function_">GA_SCRIPT</span> = (<span class="hljs-params"></span>) =&gt; {
   <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">GA_ID</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">GA_ID</span> ?? <span class="hljs-string">""</span>
@@ -190,48 +254,25 @@ It's a free tool that provides a quick overview of the website's SEO performance
 }
 </code></pre>
 <div class="note">
-    I am using a github secret to store the GA_ID, which is then injected into the build process.
-    But that is not mandatory, you can simply replace `process.env.GA_ID` with your own ID.
+  I am using a github secret to store the GA_ID, which is then injected into the build process.
+  But that is not mandatory, you can simply replace `process.env.GA_ID` with your own ID.
 </div>
 <p>Next we can include this in our <code>head</code> function:</p>
-<pre data-language="typescript"><code class="language-typescript"><span class="hljs-comment">// observablehq.config.ts</span>
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
-  <span class="hljs-attr">title</span>: <span class="hljs-string">"Tronicart"</span>,
+<pre data-language="typescript"><code class="language-typescript"><span class="hljs-comment">// head() function</span>
+<span class="hljs-keyword">return</span> <span class="hljs-string">`
+  &lt;meta name="description" content="<span class="hljs-subst">${description}</span>"&gt;
+  &lt;meta name="keywords" content="<span class="hljs-subst">${[...keywords].join(<span class="hljs-string">", "</span>)}</span>"&gt;
 
-  <span class="hljs-comment">// Other configurations...</span>
-
-  <span class="hljs-attr">head</span>: <span class="hljs-function">(<span class="hljs-params">{ title, data, path }</span>) =&gt;</span> {
-    <span class="hljs-comment">// ... variables</span>
-
-    <span class="hljs-keyword">return</span> <span class="hljs-string">`
-      &lt;meta name="description" content="<span class="hljs-subst">${description}</span>"&gt;
-      &lt;meta name="keywords" content="<span class="hljs-subst">${[...keywords].join(<span class="hljs-string">", "</span>)}</span>"&gt;
-
-      <span class="hljs-subst">${GA_SCRIPT()}</span>
-    `</span>
-  },
-}
+  <span class="hljs-subst">${GA_SCRIPT()}</span>
+`</span>
 </code></pre>
 <h2 id="sitemap-and-robots-txt" tabindex="-1"><a class="observablehq-header-anchor" href="#sitemap-and-robots-txt">Sitemap and robots.txt</a></h2>
 <p>At time of writing, Observable does not appear to support sitemaps or robots.txt files. This is a bit of a bummer, but we can work around it.
-The observable config object already contains a list of all the pages in the website, so we can use that to generate a sitemap.</p>
-<p>Let's start by creating a custom script that will add a sitemap to the final build:</p>
-<pre data-language="typescript"><code class="language-typescript"><span class="hljs-keyword">import</span> config <span class="hljs-keyword">from</span> <span class="hljs-string">"observablehq.config"</span>
-
-<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">generateSitemap</span>(<span class="hljs-params"></span>) {
-  <span class="hljs-keyword">const</span> { pages } = config;
-
-  <span class="hljs-comment">// Generate sitemap using pages</span>
-}
-
-<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">generateRobotsTxt</span>(<span class="hljs-params"></span>) {
-  <span class="hljs-comment">// Generate robots.txt</span>
-}}
-
-<span class="hljs-title function_">generateSitemap</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">generateRobotsTxt</span>())
-</code></pre>
-<p>Next, let's create an npm script to run this script, and hook it to the build method</p>
-<pre data-language="json"><code class="language-json"><span class="hljs-punctuation">{</span>
+It so happens that the observable config object contains a list of all the pages in the website, which is used to configure the sidebar.</p>
+<p>With the help of a <a href="https://github.com/patrixr/tronicart/blob/main/notebook/scripts/sitemap.ts" target="_blank" rel="noopener noreferrer">custom script</a> we can use that to generate a sitemap.</p>
+<p>I won't go into the details of the script, but the important thing to note is that we can hook into the build process to generate the sitemap and robots.txt files.</p>
+<pre data-language="json"><code class="language-json"><span class="hljs-comment">// package.json</span>
+<span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"scripts"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-comment">// Other scripts...</span>
     <span class="hljs-attr">"sitemap"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"node generate-sitemap.js"</span><span class="hljs-punctuation">,</span>
@@ -240,26 +281,63 @@ The observable config object already contains a list of all the pages in the web
 <span class="hljs-punctuation">}</span>
 </code></pre>
 <p>And voila ! We now have a sitemap and robots.txt file generated for our website.</p>
-<h2 id="report-details" tabindex="-1"><a class="observablehq-header-anchor" href="#report-details">Report details</a></h2>
-<p>Here are the key recommendations from the SEO Site Checkup report:</p>
-<blockquote>
-<ul>
-<li><wa-badge appearance="filled outlined" variant="danger">High</wa-badge> Add a <strong>meta description</strong> tag to provide a brief and informative summary of the page's content for search engines.</li>
-<li><wa-badge appearance="filled outlined" variant="danger">High</wa-badge> To ensure that Search Engines can accurately identify the topic of this webpage, it is important to include the <strong>most common keywords</strong> in the title tag, meta description, and heading tags.</li>
-<li><wa-badge appearance="filled outlined" variant="danger">High</wa-badge> Connect your webpage with <strong>social media</strong> networks using APIs or AddThis, as social signals are becoming increasingly important for search engines to validate a site's trustworthiness and authority.</li>
-<li><wa-badge appearance="filled outlined" variant="danger">High</wa-badge> To improve the website experience for your visitors, it is recommended to eliminate any <strong>render-blocking resources</strong> on this webpage.</li>
-<li><wa-badge appearance="filled outlined" variant="danger">High</wa-badge> Consider using <strong>structured data</strong> in your webpage as it can help search engines gain a better understanding of your content.</li>
-<li><wa-badge appearance="filled outlined" variant="warning">Medium</wa-badge> Add a <strong>sitemap</strong> file to help search engine crawlers index content more thoroughly and quickly.</li>
-<li><wa-badge appearance="filled outlined" variant="warning">Medium</wa-badge> Add a <strong>robots.txt</strong> file to properly communicate with web crawlers and prevent unwanted access to sensitive content.</li>
-<li><wa-badge appearance="filled outlined" variant="warning">Medium</wa-badge> Add a <strong>Google Analytics</strong> script to this website to help in diagnosing potential SEO issues by monitoring site visitors and traffic sources.</li>
-<li><wa-badge appearance="filled outlined" variant="warning">Medium</wa-badge> Using <strong>social media meta tags</strong> can improve the appearance and content of shared links on social media platforms, potentially increasing click-through rates and engagement with the page.</li>
-<li><wa-badge appearance="filled outlined" variant="warning">Medium</wa-badge> Avoid performance and security issues by adding "rel=noopener" or "rel=noreferrer" to your "target=_blank" links.</li>
-</ul>
-</blockquote>
+<h2 id="adding-a-favicon" tabindex="-1"><a class="observablehq-header-anchor" href="#adding-a-favicon">Adding a favicon</a></h2>
+<p>Another recommendation from the SEO Site Checkup report is to add a favicon to the website.
+A quick p5 sketch was easy ebough to generate a favicon for the website:</p>
+<p><img src="../_file/data/static/favicon-32x32.6f5dce35.png" alt=""></p>
+<p>Using this amazing favicon generator: <a href="https://favicon.io/" target="_blank" rel="noopener noreferrer">favicon.io</a>, I generated a few different sizes of the favicon and added them to the website's static folder.
+Following the same method as before, we can add the favicon to the head of the website:</p>
+<pre data-language="typescript"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-attr">head</span>: <span class="hljs-function">(<span class="hljs-params">{ title, data, path }</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`
+      &lt;meta name="description" content="<span class="hljs-subst">${description}</span>"&gt;
+      &lt;meta name="keywords" content="<span class="hljs-subst">${[...keywords].join(<span class="hljs-string">", "</span>)}</span>"&gt;
+
+      <span class="hljs-subst">${GA_SCRIPT()}</span>
+
+      &lt;link rel="icon" href="/_file/data/static/favicon.ico" sizes="32x32"&gt;
+      &lt;link rel="icon" href="/_file/data/static/facicon-32x32.png" sizes="32x32"&gt;
+      &lt;link rel="icon" href="/_file/data/static/facicon-16x16.png" sizes="16x16"&gt;
+      &lt;link rel="apple-touch-icon" href="/_file/data/static/apple-touch-icon.png"&gt;
+      &lt;link rel="manifest" href="/_file/data/static/manifest.json" /&gt;
+    `</span>
+  },
+}
+</code></pre>
+<h2 id="adding-structured-data" tabindex="-1"><a class="observablehq-header-anchor" href="#adding-structured-data">Adding structured data</a></h2>
+<p>Structured data is a way to provide search engines with more information about the content of the website.
+Usually, this is done with JSON-LD scripts in the <code>&lt;head&gt;</code> of the website.</p>
+<h3 id="some-limitations" tabindex="-1"><a class="observablehq-header-anchor" href="#some-limitations">Some limitations</a></h3>
+<p>In this instance, the <em>head()</em> method does not have enough details of the page to generate a detailed JSON-LD script.
+For example, we would need to know the author of the page, the date it was published, or even attach the whole content of the page.</p>
+<h3 id="a-temporay-solution" tabindex="-1"><a class="observablehq-header-anchor" href="#a-temporay-solution">A temporay solution</a></h3>
+<p>For now, I've added a simple JSON-LD script to the head of the website, which provides some basic information about the website.</p>
+<pre data-language="typescript"><code class="language-typescript"><span class="hljs-keyword">return</span> <span class="hljs-string">`
+&lt;!-- ... --&gt;
+
+&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "<span class="hljs-subst">${title}</span>",
+  "image": "<span class="hljs-subst">${defaultImage}</span>,
+  "keywords": "<span class="hljs-subst">${[...keywords].join(<span class="hljs-string">" "</span>)}</span>",
+  "publisher": "Tronica",
+  "url": "<span class="hljs-subst">${BASE_URL + path}</span>",
+  "description": "<span class="hljs-subst">${title}</span>",
+  "author": {
+    "@type": "Person",
+    "name": "Patrick"
+  }
+}
+&lt;/script&gt;
+`</span>
+</code></pre>
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./custom-react-hook"><span>Custom React API hook</span></a><a rel="next" href="../playgrounds/falling-sand"><span>Falling sand</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-11T01:12:48">Jan 11, 2025</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-12T12:11:07">Jan 12, 2025</a>.</div>
 </footer>
 </div>
 </body>

@@ -12,32 +12,55 @@
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="../_observablehq/theme-parchment.d89d0dee.css">
 <link rel="stylesheet" type="text/css" href="../_observablehq/stdlib/inputs.ea9fd553.css">
-<link rel="modulepreload" href="../_observablehq/client.24f05b63.js">
+<link rel="modulepreload" href="../_observablehq/client.a725201a.js">
 <link rel="modulepreload" href="../_observablehq/runtime.f168f711.js">
 <link rel="modulepreload" href="../_observablehq/stdlib.0e911bb9.js">
 <link rel="modulepreload" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js">
-<link rel="modulepreload" href="../_import/components/raytracing.eafe8cb7.js">
+<link rel="modulepreload" href="../_import/components/raytracing.5ad3766a.js">
 <link rel="modulepreload" href="../_import/components/canvas.f4db0867.js">
-<link rel="modulepreload" href="../_observablehq/stdlib/mermaid.e4ef739c.js">
+<link rel="modulepreload" href="../_observablehq/stdlib/mermaid.b7b51fd9.js">
 <link rel="modulepreload" href="../_observablehq/stdlib/inputs.36969e44.js">
 <link rel="modulepreload" href="../_npm/htl@0.3.1/063eb405.js">
 <link rel="modulepreload" href="../_npm/isoformat@0.2.1/c68fbd73.js">
-<link rel="modulepreload" href="../_npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs.aaab8952.js">
+<link rel="modulepreload" href="../_npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs.940dc0bc.js">
 
-<meta name="description" content="Creative coding and art">
+<meta name="description" content="Raytracing using Go and WebAssembly">
 <meta name="keywords" content="creative, code, art, github">
 <meta name="author" content="Patrick Rabier">
 
 <meta property="og:title" content="Raytracing using Go and WebAssembly">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/experiments/raytracing-wasm">
-<meta property="og:image" content="https://tronica.io/_file/data/images/og-thumb.png">
-<meta name="twitter:card" content="Creative coding and art">
+<meta property="og:image" content="https://tronica.io/_file/data/static/og-thumb.png">
+<meta name="twitter:card" content="Raytracing using Go and WebAssembly">
 <meta name="twitter:site" content="@tronicapps">
 <meta name="twitter:creator" content="@tronicapps">
 
+<link rel="icon" href="../_file/data/static/favicon-32x32.6f5dce35.png" sizes="32x32">
+<link rel="icon" href="../_file/data/static/favicon-16x16.827eb093.png" sizes="16x16">
+<link rel="apple-touch-icon" href="../_file/data/static/apple-touch-icon.045844fa.png">
+<link rel="manifest" href="../_file/data/static/manifest.7a9e07ce.json">
+
 <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/styles/themes/default.css">
 <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Raytracing using Go and WebAssembly",
+  "image": "https://tronica.io/_file/data/static/og-thumb.png,
+  "keywords": "creative code art github",
+  "publisher": "Tronica",
+  "url": "https://tronica.io/experiments/raytracing-wasm",
+  "description": "Raytracing using Go and WebAssembly",
+  "author": {
+    "@type": "Person",
+    "name": "Patrick Rabier"
+  }
+}
+</script>
 
 
 <!-- Google tag (gtag.js) -->
@@ -53,19 +76,19 @@
 
 <script type="module">
 
-import {define} from "../_observablehq/client.24f05b63.js";
+import {define} from "../_observablehq/client.a725201a.js";
 import {registerFile} from "../_observablehq/stdlib.0e911bb9.js";
 
-registerFile("../data/rtconfig.json", {"name":"../data/rtconfig.json","mimeType":"application/json","path":"../_file/data/rtconfig.9833053a.json","lastModified":1736557954775,"size":964});
+registerFile("../data/static/rtconfig.json", {"name":"../data/static/rtconfig.json","mimeType":"application/json","path":"../_file/data/static/rtconfig.9833053a.json","lastModified":1736683852837,"size":964});
 
 define({id: "4338bdb9", outputs: ["render","wasmScript","raytracerScript","canvas"], body: async () => {
-const [{render, wasmScript, raytracerScript}, {canvas}] = await Promise.all([import("../_import/components/raytracing.eafe8cb7.js"), import("../_import/components/canvas.f4db0867.js")]);
+const [{render, wasmScript, raytracerScript}, {canvas}] = await Promise.all([import("../_import/components/raytracing.5ad3766a.js"), import("../_import/components/canvas.f4db0867.js")]);
 
 return {render,wasmScript,raytracerScript,canvas};
 }});
 
 define({id: "8be527aa", outputs: ["mermaid"], body: async () => {
-const {default: mermaid} = await import("../_observablehq/stdlib/mermaid.e4ef739c.js");
+const {default: mermaid} = await import("../_observablehq/stdlib/mermaid.b7b51fd9.js");
 
 return {mermaid};
 }});
@@ -123,8 +146,8 @@ const size = view(Inputs.range([300, 750], { step: 1, label: "Width" }))
 return {samples,size};
 }});
 
-define({id: "d3db6065", inputs: ["FileAttachment","samples","size"], outputs: ["config"], body: async (FileAttachment,samples,size) => {
-const config = await FileAttachment("../data/rtconfig.json").json()
+define({id: "fe5f1959", inputs: ["FileAttachment","samples","size"], outputs: ["config"], body: async (FileAttachment,samples,size) => {
+const config = await FileAttachment("../data/static/rtconfig.json").json()
 config.antialiasing.samples = samples
 config.size = size
 return {config};
@@ -146,7 +169,7 @@ display(config)
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
-  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.a1212c59.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("../_observablehq/search.59969b84.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
   <section class="observablehq-section-active">
     <summary>Experiments</summary>
     <ol>
@@ -223,12 +246,12 @@ display(config)
 <div class="observablehq observablehq--block"><!--:ff4116d1:--></div>
 <h3 id="config" tabindex="-1"><a class="observablehq-header-anchor" href="#config">Config</a></h3>
 <div class="observablehq observablehq--block"><!--:ea9ec351:--></div>
-<div class="observablehq observablehq--block"><!--:d3db6065:--></div>
+<div class="observablehq observablehq--block"><!--:fe5f1959:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:6ee4a877:--></div>
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="../"><span>Tronicart</span></a><a rel="next" href="./three-body-problem"><span>Three body problem</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-11T01:12:48">Jan 11, 2025</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-01-12T12:11:07">Jan 12, 2025</a>.</div>
 </footer>
 </div>
 </body>
