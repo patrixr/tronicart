@@ -34,7 +34,7 @@ export function render(config, canvasId = "defaultCanvas0", lowRes = false) {
  */
 export function wasmScript() {
   const script = document.createElement("script")
-  script.src = "/_file/data/wasm_exec.js"
+  script.src = "/_file/data/static/wasm_exec.js"
   return script
 }
 
@@ -48,7 +48,7 @@ export function raytracerScript() {
     setTimeout(() => {
       console.log("Loading raytracer.wasm")
       const go = new Go();
-      WebAssembly.instantiateStreaming(fetch("/_file/data/raytracer.wasm"), go.importObject).then((result) => {
+      WebAssembly.instantiateStreaming(fetch("/_file/data/static/raytracer.wasm"), go.importObject).then((result) => {
           go.run(result.instance);
       });
     }, 1000)

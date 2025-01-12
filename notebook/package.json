@@ -4,10 +4,10 @@
   "scripts": {
     "clean": "rm -rf docs/.observablehq/cache",
     "build": "rm -rf dist && observable build",
-    "dev": "observable preview --no-open",
+    "dev": "NODE_ENV=dev observable preview --no-open",
     "deploy": "observable deploy",
     "observable": "observable",
-    "postbuild": "npm run sitemap && cp src/data/wasm_exec.js src/data/raytracer.wasm ./dist/_file/data",
+    "postbuild": "npm run sitemap && cp src/data/static/* ./dist/_file/data/static/",
     "sitemap": "tsx scripts/sitemap.ts"
   },
   "dependencies": {

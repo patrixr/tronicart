@@ -79,7 +79,7 @@ const size = view(Inputs.range([300, 750], { step: 1, label: "Width" }))
 ```
 
 ```js
-const config = await FileAttachment("../data/rtconfig.json").json()
+const config = await FileAttachment("../data/static/rtconfig.json").json()
 config.antialiasing.samples = samples
 config.size = size
 ```

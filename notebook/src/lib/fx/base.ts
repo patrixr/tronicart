@@ -12,7 +12,7 @@ type StrokeProps = Partial<{
  * Creates your own effect
  */
 const freedraw = <T>(fn: FreedrawFn<T>): Fx<T> => {
-  return (ctx, next) => {
+  return (ctx: Context<any>, next) => {
     ctx.p5.push()
     fn(ctx)
     next(ctx)
@@ -23,7 +23,7 @@ const freedraw = <T>(fn: FreedrawFn<T>): Fx<T> => {
 /**
  * Creates your own effect that only runs once
  */
-const once = <T>(fn: FreedrawFn<T>): Fx<T> => {
+const once = <T>(fn: FreedrawFn<T>): Fx<T, null> => {
   let done = false
 
   return (ctx, next) => {
@@ -70,7 +70,7 @@ const stroke = (props: StrokeProps = {}): Fx<StrokeProps> => {
       ctx.p5.noStroke()
     }
     if (typeof weight !== "undefined") {
-      ctx.p5.strokeWeight(props.weight)
+      ctx.p5.strokeWeight(weight)
     } else {
       ctx.p5.strokeWeight(1)
     }

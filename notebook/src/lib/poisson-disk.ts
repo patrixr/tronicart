@@ -55,7 +55,7 @@ export class PoissonDiskSampling {
     const cellSize = Math.ceil(radius / Math.sqrt(dimensions))
     const cellCountW = Math.ceil(width / cellSize)
     const cellCountH = Math.ceil(height / cellSize)
-    const grid = new Grid<P5.Vector>(cellCountW, cellCountH).fill(null)
+    const grid = new Grid<P5.Vector | null>(cellCountW, cellCountH).fill(null)
     const firstPoint = p5.createVector(
       width / 4 + randomInt(width / 2),
       height / 4 + randomInt(height / 2),

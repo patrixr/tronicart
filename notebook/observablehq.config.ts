@@ -1,7 +1,8 @@
 // See https://observablehq.com/framework/config for documentation.
-
-const BASE_URL = "https://tronica.io"
-const DEFAULT_THUMB = `${BASE_URL}/_file/data/images/og-thumb.png`
+const BASE_URL = /dev/.test(process.env.NODE_ENV)
+  ? "http://localhost:3000"
+  : "https://tronica.io"
+const DEFAULT_THUMB = `${BASE_URL}/_file/data/static/og-thumb.png`
 
 export default {
   // The project’s title; used in the sidebar and webpage titles.
@@ -113,7 +114,7 @@ export default {
     }
 
     return `
-<meta name="description" content="${description}">
+<meta name="description" content="${title}">
 <meta name="keywords" content="${[...keywords].join(", ")}">
 <meta name="author" content="Patrick Rabier">
 
@@ -121,12 +122,35 @@ export default {
 <meta property="og:type" content="article" />
 <meta property="og:url" content="${path}" />
 <meta property="og:image" content="${DEFAULT_THUMB}" />
-<meta name="twitter:card" content="${description}" />
+<meta name="twitter:card" content="${title}" />
 <meta name="twitter:site" content="@tronicapps" />
 <meta name="twitter:creator" content="@tronicapps" />
 
+<link rel="icon" href="/data/static/favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="/data/static/favicon-16x16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/data/static/apple-touch-icon.png">
+<link rel="manifest" href="/data/static/manifest.json" />
+
 <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/styles/themes/default.css" />
 <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-alpha.8/dist/webawesome.loader.js"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "${title}",
+  "image": "${DEFAULT_THUMB},
+  "keywords": "${[...keywords].join(" ")}",
+  "publisher": "Tronica",
+  "url": "${BASE_URL + path}",
+  "description": "${title}",
+  "author": {
+    "@type": "Person",
+    "name": "Patrick Rabier"
+  }
+}
+</script>
 
 ${GA_SCRIPT()}
 `

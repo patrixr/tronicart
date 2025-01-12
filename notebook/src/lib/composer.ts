@@ -2,8 +2,6 @@ import type P5 from "p5"
 
 type Obj = { [key: string]: any }
 
-type FxList = readonly [Fx<Obj>, ...Fx<Obj>[]]
-
 export type NoState = {}
 
 // ------------------------------------
@@ -29,9 +27,9 @@ export type NextFn<T> = (ctx: Context<T>) => any
  * @param ctx - The context object containing the p5 instance and current state.
  * @param next - The next function in the pipeline to call after this effect.
  */
-export type Fx<S = NoState, Ext extends Obj = {}> = (
+export type Fx<S = NoState, Ext extends Obj | null = {}> = (
   ctx: Context<S>,
-  next: NextFn<S & Ext>,
+  next: NextFn<Ext extends Obj ? S & Ext : S>,
 ) => void
 
 /**
@@ -97,7 +95,7 @@ export function compose<
 
   const pipeline = (ctx: Context<S>) => {
     const next = idx === effects.length - 1 ? end : pipeline
-    effects[idx++](ctx, next)
+    effects[idx++](ctx, next as any)
   }
 
   return (ctx, next) => {
@@ -185,7 +183,7 @@ export function compile<
 >(stateFactory: StateFactory<S>, effects: E): Scene {
   let state: S = stateFactory()
 
-  const next: NextFn<S> = (ctx) => {
+  const next: NextFn<any> = (ctx) => {
     state = ctx.state
   }
 
